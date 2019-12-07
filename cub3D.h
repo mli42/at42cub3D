@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/07 11:18:23 by mli              ###   ########.fr       */
+/*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
+/*   Updated: 2019/12/07 11:17:57 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-int		main(void)
-{
-	void *ptr;
-	void *win;
+# include "./minilibx_opengl_20191021/mlx.h"
 
-	ptr = mlx_init();
-
-	win = mlx_new_window(ptr, 1000, 1000, "First Window");
-
-	mlx_loop(ptr);
-
-	return (0);
-
-}
+#endif
