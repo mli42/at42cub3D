@@ -13,6 +13,20 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
 # include "./minilibx_opengl_20191021/mlx.h"
+# include "./libft/libft.h"
+
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
+
+int		ft_error(char *str);
+void	*ft_memalloc(int size);
+
+#include <stdio.h>
 
 #endif

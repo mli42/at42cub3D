@@ -13,22 +13,27 @@
 NAME = cub3D
 
 MLX_PATH = ./minilibx_opengl_20191021/
-
 MLX_NAME = libmlx.a
+
+LIBFT_PATH = ./libft/
+LIBFT = libft.a
 
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_FILES = main.c
+SRCS_FILES = main.c error.c utils.c
 
 OBJS = ${SRCS_FILES:.c=.o}
 
-$(NAME): ${OBJS} ${MLX_PATH}${MLX_NAME}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit
+$(NAME): ${OBJS} ${MLX_PATH}${MLX_NAME} ${LIBFT_PATH}${LIBFT}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
 
 $(MLX_PATH)$(MLX_NAME):
 	make -C ${MLX_PATH}
+
+$(LIBFT_PATH)$(LIBFT):
+	make -C ${LIBFT_PATH}
 
 all: ${NAME}
 
@@ -38,6 +43,7 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 	make -C ${MLX_PATH} clean
+	make -C ${LIBFT_PATH} clean
 
 re: fclean all
 
