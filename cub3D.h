@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/07 11:17:57 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/09 19:41:21 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+
+enum			varName
+{
+	bit_per_pixel,
+	sizeLine,
+	endian,
+	end
+};
+
+typedef struct	s_win
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		*img_data;
+	int		win_size[2];
+}				t_win;
 
 int		ft_error(char *str);
 void	*ft_memalloc(int size);

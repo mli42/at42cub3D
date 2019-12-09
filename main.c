@@ -6,17 +6,16 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/07 11:18:23 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/09 19:41:55 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int		*ft_winsize(int tab[2])
+void	ft_winsize(int tab[2])
 {
 	tab[0] = 1000;
 	tab[1] = 1000;
-	return (tab);
 }
 
 char	*ft_map(int fd)
@@ -26,26 +25,9 @@ char	*ft_map(int fd)
 	return (malloc(1));
 }
 
-enum varName
-{
-	bit_per_pixel,
-	sizeLine,
-	endian,
-	end
-};
-
 int square_postion_x = 0;
 int square_postion_y = 0;
 int square_size = 100;
-
-typedef struct	s_win
-{
-	void	*mlx;
-	void	*win;
-	void 	*img;
-	int 	*img_data;
-	int		win_size[2];
-}				t_win;
 
 int		ft_cub3d(t_win *draw, char *map)
 {
@@ -115,7 +97,7 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if (!(draw = (t_win *)ft_memalloc(sizeof(t_win *))))
+		if (!(draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
 			return (ft_error("Can't do any allocation"));
 		if (!(map = ft_map(open(argv[1], O_RDONLY))))
 			return (ft_error("Map error"));
