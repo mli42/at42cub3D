@@ -26,7 +26,6 @@ char	*ft_map(int fd)
 	return (malloc(1));
 }
 
-
 enum varName
 {
 	bit_per_pixel,
@@ -78,7 +77,8 @@ void ft_draw(t_win *draw)
 		while (++x < draw->win_size[1])
 		{
 			if (x > square_postion_x && y > square_postion_y &&
-				x < square_size && y < square_size)
+				x < square_size + square_postion_x &&
+				y < square_size + square_postion_y)
 				draw->img_data[y * draw->win_size[0] + x] = 0x7fffff;
 			else
 				draw->img_data[y * draw->win_size[0] + x] = 0;
@@ -97,13 +97,13 @@ int 	fct(int keycode, void *param)
 	if (keycode == 53)
 		exit (1);
 	if (keycode == RIGHT)
-		square_postion_x += 10;
+		square_postion_x += 50;
 	if (keycode == LEFT)
-		square_postion_x -= 10;
+		square_postion_x -= 50;
 	if (keycode == UP)
-		square_postion_y += 10;
+		square_postion_y -= 50;
 	if (keycode == DOWN)
-		square_postion_x -= 10;
+		square_postion_y += 50;
 	ft_draw(draw);
 	return (1);
 }
