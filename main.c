@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/10 12:06:36 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/10 19:01:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		main(int argc, char **argv)
 			return (ft_error("MLX does not open a window"));
 		if ((ft_cub3d(draw, map)) == -1)
 			return (-1);
-		mlx_key_hook(draw->win, fct, draw);
+		mlx_hook(draw->win, KeyPress, KeyPressMask, fct, draw);
 		mlx_loop(draw->mlx);
 	}
 	else
