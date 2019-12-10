@@ -6,11 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/09 19:41:55 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/10 12:06:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 void	ft_winsize(int tab[2])
 {
@@ -31,7 +31,7 @@ int square_size = 100;
 
 int		ft_cub3d(t_win *draw, char *map)
 {
-	int 	var[3];
+	int		var[3];
 
 	if (!(draw->img = mlx_new_image(draw->mlx, draw->win_size[0],
 			draw->win_size[1])))
@@ -47,7 +47,7 @@ int		ft_cub3d(t_win *draw, char *map)
 	return (1);
 }
 
-void ft_draw(t_win *draw)
+void	ft_draw(t_win *draw)
 {
 	int x;
 	int y;
@@ -69,7 +69,7 @@ void ft_draw(t_win *draw)
 	mlx_put_image_to_window(draw->mlx, draw->win, draw->img, 0, 0);
 }
 
-int 	fct(int keycode, void *param)
+int		fct(int keycode, void *param)
 {
 	t_win	*draw;
 
@@ -77,7 +77,7 @@ int 	fct(int keycode, void *param)
 //	printf("%d\n", keycode);
 
 	if (keycode == 53)
-		exit (1);
+		exit(1);
 	if (keycode == RIGHT)
 		square_postion_x += 50;
 	if (keycode == LEFT)
@@ -92,7 +92,7 @@ int 	fct(int keycode, void *param)
 
 int		main(int argc, char **argv)
 {
-	t_win 	*draw;
+	t_win	*draw;
 	char	*map;
 
 	if (argc == 2)
