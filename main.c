@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/10 19:01:01 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/12 15:16:24 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ int		fct(int keycode, void *param)
 	if (keycode == 53)
 		exit(1);
 	if (keycode == RIGHT)
-		square_postion_x += 50;
+		square_postion_x += 10;
 	if (keycode == LEFT)
-		square_postion_x -= 50;
+		square_postion_x -= 10;
 	if (keycode == UP)
-		square_postion_y -= 50;
+		square_postion_y -= 10;
 	if (keycode == DOWN)
-		square_postion_y += 50;
+		square_postion_y += 10;
 	ft_draw(draw);
 	return (1);
 }
@@ -95,24 +95,21 @@ int		main(int argc, char **argv)
 	t_win	*draw;
 	char	*map;
 
-	if (argc == 2)
-	{
-		if (!(draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
-			return (ft_error("Can't do any allocation"));
-		if (!(map = ft_map(open(argv[1], O_RDONLY))))
-			return (ft_error("Map error"));
-		ft_winsize(draw->win_size);
-		if (!(draw->mlx = mlx_init()))
-			return (ft_error("MLX does not initialize"));
-		if (!(draw->win = mlx_new_window(draw->mlx, draw->win_size[0],
-						draw->win_size[1], "cub3D")))
-			return (ft_error("MLX does not open a window"));
-		if ((ft_cub3d(draw, map)) == -1)
-			return (-1);
-		mlx_hook(draw->win, KeyPress, KeyPressMask, fct, draw);
-		mlx_loop(draw->mlx);
-	}
-	else
+	if (argc != 2)
 		return (ft_error("Just give me ONE map"));
+	if (!(draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
+		return (ft_error("Can't do any allocation"));
+	if (!(map = ft_map(open(argv[1], O_RDONLY))))
+		return (ft_error("Map error"));
+	ft_winsize(draw->win_size);
+	if (!(draw->mlx = mlx_init()))
+		return (ft_error("MLX does not initialize"));
+	if (!(draw->win = mlx_new_window(draw->mlx, draw->win_size[0],
+					draw->win_size[1], "cub3D")))
+		return (ft_error("MLX does not open a window"));
+	if ((ft_cub3d(draw, map)) == -1)
+		return (-1);
+	mlx_hook(draw->win, KeyPress, KeyPressMask, fct, draw);
+	mlx_loop(draw->mlx);
 	return (0);
 }
