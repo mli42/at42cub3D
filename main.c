@@ -6,12 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/12 20:42:49 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/13 17:22:10 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int map[5][5] = {{1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 1},
@@ -54,7 +53,7 @@ int		ft_cub3d(t_win *draw, char *map)
 	return (1);
 }
 
-void	ft_draw(t_win *draw)
+void	ft_draw_square(t_win *draw)
 {
 	int x;
 	int y;
@@ -76,6 +75,31 @@ void	ft_draw(t_win *draw)
 	mlx_put_image_to_window(draw->mlx, draw->win, draw->img, 0, 0);
 }
 
+enum	e_coord
+{
+	x, y
+};
+		//			FLOATS
+	float pos[2] = {3, 3}; // Being at the center;
+	float v_dir[2] = {0, 1}; // Watching North;
+	float pov = 1/3; // Champ de vision de 30 degres de chaque côté;
+//	float v_pov_min[2] = {v_dir[x] - pov, v_dir[y]}; // POV MIN;
+//	float v_pov_max[2] = {v_dir[x] + pov, v_dir[y]}; // POV MAX;
+	float v_pov_min[2];
+	float v_pov_max[2];
+
+
+void	ft_draw(t_win *draw)
+{
+	(void)draw;
+	v_pov_min[x] = v_dir[x] - pov;
+	v_pov_min[y] = v_dir[y];
+	v_pov_max[x] = v_dir[x] + pov;
+	v_pov_max[y] = v_dir[y];
+
+	printf("v_dir == x: %.1f || y: %.1f\n", v_dir[x], v_dir[y]);
+}
+
 int		fct(int keycode, void *param)
 {
 	t_win	*draw;
@@ -85,13 +109,13 @@ int		fct(int keycode, void *param)
 
 	if (keycode == 53)
 		exit(1);
-	if (keycode == RIGHT)
+	else if (keycode == RIGHT)
 		square_postion_x += 10;
-	if (keycode == LEFT)
+	else if (keycode == LEFT)
 		square_postion_x -= 10;
-	if (keycode == UP)
+	else if (keycode == UP)
 		square_postion_y -= 10;
-	if (keycode == DOWN)
+	else if (keycode == DOWN)
 		square_postion_y += 10;
 	ft_draw(draw);
 	return (1);
@@ -102,6 +126,12 @@ int		main(int argc, char **argv)
 	t_win	*draw;
 	char	*map;
 
+	// INIT
+	v_pov_min[x] = v_dir[x] - pov;
+	v_pov_min[y] = v_dir[y];
+	v_pov_max[x] = v_dir[x] + pov;
+	v_pov_max[y] = v_dir[y];
+	// INIT
 	if (argc != 2)
 		return (ft_error("Just give me ONE map"));
 	if (!(draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
@@ -116,6 +146,7 @@ int		main(int argc, char **argv)
 		return (ft_error("MLX does not open a window"));
 	if ((ft_cub3d(draw, map)) == -1)
 		return (-1);
+	ft_draw(draw);
 	mlx_hook(draw->win, KeyPress, KeyPressMask, fct, draw);
 	mlx_loop(draw->mlx);
 	return (0);

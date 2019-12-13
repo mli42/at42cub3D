@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/12 20:34:09 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/13 13:46:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+
+# define BLUE 0x7fffff
+# define GREEN 0xff00
+# define D_BLUE 0x555
+# define D_RED 0x7f0000
+# define RED 0xff0000
+# define GREY 0x333333
+
 
 enum			e_varname
 {
