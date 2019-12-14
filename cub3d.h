@@ -34,7 +34,6 @@
 # define RED 0xff0000
 # define GREY 0x333333
 
-
 enum			e_varname
 {
 	bit_per_pixel,
@@ -51,6 +50,21 @@ typedef struct	s_win
 	int		*img_data;
 	int		win_size[2];
 }				t_win;
+
+typedef struct	s_coord
+{
+	double x;
+	double y;
+}				t_coord;
+
+typedef struct	s_vectors
+{
+	t_coord pos;
+	t_coord dir;
+	t_coord pov;
+	t_coord pov_min;
+	t_coord pov_max;
+}				t_vectors;
 
 int				ft_error(char *str);
 void			*ft_memalloc(int size);

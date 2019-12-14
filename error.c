@@ -12,10 +12,17 @@
 
 #include "cub3d.h"
 
-int		ft_error(char *str)
+void	ft_free_windraw(t_win *draw)
+{
+	free(draw);
+	draw = NULL;
+}
+
+int		ft_error(char *str, t_win *draw)
 {
 	write(2, "Error\n", 6);
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
+	ft_free(draw);
 	return (-1);
 }

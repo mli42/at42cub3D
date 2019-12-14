@@ -75,19 +75,12 @@ void	ft_draw_square(t_win *draw)
 	mlx_put_image_to_window(draw->mlx, draw->win, draw->img, 0, 0);
 }
 
-enum	e_coord
-{
-	x, y
-};
 		//			FLOATS
 	float pos[2] = {3, 3}; // Being at the center;
 	float v_dir[2] = {0, 1}; // Watching North;
 	float pov = 1/3; // Champ de vision de 30 degres de chaque côté;
 //	float v_pov_min[2] = {v_dir[x] - pov, v_dir[y]}; // POV MIN;
 //	float v_pov_max[2] = {v_dir[x] + pov, v_dir[y]}; // POV MAX;
-	float v_pov_min[2];
-	float v_pov_max[2];
-
 
 void	ft_draw(t_win *draw)
 {
