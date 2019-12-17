@@ -23,6 +23,22 @@ int		ft_error(char *str, t_win *draw)
 	write(2, "Error\n", 6);
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
-	ft_free(draw);
+	ft_free_windraw(draw);
 	return (-1);
+}
+
+t_vectors	*ft_init(void)
+{
+	t_vectors	*result;
+
+	if (!(result = (t_vectors *)ft_memalloc((int)sizeof(t_vectors))))
+		return (NULL);
+	// Being at the center
+	result->pos.x = 3;
+	result->pos.y = 3;
+	// Watching North
+	result->dir.x = 0;
+	result->dir.y = 1;
+
+	return (result);
 }

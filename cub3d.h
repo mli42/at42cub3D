@@ -61,14 +61,22 @@ typedef struct	s_vectors
 {
 	t_coord pos;
 	t_coord dir;
-	t_coord pov;
 	t_coord pov_min;
 	t_coord pov_max;
 }				t_vectors;
 
-int				ft_error(char *str);
+int				ft_error(char *str, t_win *draw);
 void			*ft_memalloc(int size);
 
 # include <stdio.h>
+
+void			ft_draw(t_win *draw);
+
+// TMP functions
+
+void			ft_winsize(int tab[2]);
+char			*ft_map(int fd);
+void			ft_draw_square(t_win *draw);
+int				fct(int keycode, void *param);
 
 #endif
