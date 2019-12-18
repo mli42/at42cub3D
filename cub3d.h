@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/12 20:34:09 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/13 13:46:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # define LEFT 123
 # define RIGHT 124
 
+# define BLUE 0x7fffff
+# define GREEN 0xff00
+# define D_BLUE 0x555
+# define D_RED 0x7f0000
+# define RED 0xff0000
+# define GREY 0x333333
+
 enum			e_varname
 {
 	bit_per_pixel,
@@ -44,9 +51,32 @@ typedef struct	s_win
 	int		win_size[2];
 }				t_win;
 
-int				ft_error(char *str);
+typedef struct	s_coord
+{
+	double x;
+	double y;
+}				t_coord;
+
+typedef struct	s_vectors
+{
+	t_coord pos;
+	t_coord dir;
+	t_coord pov_min;
+	t_coord pov_max;
+}				t_vectors;
+
+int				ft_error(char *str, t_win *draw);
 void			*ft_memalloc(int size);
 
 # include <stdio.h>
+
+void			ft_draw(t_win *draw);
+
+// TMP functions
+
+void			ft_winsize(int tab[2]);
+char			*ft_map(int fd);
+void			ft_draw_square(t_win *draw);
+int				fct(int keycode, void *param);
 
 #endif

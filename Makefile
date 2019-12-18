@@ -22,7 +22,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_FILES = main.c error.c utils.c
+SRCS_FILES = main.c error.c utils.c tmp.c
 
 OBJS = ${SRCS_FILES:.c=.o}
 
@@ -47,4 +47,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+work: all clean
+
+.PHONY: all clean fclean re work

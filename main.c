@@ -6,35 +6,17 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/12 20:42:49 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/13 17:22:10 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 int map[5][5] = {{1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 1},
 			{1, 0, 0, 0, 1},
 			{1, 0, 0, 0, 1},
 			{1, 1, 1, 1, 1}};
-
-void	ft_winsize(int tab[2])
-{
-	tab[0] = WIN_X;
-	tab[1] = WIN_Y;
-}
-
-char	*ft_map(int fd)
-{
-	if (fd <= -1)
-		return (NULL);
-	return (malloc(1));
-}
-
-int square_postion_x = 0;
-int square_postion_y = 0;
-int square_size = 100;
 
 int		ft_cub3d(t_win *draw, char *map)
 {
@@ -56,45 +38,8 @@ int		ft_cub3d(t_win *draw, char *map)
 
 void	ft_draw(t_win *draw)
 {
-	int x;
-	int y;
-
-	y = -1;
-	while (++y < draw->win_size[0])
-	{
-		x = -1;
-		while (++x < draw->win_size[1])
-		{
-			if (x > square_postion_x && y > square_postion_y &&
-				x < square_size + square_postion_x &&
-				y < square_size + square_postion_y)
-				draw->img_data[y * draw->win_size[0] + x] = 0x7fffff;
-			else
-				draw->img_data[y * draw->win_size[0] + x] = 0;
-		}
-	}
-	mlx_put_image_to_window(draw->mlx, draw->win, draw->img, 0, 0);
-}
-
-int		fct(int keycode, void *param)
-{
-	t_win	*draw;
-
-	draw = (t_win *)param;
-//	printf("%d\n", keycode);
-
-	if (keycode == 53)
-		exit(1);
-	if (keycode == RIGHT)
-		square_postion_x += 10;
-	if (keycode == LEFT)
-		square_postion_x -= 10;
-	if (keycode == UP)
-		square_postion_y -= 10;
-	if (keycode == DOWN)
-		square_postion_y += 10;
-	ft_draw(draw);
-	return (1);
+	(void)draw;
+	ft_draw_square(draw);
 }
 
 int		main(int argc, char **argv)
@@ -103,19 +48,20 @@ int		main(int argc, char **argv)
 	char	*map;
 
 	if (argc != 2)
-		return (ft_error("Just give me ONE map"));
+		return (ft_error("Just give me ONE map", NULL));
 	if (!(draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
-		return (ft_error("Can't do any allocation"));
+		return (ft_error("Can't do any allocation", NULL));
 	if (!(map = ft_map(open(argv[1], O_RDONLY))))
-		return (ft_error("Map error"));
+		return (ft_error("Map error", draw));
 	ft_winsize(draw->win_size);
 	if (!(draw->mlx = mlx_init()))
-		return (ft_error("MLX does not initialize"));
+		return (ft_error("MLX does not initialize", draw));
 	if (!(draw->win = mlx_new_window(draw->mlx, draw->win_size[0],
 					draw->win_size[1], "cub3D")))
-		return (ft_error("MLX does not open a window"));
+		return (ft_error("MLX does not open a window", draw));
 	if ((ft_cub3d(draw, map)) == -1)
 		return (-1);
+	ft_draw(draw);
 	mlx_hook(draw->win, KeyPress, KeyPressMask, fct, draw);
 	mlx_loop(draw->mlx);
 	return (0);
