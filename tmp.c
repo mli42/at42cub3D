@@ -64,6 +64,6 @@ int		fct(int keycode, void *param)
 		square_postion_y -= 10;
 	else if (keycode == DOWN)
 		square_postion_y += 10;
-	ft_draw(draw);
+//	ft_draw(draw);
 	return (1);
 }

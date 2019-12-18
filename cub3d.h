@@ -65,12 +65,18 @@ typedef struct	s_vectors
 	t_coord pov_max;
 }				t_vectors;
 
+typedef struct	s_param
+{
+	t_win		*draw;
+	t_vectors	*space;
+}				t_param;
+
 int				ft_error(char *str, t_win *draw);
 void			*ft_memalloc(int size);
 
 # include <stdio.h>
 
-void			ft_draw(t_win *draw);
+void			ft_draw(t_param param);
 
 // TMP functions
 
