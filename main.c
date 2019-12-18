@@ -20,14 +20,14 @@ int map[5][5] = {{1, 1, 1, 1, 1},
 
 int		ft_press_key(int keycode, void *param)
 {
-	const t_param	*params = (t_param *)param;
-	const t_vectors	*space = params->space;
-	const t_win		*draw = params->draw;
+	t_win		*draw;
+	t_vectors	*space;
+	t_param		*params;
 
 	//      printf("%d\n", keycode);
-	(void)space;
-	(void)draw;
-	(void)params;
+	params = (t_param *)param;
+	draw = params->draw;
+	space = params->space;
 
 	if (keycode == 53)
 		exit(1);
@@ -49,7 +49,7 @@ int		ft_cub3d(t_win *draw, char *map)
 	t_vectors	*space;
 	t_param		param;
 
-	if (!(space = (t_vectors *)ft_memalloc((int)sizeof(t_vectors))))
+	if (!(space = ft_init_space()))
 		return (ft_error("Malloc problem", draw));
 	if (!(draw->img = mlx_new_image(draw->mlx, draw->win_size[0],
 			draw->win_size[1])))
@@ -74,9 +74,19 @@ void	ft_draw(t_param param)
 {
 	t_win		*draw;
 	t_vectors	*space;
+	static int i = 0;
 
 	draw = param.draw;
 	space = param.space;
+
+	// Calculer les murs et les dessiner
+	if (i == 0 || i == 1)
+		ft_recalculate_povs(space);
+
+	// ft_draw_map();
+	// ft_draw_minimap();
+	
+	i++;
 }
 
 int		main(int argc, char **argv)

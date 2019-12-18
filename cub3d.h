@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 # include "./minilibx_opengl_20191021/X.h"
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
@@ -33,6 +34,9 @@
 # define D_RED 0x7f0000
 # define RED 0xff0000
 # define GREY 0x333333
+
+# define RAD_30 0.52359878
+# define RAD_90 1.570796
 
 enum			e_varname
 {
@@ -84,5 +88,10 @@ void			ft_winsize(int tab[2]);
 char			*ft_map(int fd);
 void			ft_draw_square(t_win *draw);
 int				fct(int keycode, void *param);
+
+// Other
+
+t_vectors		*ft_init_space(void);
+void			ft_recalculate_povs(t_vectors *space);
 
 #endif
