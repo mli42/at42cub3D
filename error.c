@@ -47,16 +47,13 @@ void	ft_recalculate_povs(t_vectors *space)
 {
 	double dir_rad;
 
-//	printf("Step: %d\n", i++);
 	dir_rad = atan2(space->dir.y, space->dir.x);
-//	printf("dir_rad : %lf\n", dir_rad);
 
-	space->pov_min.x = cos(dir_rad - RAD_30);
-	space->pov_min.y = sin(dir_rad - RAD_30);
+	space->pov_max.x = cos(dir_rad - RAD_30);
+	space->pov_max.y = sin(dir_rad - RAD_30);
+	space->pov_min.x = cos(dir_rad + RAD_30);
+	space->pov_min.y = sin(dir_rad + RAD_30);
 
-	space->pov_max.x = cos(dir_rad + RAD_30);
-	space->pov_max.y = sin(dir_rad + RAD_30);
-
-//	printf("Min %lf\n", atan2(space->pov_min.y, space->pov_min.x) * (180/M_PI));
-//	printf("Max %lf\n", atan2(space->pov_max.y, space->pov_max.x) * (180/M_PI));
+	printf("Min %lf\n", atan2(space->pov_min.y, space->pov_min.x) * (180/M_PI));
+	printf("Max %lf\n", atan2(space->pov_max.y, space->pov_max.x) * (180/M_PI));
 }

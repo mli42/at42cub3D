@@ -2,21 +2,13 @@
 |                                              # #    ###       |
 |     Author: L                                # #      #       |
 |     Mail:                                    ###    ###       |
-|     Creation date: 2019/12/16 17:40:37         #    #         |
+|     Creation date: 2019/12/18 23:54:16         #    #         |
 |                                                #    ###       |
 \***************************************************************/
 
-#include <math.h>
-#include <stdio.h>
+#include "cub3d.h"
 
-int	main(void)
+int		main(void)
 {
-	double angle = 180/M_PI;
-
-	printf("%lf\n", M_PI);
-
-	angle *= atan2(1, 0); 
-	printf("%lf\n", angle);
-
-	return (0);
+	printf("%lf\n", atan2(sin(M_PI/18), cos(M_PI/18)) * (180/M_PI));
 }

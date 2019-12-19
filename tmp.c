@@ -56,13 +56,13 @@ int		fct(int keycode, void *param)
 
 	if (keycode == 53)
 		exit(1);
-	else if (keycode == RIGHT)
+	else if (keycode == ARROW_RIGHT)
 		square_postion_x += 10;
-	else if (keycode == LEFT)
+	else if (keycode == ARROW_LEFT)
 		square_postion_x -= 10;
-	else if (keycode == UP)
+	else if (keycode == ARROW_UP)
 		square_postion_y -= 10;
-	else if (keycode == DOWN)
+	else if (keycode == ARROW_DOWN)
 		square_postion_y += 10;
 //	ft_draw(draw);
 	return (1);

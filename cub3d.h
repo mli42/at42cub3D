@@ -23,10 +23,15 @@
 
 # define WIN_X 1000
 # define WIN_Y 1000
-# define UP 126
-# define DOWN 125
-# define LEFT 123
-# define RIGHT 124
+# define ARROW_UP 126
+# define ARROW_DOWN 125
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+
+# define A_KEY 0
+# define S_KEY 1
+# define D_KEY 2
+# define W_KEY 13
 
 # define BLUE 0x7fffff
 # define GREEN 0xff00
@@ -35,6 +40,8 @@
 # define RED 0xff0000
 # define GREY 0x333333
 
+// M_PI/18
+# define RAD_10 0.1745329251994
 # define RAD_30 0.52359878
 # define RAD_90 1.570796
 
@@ -80,7 +87,7 @@ void			*ft_memalloc(int size);
 
 # include <stdio.h>
 
-void			ft_draw(t_param param);
+void			ft_draw(t_param *hub);
 
 // TMP functions
 
