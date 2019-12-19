@@ -12,18 +12,12 @@
 
 #include "cub3d.h"
 
-void	ft_free_windraw(t_win *draw)
-{
-	free(draw);
-	draw = NULL;
-}
-
-int		ft_error(char *str, t_win *draw)
+int		ft_error(char *str, t_param *hub)
 {
 	write(2, "Error\n", 6);
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
-	ft_free_windraw(draw);
+	ft_remove_all(hub);
 	return (-1);
 }
 
@@ -34,19 +28,21 @@ t_vectors	*ft_init_space(void)
 	if (!(space = (t_vectors *)ft_memalloc((int)sizeof(t_vectors))))
 		return (NULL);
 	// Being at the center
-	space->pos.x = 3;
-	space->pos.y = 3;
-	space->pos_rad = atan2(space->pos.y, space->pos.x);
+	space->pos.x = 3.5;
+	space->pos.y = 3.5;
 	// Watching North
 	space->dir.x = 0;
 	space->dir.y = 1;
-	space->dir_rad = atan2(space->dir.y, space->dir.x);
 
 	return (space);
 }
 
 void	ft_recalculate_povs(t_vectors *space)
 {
+	// To move/re-add when i'll change my position => have to recalculate this rad
+	space->pos_rad = atan2(space->pos.y, space->pos.x);
+
+	space->dir_rad = atan2(space->dir.y, space->dir.x);
 	space->pov_min.x = cos(space->dir_rad + RAD_30);
 	space->pov_min.y = sin(space->dir_rad + RAD_30);
 	space->pov_min_rad = atan2(space->pov_min.y, space->pov_min.x);

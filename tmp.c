@@ -67,3 +67,24 @@ int		fct(int keycode, void *param)
 //	ft_draw(draw);
 	return (1);
 }
+/*
+double	ft_v_check(t_win *draw, t_vectors *space, double current_ray)
+{
+	double distance;
+	t_coord to_check;
+
+	// premier point -> x;y
+
+	// Attetion si facing down
+	to_check.y = (int)space->pos.y;// + (current_ray < 0 ? 1 : 0);
+	to_check.x = ft_abs_double(to_check.y - space->pos.y) / tan(current_ray);
+	printf("X: %lf\tY:%lf\n", to_check.x, to_check.y);
+	if (map[(int)to_check.y][(int)to_check.x])
+		return (1);
+
+	distance = 0;
+	(void)draw;
+	(void)space;
+	(void)current_ray;
+	return (distance);
+}*/

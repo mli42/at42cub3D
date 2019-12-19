@@ -22,7 +22,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_FILES = main.c error.c utils.c tmp.c
+SRCS_FILES = main.c error.c utils.c tmp.c ft_remove_all.c
 
 OBJS = ${SRCS_FILES:.c=.o}
 

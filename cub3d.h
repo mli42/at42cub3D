@@ -21,12 +21,13 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 
-# define WIN_X 1000
-# define WIN_Y 1000
+# define WIN_X 200
+# define WIN_Y 200
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
 # define ARROW_RIGHT 124
+# define EXIT_CODE 53
 
 # define A_KEY 0
 # define S_KEY 1
@@ -86,7 +87,7 @@ typedef struct	s_param
 	t_vectors	*space;
 }				t_param;
 
-int				ft_error(char *str, t_win *draw);
+int				ft_error(char *str, t_param *hub);
 void			*ft_memalloc(int size);
 
 # include <stdio.h>
@@ -105,5 +106,6 @@ int				fct(int keycode, void *param);
 t_vectors		*ft_init_space(void);
 void			ft_recalculate_povs(t_vectors *space);
 double			ft_abs_double(double nbr);
+int				ft_remove_all(t_param *hub);
 
 #endif
