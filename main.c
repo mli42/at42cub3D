@@ -89,22 +89,63 @@ int		ft_cub3d(t_param *hub, char *map)
 	return (1);
 }
 
+double	ft_v_check(t_win *draw, t_vectors *space, double current_ray)
+{
+	double distance;
+	t_coord to_check;
+
+	// premier point -> x;y
+	
+	// Attetion si facing down
+	to_check.y = (int)space->pos.y + (current_ray < 0 ? 1 : 0);
+	to_check.x = ft_abs_double(to_check.y - space->pos.y) / tan(current_ray);
+	printf("X: %lf\tY:%lf\n", to_check.x, to_check.y);
+	if (map[(int)to_check.y][(int)to_check.x])
+		return (1);
+
+	distance = 0;
+	(void)draw;
+	(void)space;
+	(void)current_ray;
+	return (distance);
+}
+
+void	ft_raycasting(t_win *draw, t_vectors *space, int i)
+{
+	double current_ray;
+//	double h_dist;
+	double v_dist;
+
+	current_ray = ft_abs_double(space->pov_max_rad - space->pov_min_rad)
+		/ draw->win_size[1] * i + space->pov_min_rad;
+//	h_dist = ft_h_check(draw, space, current_ray);
+	v_dist = ft_v_check(draw, space, current_ray);
+
+	printf("v dist : %lf\n", v_dist);
+}
+
 void	ft_draw(t_param *hub)
 {
+//	static int w = 0;
+//	w++;
 	t_win		*draw;
 	t_vectors	*space;
-	static int i = 0;
+	int			ray_max;
+	int			i;
 
 	draw = hub->draw;
 	space = hub->space;
-
-	// Calculer les murs et les dessiner
 	ft_recalculate_povs(space);
+
+	i = -1;
+	ray_max = hub->draw->win_size[1];
+//	while (++i < ray_max)
+	while (++i < 5)
+		ft_raycasting(hub->draw, hub->space, i);
 
 	// ft_draw_map();
 	// ft_draw_minimap();
 	
-	i++;
 }
 
 int		main(int argc, char **argv)

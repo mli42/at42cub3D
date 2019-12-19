@@ -10,5 +10,8 @@
 
 int		main(void)
 {
-	printf("%lf\n", atan2(sin(M_PI/18), cos(M_PI/18)) * (180/M_PI));
+	printf("%lf\n", atan2(-1, 0) * (180/M_PI));
+	printf("%lf\n", atan2(-1, 0));
+	printf("%lf\n", atan2(sin(5 * M_PI/4), cos(5 * M_PI / 4)) * (180/M_PI));
+	printf("%lf\n", atan2(sin(5 * M_PI/4), cos(5 * M_PI / 4)));
 }

@@ -21,3 +21,8 @@ void	*ft_memalloc(int size)
 	ft_memset(result, 0, size);
 	return (result);
 }
+
+double	ft_abs_double(double nbr)
+{
+	return ((nbr >= 0 ? nbr : -nbr));
+}

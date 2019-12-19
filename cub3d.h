@@ -74,6 +74,10 @@ typedef struct	s_vectors
 	t_coord dir;
 	t_coord pov_min;
 	t_coord pov_max;
+	double	pos_rad;
+	double	dir_rad;
+	double	pov_min_rad;
+	double	pov_max_rad;
 }				t_vectors;
 
 typedef struct	s_param
@@ -100,5 +104,6 @@ int				fct(int keycode, void *param);
 
 t_vectors		*ft_init_space(void);
 void			ft_recalculate_povs(t_vectors *space);
+double			ft_abs_double(double nbr);
 
 #endif

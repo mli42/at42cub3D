@@ -36,24 +36,24 @@ t_vectors	*ft_init_space(void)
 	// Being at the center
 	space->pos.x = 3;
 	space->pos.y = 3;
+	space->pos_rad = atan2(space->pos.y, space->pos.x);
 	// Watching North
 	space->dir.x = 0;
 	space->dir.y = 1;
+	space->dir_rad = atan2(space->dir.y, space->dir.x);
 
 	return (space);
 }
 
 void	ft_recalculate_povs(t_vectors *space)
 {
-	double dir_rad;
+	space->pov_min.x = cos(space->dir_rad + RAD_30);
+	space->pov_min.y = sin(space->dir_rad + RAD_30);
+	space->pov_min_rad = atan2(space->pov_min.y, space->pov_min.x);
+	space->pov_max.x = cos(space->dir_rad - RAD_30);
+	space->pov_max.y = sin(space->dir_rad - RAD_30);
+	space->pov_max_rad = atan2(space->pov_max.y, space->pov_max.x);
 
-	dir_rad = atan2(space->dir.y, space->dir.x);
-
-	space->pov_max.x = cos(dir_rad - RAD_30);
-	space->pov_max.y = sin(dir_rad - RAD_30);
-	space->pov_min.x = cos(dir_rad + RAD_30);
-	space->pov_min.y = sin(dir_rad + RAD_30);
-
-	printf("Min %lf\n", atan2(space->pov_min.y, space->pov_min.x) * (180/M_PI));
-	printf("Max %lf\n", atan2(space->pov_max.y, space->pov_max.x) * (180/M_PI));
+	printf("Min %lf\n", space->pov_min_rad * (180/M_PI));
+	printf("Max %lf\n", space->pov_max_rad * (180/M_PI));
 }
