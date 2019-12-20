@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/13 13:46:11 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/20 17:59:12 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 
-# define WIN_X 200
-# define WIN_Y 200
+# define WIN_X 350
+# define WIN_Y 350
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
@@ -40,6 +40,7 @@
 # define D_RED 0x7f0000
 # define RED 0xff0000
 # define GREY 0x333333
+# define ORANGE 0xFF9500
 
 // M_PI/18
 # define RAD_10 0.1745329251994
@@ -107,5 +108,7 @@ t_vectors		*ft_init_space(void);
 void			ft_recalculate_povs(t_vectors *space);
 double			ft_abs_double(double nbr);
 int				ft_remove_all(t_param *hub);
+void			ft_raycasting(t_win *draw, t_vectors *space, int i);
+void			ft_draw(t_param *hub);
 
 #endif

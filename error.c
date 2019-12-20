@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:25 by mli               #+#    #+#             */
-/*   Updated: 2019/12/10 12:06:28 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/20 18:09:46 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vectors	*ft_init_space(void)
 	space->pos.y = 3.5;
 	// Watching North
 	space->dir.x = 0;
-	space->dir.y = 1;
+	space->dir.y = -1;
 
 	return (space);
 }
