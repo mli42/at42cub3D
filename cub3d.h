@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/20 17:59:12 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/21 19:56:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 
-# define WIN_X 350
-# define WIN_Y 350
+# define WIN_X 1000
+# define WIN_Y 1000
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123

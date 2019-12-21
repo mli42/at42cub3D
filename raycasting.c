@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2019/12/20 18:09:01 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/21 19:56:53 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	ft_raycasting(t_win *draw, t_vectors *space, int i)
 	double current_ray;
 	t_coord checking_point;
 	double distance;
-	const double step = (1.0/10.0);
+	static const double step = (1.0/10.0);
+	t_coord const_add;
 
 	current_ray = (ft_abs_double(space->pov_max_rad - space->pov_min_rad)
 		/ draw->win_size[1] * i) + space->pov_max_rad;
@@ -60,12 +61,14 @@ void	ft_raycasting(t_win *draw, t_vectors *space, int i)
 	printf("\t\tCURRENT RAY : %lf\n", current_ray * (180/M_PI));
 
 	distance = 0;
-	checking_point.x = 0;
-	checking_point.y = 0;
+	checking_point.x = space->pos.x;
+	checking_point.y = space->pos.y;
+	const_add.x = cos(current_ray) * step;
+	const_add.y = sin(current_ray) * step;
 	while (map[(int)checking_point.y + 1][(int)checking_point.x + 1] == 0)
 	{
-		checking_point.x = space->pos.x + cos(current_ray) * distance;
-		checking_point.y = space->pos.y + sin(current_ray) * distance;
+		checking_point.x += const_add.x;
+		checking_point.y += const_add.y;
 		distance += step;
 
 	//	printf("Checkpoint : X=%lf\tY=%lf\n", checking_point.x, checking_point.y);
@@ -80,16 +83,11 @@ void	ft_draw(t_param *hub)
 {
 //	static int w = 0;
 //	w++;
-	t_win		*draw;
-	t_vectors	*space;
+	int				i;
 	static int		ray_max;
-	int			i;
-
-	draw = hub->draw;
-	space = hub->space;
-	ft_recalculate_povs(space);
 
 	i = -1;
+	ft_recalculate_povs(hub->space);
 	ray_max = hub->draw->win_size[1];
 	while (++i < ray_max)
 		ft_raycasting(hub->draw, hub->space, i);
