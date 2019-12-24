@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2019/12/24 03:49:41 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/25 00:17:07 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_arrow_right(t_param *hub)
 {
-	hub->space->dir.x = cos(hub->space->dir_rad + RAD_10);
-	hub->space->dir.y = sin(hub->space->dir_rad + RAD_10);
+	hub->space->dir.x = cos(hub->space->dir_rad + RAD_5);
+	hub->space->dir.y = sin(hub->space->dir_rad + RAD_5);
 	printf("Pressed ARROW_RIGHT\n");
 }
 
 void	ft_arrow_left(t_param *hub)
 {
-	hub->space->dir.x = cos(hub->space->dir_rad - RAD_10);
-	hub->space->dir.y = sin(hub->space->dir_rad - RAD_10);
+	hub->space->dir.x = cos(hub->space->dir_rad - RAD_5);
+	hub->space->dir.y = sin(hub->space->dir_rad - RAD_5);
 	printf("Pressed ARROW_LEFT\n");
 }
 

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2019/12/22 13:25:37 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/25 00:45:05 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,14 @@ void	ft_drawing_ray(t_win *draw, int i, double distance, int touched)
 		else
 			draw->img_data[x * draw->win_size[0] + i] = 0;
 	}
-	mlx_put_image_to_window(draw->mlx, draw->win, draw->img, 0, 0);
 }
 
-void	ft_raycasting(t_win *draw, t_vectors *space, double current_ray)
+void	ft_raycasting(t_win *draw, t_vectors *space, double current_ray, int i)
 {
 	t_coord checking_point;
 	double distance;
-	static const double step = (1.0/10.0);
+	static const double step = (1.0/100.0);
 	t_coord const_add;
-	static int i = 0;
 
 	distance = 0;
 	checking_point.x = space->pos.x;
@@ -71,7 +69,7 @@ void	ft_raycasting(t_win *draw, t_vectors *space, double current_ray)
 	}
 //	printf("Case final: X=%d\tY=%d\n", (int)checking_point.x + 1, (int)checking_point.y + 1);
 //	printf("Distance found : %lf\n", distance);
-	ft_drawing_ray(draw, i++, distance, map[(int)checking_point.y + 1][(int)checking_point.x + 1]);
+	ft_drawing_ray(draw, i, distance, map[(int)checking_point.y + 1][(int)checking_point.x + 1]);
 }
 
 void	ft_draw(t_param *hub)
@@ -94,10 +92,8 @@ void	ft_draw(t_param *hub)
 	while (++i < ray_max)
 	{
 //		printf("\t\tCURRENT RAY : %lf\n", current_ray * (180/M_PI));
-		ft_raycasting(hub->draw, hub->space, current_ray);
+		ft_raycasting(hub->draw, hub->space, current_ray, i);
 		current_ray += ray_size;
 	}
-
-	// ft_draw_map();
-	// ft_draw_minimap();
+	mlx_put_image_to_window(hub->draw->mlx, hub->draw->win, hub->draw->img, 0, 0);
 }

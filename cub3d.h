@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/24 03:45:36 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/25 00:47:16 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define ORANGE 0xFF9500
 
 // M_PI/18
+# define RAD_5  0.0872664625997
 # define RAD_10 0.1745329251994
 # define RAD_30 0.52359878
 # define RAD_90 1.570796
@@ -115,7 +116,7 @@ t_vectors		*ft_init_space(void);
 void			ft_recalculate_povs(t_vectors *space);
 double			ft_abs_double(double nbr);
 int				ft_remove_all(t_param *hub);
-void			ft_raycasting(t_win *draw, t_vectors *space, double current_ray);
+void			ft_raycasting(t_win *draw, t_vectors *space, double current_ray, int i);
 void			ft_draw(t_param *hub);
 t_funct			*funct_ptr_init(void);
 
