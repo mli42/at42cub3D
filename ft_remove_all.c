@@ -16,8 +16,12 @@ int		ft_remove_all(t_param *hub)
 			; // Destroy the MLX
 		free(hub->draw);
 		hub->draw = NULL;
+
 		free(hub->space);
 		hub->space = NULL;
+
+		free(hub->funct);
+		hub->funct = NULL;
 	}
 	free(hub);
 	write(1, "Process stoped.\n", 16);

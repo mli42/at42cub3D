@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2019/12/20 09:28:36 by mli              ###   ########.fr        #
+#    Updated: 2019/12/24 03:31:30 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS_FILES = main.c error.c utils.c tmp.c ft_remove_all.c raycasting.c
+SRCS_FILES = main.c error.c utils.c tmp.c ft_remove_all.c raycasting.c \
+			 funct_ptr.c
 
 OBJS = ${SRCS_FILES:.c=.o}
 

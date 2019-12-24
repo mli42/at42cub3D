@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/21 19:56:00 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/24 03:45:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 
-# define WIN_X 1000
-# define WIN_Y 1000
+# define WIN_X 500
+# define WIN_Y 500
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
@@ -82,10 +82,17 @@ typedef struct	s_vectors
 	double	pov_max_rad;
 }				t_vectors;
 
+typedef struct	s_funct
+{
+	int		key_map[8];
+	void	(*fct[8])();
+}				t_funct;
+
 typedef struct	s_param
 {
 	t_win		*draw;
 	t_vectors	*space;
+	t_funct		*funct;
 }				t_param;
 
 int				ft_error(char *str, t_param *hub);
@@ -108,7 +115,16 @@ t_vectors		*ft_init_space(void);
 void			ft_recalculate_povs(t_vectors *space);
 double			ft_abs_double(double nbr);
 int				ft_remove_all(t_param *hub);
-void			ft_raycasting(t_win *draw, t_vectors *space, int i);
+void			ft_raycasting(t_win *draw, t_vectors *space, double current_ray);
 void			ft_draw(t_param *hub);
+t_funct			*funct_ptr_init(void);
 
+void			ft_arrow_right(t_param *hub);
+void			ft_arrow_left(t_param *hub);
+void			ft_arrow_up(t_param *hub);
+void			ft_arrow_down(t_param *hub);
+void			ft_a_key(t_param *hub);
+void			ft_s_key(t_param *hub);
+void			ft_d_key(t_param *hub);
+void			ft_w_key(t_param *hub);
 #endif

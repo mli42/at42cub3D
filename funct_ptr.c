@@ -5,50 +5,84 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/12 12:38:42 by mli               #+#    #+#             */
-/*   Updated: 2019/12/12 14:00:16 by mli              ###   ########.fr       */
+/*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
+/*   Updated: 2019/12/24 03:49:41 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "cub3d.h"
 
-void	ft_ls(void)
+void	ft_arrow_right(t_param *hub)
 {
-	printf("Typed ls\n");
+	hub->space->dir.x = cos(hub->space->dir_rad + RAD_10);
+	hub->space->dir.y = sin(hub->space->dir_rad + RAD_10);
+	printf("Pressed ARROW_RIGHT\n");
 }
 
-void	ft_cd(void)
+void	ft_arrow_left(t_param *hub)
 {
-	printf("Typed cd\n");
+	hub->space->dir.x = cos(hub->space->dir_rad - RAD_10);
+	hub->space->dir.y = sin(hub->space->dir_rad - RAD_10);
+	printf("Pressed ARROW_LEFT\n");
 }
 
-void	ft_cat(void)
+void	ft_arrow_up(t_param *hub)
 {
-	printf("Typed cat\n");
+	(void)hub;
+	printf("Pressed ARROW_UP\n");
 }
 
-int		main(int argc, char **argv)
+void	ft_arrow_down(t_param *hub)
 {
-	void (*fct[3])();
-	char *cmd[3];
+	(void)hub;
+	printf("Pressed ARROW_DOWN\n");
+}
 
-	if (argc != 2)
-	{
-		printf("Not good\n");
-		return (0);
-	}
-	fct[0] = ft_ls;
-	fct[1] = ft_cd;
-	fct[2] = ft_cat;
+void	ft_a_key(t_param *hub)
+{
+	(void)hub;
+	printf("Pressed A-key\n");
+}
 
-	cmd[0] = "ls";
-	cmd[1] = "cd";
-	cmd[2] = "cat";
-	int i = -1;
-	while (++i < 3)
-		if (!strcmp(argv[1], cmd[i]))
-			fct[i]();
-	return (0);
+void	ft_s_key(t_param *hub)
+{
+	(void)hub;
+	printf("Pressed S-key\n");
+}
+
+void	ft_d_key(t_param *hub)
+{
+	(void)hub;
+	printf("Pressed D-key\n");
+}
+
+void	ft_w_key(t_param *hub)
+{
+	(void)hub;
+	printf("Pressed W-key\n");
+}
+
+t_funct		*funct_ptr_init(void)
+{
+	t_funct *funct;
+
+	if (!(funct = (t_funct *)ft_memalloc((int)sizeof(t_funct))))
+		return (NULL);
+	funct->key_map[0] = ARROW_RIGHT;
+	funct->key_map[1] = ARROW_LEFT;
+	funct->key_map[2] = ARROW_UP;
+	funct->key_map[3] = ARROW_DOWN;
+	funct->key_map[4] = A_KEY;
+	funct->key_map[5] = S_KEY;
+	funct->key_map[6] = D_KEY;
+	funct->key_map[7] = W_KEY;
+	funct->fct[0] = ft_arrow_right;
+	funct->fct[1] = ft_arrow_left;
+	funct->fct[2] = ft_arrow_up;
+	funct->fct[3] = ft_arrow_down;
+	funct->fct[4] = ft_a_key;
+	funct->fct[5] = ft_s_key;
+	funct->fct[6] = ft_d_key;
+	funct->fct[7] = ft_w_key;
+	return (funct);
 }

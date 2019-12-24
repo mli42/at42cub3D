@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/20 18:06:59 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/24 03:58:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,46 +18,31 @@ int map[7][7] = {{1, 2, 3, 4, 3, 2, 1},
 				{1, 0, 0, 0, 0, 0, 1},
 				{1, 0, 0, 0, 0, 0, 1},
 				{1, 0, 0, 0, 0, 0, 1},
-				{1, 1, 1, 1, 1, 1, 1}};
+				{3, 3, 3, 3, 3, 3, 3}};
 
 int		ft_press_key(int keycode, void *param)
 {
-	t_win		*draw;
-	t_vectors	*space;
+	int			i;
 	t_param		*hub;
+	int			*keymap;
 
 //	printf("Key: %d\n", keycode);
 	hub = (t_param *)param;
-	draw = hub->draw;
-	space = hub->space;
+	keymap = hub->funct->key_map;
 
 	if (keycode == EXIT_CODE)
 		exit(ft_remove_all(hub));
-	else if (keycode == ARROW_RIGHT)
+	else
 	{
-		space->dir.x = cos(space->dir_rad + RAD_10);
-		space->dir.y = sin(space->dir_rad + RAD_10);
-		printf("Pressed ARROW_RIGHT\n");
+		i = -1;
+		while (++i < 8)
+			if (keycode == keymap[i])
+			{
+				hub->funct->fct[i](hub);
+				ft_draw(hub);
+				break ;
+			}
 	}
-	else if (keycode == ARROW_LEFT)
-	{
-		space->dir.x = cos(space->dir_rad - RAD_10);
-		space->dir.y = sin(space->dir_rad - RAD_10);
-		printf("Pressed ARROW_LEFT\n");
-	}
-	else if (keycode == ARROW_UP)
-		printf("Pressed ARROW_UP\n");
-	else if (keycode == ARROW_DOWN)
-		printf("Pressed ARROW_DOWN\n");
-	else if (keycode == A_KEY)
-		printf("Pressed A-key\n");
-	else if (keycode == S_KEY)
-		printf("Pressed S-key\n");
-	else if (keycode == D_KEY)
-		printf("Pressed D-key\n");
-	else if (keycode == W_KEY)
-		printf("Pressed W-key\n");
-	ft_draw(hub);
 	return (1);
 }
 
@@ -90,26 +75,26 @@ int		ft_cub3d(t_param *hub, char *map)
 int		main(int argc, char **argv)
 {
 	t_param	*hub;
-	t_win	*draw;
 	char	*map;
 
 	if (argc != 2)
 		return (ft_error("Just give me ONE map", NULL));
 	if (!(hub = (t_param *)ft_memalloc((int)sizeof(t_param))))
-		return (ft_error("Can't do any allocation", NULL));
+		return (ft_error("Can't allocate", hub));
 	if (!(hub->draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
-		return (ft_error("Can't do any allocation", hub));
-	draw = hub->draw;
+		return (ft_error("Can't allocate", hub));
+	if (!(hub->funct = funct_ptr_init()))
+		return (ft_error("Can't allocate", hub));
 	if (!(map = ft_map(open(argv[1], O_RDONLY))))
 		return (ft_error("Map error", hub));
-	ft_winsize(draw->win_size);
-	if (!(draw->mlx = mlx_init()))
+	ft_winsize(hub->draw->win_size);
+	if (!(hub->draw->mlx = mlx_init()))
 		return (ft_error("MLX does not initialize", hub));
-	if (!(draw->win = mlx_new_window(draw->mlx, draw->win_size[0],
-					draw->win_size[1], "cub3D")))
+	if (!(hub->draw->win = mlx_new_window(hub->draw->mlx,
+			hub->draw->win_size[0], hub->draw->win_size[1], "cub3D")))
 		return (ft_error("MLX does not open a window", hub));
 	if ((ft_cub3d(hub, map)) == -1)
 		return (-1);
-	mlx_loop(draw->mlx);
+	mlx_loop(hub->draw->mlx);
 	return (0);
 }
