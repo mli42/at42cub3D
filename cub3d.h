@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/25 00:47:16 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/25 21:07:39 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 
-# define WIN_X 500
-# define WIN_Y 500
+# define WIN_X 800
+# define WIN_Y 800
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
@@ -45,8 +45,9 @@
 // M_PI/18
 # define RAD_5  0.0872664625997
 # define RAD_10 0.1745329251994
-# define RAD_30 0.52359878
-# define RAD_90 1.570796
+# define RAD_30 0.5235987755982
+# define RAD_90 1.5707963267948
+# define FOOT_STEP 0.08
 
 enum			e_varname
 {

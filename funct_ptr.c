@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2019/12/25 00:17:07 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/25 21:00:14 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,46 @@ void	ft_arrow_down(t_param *hub)
 	printf("Pressed ARROW_DOWN\n");
 }
 
-void	ft_a_key(t_param *hub)
+void	ft_w_key(t_param *hub)
 {
-	(void)hub;
-	printf("Pressed A-key\n");
+	hub->space->pos.y += (hub->space->dir.y * FOOT_STEP);
+	hub->space->pos.x += (hub->space->dir.x * FOOT_STEP);
+	printf("Pressed W-key\n");
 }
 
 void	ft_s_key(t_param *hub)
 {
-	(void)hub;
+	hub->space->pos.y -= (hub->space->dir.y * FOOT_STEP);
+	hub->space->pos.x -= (hub->space->dir.x * FOOT_STEP);
 	printf("Pressed S-key\n");
+}
+
+void	ft_a_key(t_param *hub)
+{
+	t_coord left_side;
+	double left_rad;
+
+	left_rad = atan2(hub->space->dir.y, hub->space->dir.x) - RAD_90;
+	left_side.x = cos(left_rad);
+	left_side.y = sin(left_rad);
+
+	hub->space->pos.y += (left_side.y * FOOT_STEP);
+	hub->space->pos.x += (left_side.x * FOOT_STEP);
+	printf("Pressed A-key\n");
 }
 
 void	ft_d_key(t_param *hub)
 {
-	(void)hub;
-	printf("Pressed D-key\n");
-}
+	t_coord right_side;
+	double right_rad;
 
-void	ft_w_key(t_param *hub)
-{
-	(void)hub;
-	printf("Pressed W-key\n");
+	right_rad = atan2(hub->space->dir.y, hub->space->dir.x) + RAD_90;
+	right_side.x = cos(right_rad);
+	right_side.y = sin(right_rad);
+
+	hub->space->pos.y += (right_side.y * FOOT_STEP);
+	hub->space->pos.x += (right_side.x * FOOT_STEP);
+	printf("Pressed D-key\n");
 }
 
 t_funct		*funct_ptr_init(void)
