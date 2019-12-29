@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/25 21:07:39 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/29 04:16:22 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,24 @@
 # define D_KEY 2
 # define W_KEY 13
 
-# define BLUE 0x7fffff
+# define SKYBLUE 0x7fffff
 # define GREEN 0xff00
 # define D_BLUE 0x555
 # define D_RED 0x7f0000
 # define RED 0xff0000
 # define GREY 0x333333
-# define ORANGE 0xFF9500
+# define ORANGE 0xFF6900
+# define GREY_FLOOR 0x424242
+# define YELLOW 0xFFED2D
 
 // M_PI/18
 # define RAD_5  0.0872664625997
 # define RAD_10 0.1745329251994
 # define RAD_30 0.5235987755982
+# define POV_60 1.0471975511965
 # define RAD_90 1.5707963267948
+# define PI2 M_PI*2
+# define CHECK_STEP 0.001
 # define FOOT_STEP 0.08
 
 enum			e_varname
@@ -71,6 +76,12 @@ typedef struct	s_coord
 	double x;
 	double y;
 }				t_coord;
+
+typedef struct	s_point
+{
+	int x;
+	int y;
+}				t_point;
 
 typedef struct	s_vectors
 {
@@ -117,7 +128,6 @@ t_vectors		*ft_init_space(void);
 void			ft_recalculate_povs(t_vectors *space);
 double			ft_abs_double(double nbr);
 int				ft_remove_all(t_param *hub);
-void			ft_raycasting(t_win *draw, t_vectors *space, double current_ray, int i);
 void			ft_draw(t_param *hub);
 t_funct			*funct_ptr_init(void);
 

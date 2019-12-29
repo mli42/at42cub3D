@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:25 by mli               #+#    #+#             */
-/*   Updated: 2019/12/25 20:46:48 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/29 03:58:55 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_vectors	*ft_init_space(void)
 	if (!(space = (t_vectors *)ft_memalloc((int)sizeof(t_vectors))))
 		return (NULL);
 	// Being at the center
-	space->pos.x = 2.5;
-	space->pos.y = 2.5;
+	space->pos.x = 3.5;
+	space->pos.y = 3.5;
 	// Watching North
 	space->dir.x = 0;
 	space->dir.y = -1;
@@ -46,9 +46,13 @@ void	ft_recalculate_povs(t_vectors *space)
 	space->pov_min.x = cos(space->dir_rad + RAD_30);
 	space->pov_min.y = sin(space->dir_rad + RAD_30);
 	space->pov_min_rad = atan2(space->pov_min.y, space->pov_min.x);
+//	if (space->pov_min_rad < 0)
+//		space->pov_min_rad += PI2;
 	space->pov_max.x = cos(space->dir_rad - RAD_30);
 	space->pov_max.y = sin(space->dir_rad - RAD_30);
 	space->pov_max_rad = atan2(space->pov_max.y, space->pov_max.x);
+//	if (space->pov_max_rad < 0)
+//		space->pov_max_rad += PI2;
 
 	printf("\n");
 	printf("Min %lf\n", space->pov_min_rad * (180/M_PI));
