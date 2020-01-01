@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/29 01:58:16 by mli              ###   ########.fr       */
+/*   Updated: 2019/12/30 02:11:33 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_press_key(int keycode, void *param)
 	else
 	{
 		i = -1;
+		// while (kmap != -1)
 		while (++i < 8)
 			if (keycode == keymap[i])
 			{

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2019/12/29 04:36:39 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/01 21:55:29 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,20 @@ int map[9][9];
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
-int		ft_color(t_param *hub, t_point wall)
+int		ft_color(t_param *hub, int face)
 {
-	t_point position;
+	(void)hub; // Hub for textures
 
-	// Point A
-	position.x = hub->space->pos.x;
-	position.y = hub->space->pos.y;
-	// Zone B
-	if (wall.x <= position.x && wall.y >= position.y)
-		return (color_set[2]);
-	// Zone C
-	if (wall.x >= position.x && wall.y >= position.y)
+	if (face == 'N')
 		return (color_set[1]);
-	// Zone D
-	if (wall.x <= position.x && wall.y <= position.y)
+	if (face == 'E')
+		return (color_set[2]);
+	if (face == 'S')
 		return (color_set[3]);
-	// Zone E
 	return (color_set[4]);
 }
 
-void	ft_drawing_ray(t_param *hub, int i, double distance, t_point point)
+void	ft_drawing_ray(t_param *hub, int i, double distance, int face)
 {
 	int x;
 	int size;
@@ -48,7 +41,7 @@ void	ft_drawing_ray(t_param *hub, int i, double distance, t_point point)
 	padding_limit = (hub->draw->win_size[0] - size) / 5;
 	while (++x < hub->draw->win_size[0])
 	{
-		color = ft_color(hub, point);
+		color = ft_color(hub, face);
 		if (x < padding_limit)
 			hub->draw->img_data[x * hub->draw->win_size[0] + i] = SKYBLUE;
 		else if (x > hub->draw->win_size[0] - padding_limit)
@@ -58,36 +51,44 @@ void	ft_drawing_ray(t_param *hub, int i, double distance, t_point point)
 	}
 }
 
+int		ft_face(double current_ray, int h_v)
+{
+	if (current_ray < 0)
+		current_ray += PI2;
+	if (current_ray >= 0 && current_ray <= M_PI && h_v == 'h')
+		return ('N');
+	if (current_ray >= M_PI && current_ray <= PI2 && h_v == 'h')
+		return ('S');
+	if (current_ray >= M_PI/2 && current_ray <= 3 * M_PI/2 && h_v == 'v')
+		return ('E');
+	return ('W');
+}
+
 void	ft_raycasting(t_param *hub, double current_ray, int i)
 {
-	t_coord checking_point;
-	t_point point;
-	double distance;
-	t_coord const_add;
+	int			h_v;
+	double		distance;
+	t_coord		check_pt;
+	t_coord		const_add;
 
 	distance = 0;
-	checking_point.x = hub->space->pos.x;
-	checking_point.y = hub->space->pos.y;
-	point.y = (int)checking_point.y + 1;
-	point.x = (int)checking_point.x + 1;
+	check_pt.x = hub->space->pos.x;
+	check_pt.y = hub->space->pos.y;
 	const_add.x = cos(current_ray) * CHECK_STEP;
 	const_add.y = sin(current_ray) * CHECK_STEP;
-	while (map[point.y][point.x] == 0)
+	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 0)
 	{
-		checking_point.x += const_add.x;
-		checking_point.y += const_add.y;
-		point.y = (int)checking_point.y + 1;
-		point.x = (int)checking_point.x + 1;
+		check_pt.y += const_add.y;
+		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 0 ? 'h' : 'v');
+		check_pt.x += const_add.x;
 		distance += CHECK_STEP;
 	}
 	distance *= cos(ft_abs_double(hub->space->dir_rad - current_ray));
-	ft_drawing_ray(hub, i, distance, point);
+	ft_drawing_ray(hub, i, distance, ft_face(current_ray, h_v));
 }
 
 void	ft_draw(t_param *hub)
 {
-//	static int w = 0;
-//	w++;
 	int				i;
 	static int		ray_max;
 	double			current_ray;
@@ -96,12 +97,10 @@ void	ft_draw(t_param *hub)
 	ft_recalculate_povs(hub->space);
 	ray_size = POV_60 / hub->draw->win_size[1];
 	current_ray = hub->space->pov_max_rad + ray_size;
-
 	i = -1;
 	ray_max = hub->draw->win_size[1];
 	while (++i < ray_max)
 	{
-//		printf("\tCURRENT RAY : %lf\t", current_ray * (180/M_PI));
 		ft_raycasting(hub, current_ray, i);
 		current_ray += ray_size;
 	}

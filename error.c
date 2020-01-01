@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:25 by mli               #+#    #+#             */
-/*   Updated: 2019/12/29 03:58:55 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/01 17:53:29 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ void	ft_recalculate_povs(t_vectors *space)
 //	if (space->pov_max_rad < 0)
 //		space->pov_max_rad += PI2;
 
-	printf("\n");
+/*	printf("\n");
 	printf("Min %lf\n", space->pov_min_rad * (180/M_PI));
 	printf("Min rad %lf\n", space->pov_min_rad);
 	printf("\n");
 	printf("Max %lf\n", space->pov_max_rad * (180/M_PI));
 	printf("Max rad %lf\n", space->pov_max_rad);
+	*/
 }
