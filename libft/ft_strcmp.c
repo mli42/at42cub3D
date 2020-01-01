@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: mli <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/10 12:00:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/02 00:14:38 by mli              ###   ########.fr       */
+/*   Created: 2019/07/10 15:47:48 by mli               #+#    #+#             */
+/*   Updated: 2020/01/01 23:18:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-
-double	ft_abs_double(double nbr)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	return ((nbr >= 0 ? nbr : -nbr));
+	int i;
+
+	i = 0;
+	while (s1[i] == s2[i])
+	{
+		if (s1[i] == '\0')
+			return (0);
+		i++;
+	}
+	return ((unsigned)s1[i] - (unsigned)s2[i]);
 }
