@@ -6,67 +6,20 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 23:32:08 by mli               #+#    #+#             */
-/*   Updated: 2020/01/02 16:56:32 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/02 17:55:15 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-#define BUFFER_SIZE 400
-
-typedef struct	s_list
+int		ft_sentence(t_gnl **alist, int min, int max)
 {
-	int				min;
-	int				max;
-	char			*tab;
-	struct s_list	*next;
-}				t_list;
-
-void	ft_remove_all(t_list **alist)
-{
-	t_list	*tmp;
-	t_list	*lst = *alist;
-
-	while (lst)
-	{
-		tmp = lst->next;
-		free(lst->tab);
-		lst->tab = NULL;
-		free(lst);
-		lst = tmp;
-	}
-	*alist = NULL;
-}
-
-t_list	*ft_lstnew(int fd)
-{
-	t_list	*new;
-
-	if (!(new = (t_list *)malloc(sizeof(t_list))))
-		return (NULL);
-	new->min = 0;
-	if (!(new->tab = (char *)malloc(sizeof(char) * BUFFER_SIZE)))
-	{
-		free(new);
-		return (NULL);
-	}
-	if ((new->max = read(fd, new->tab, BUFFER_SIZE)) < 0)
-	{
-		free(new->tab);
-		new->tab = NULL;
-		free(new);
-		return (NULL);
-	}
-	new->next = 0;
-	return (new);
-}
-
-int		ft_sentence(t_list **alist, int min, int max)
-{
-	int		size = 0;
+	int		size;
 	char	*tab;
-	t_list	*lst = *alist;
+	t_gnl	*lst;
 
+	size = 0;
+	lst = *alist;
 	while (lst->next)
 	{
 		size += lst->max - lst->min;
@@ -84,24 +37,11 @@ int		ft_sentence(t_list **alist, int min, int max)
 	return (0);
 }
 
-void    ft_lstclear(t_list **alst)
+int		ft_found(t_gnl **alist, char **line, int size)
 {
-    t_list  *tmp;
-
-    while ((*alst)->next)
-    {
-        tmp = (*alst);
-        *alst = (*alst)->next;
-        free(tmp->tab);
-        free(tmp);
-    }
-}
-
-int		ft_found(t_list **alist, char **line, int size)
-{
-	int i;
+	int		i;
 	char	*src;
-	t_list *lst;
+	t_gnl	*lst;
 
 	i = 0;
 	lst = *alist;
@@ -121,31 +61,20 @@ int		ft_found(t_list **alist, char **line, int size)
 		lst = lst->next;
 	line[0][i] = '\0';
 	(lst->min)++;
-	ft_lstclear(alist);
+	ft_lstclear_gnl(alist);
 	return (1);
 }
 
-int		ft_size(t_list *lst)
-{
-	int		size = 1;
-
-	while (lst)
-	{
-		size = lst->max - lst->min;
-		lst = lst->next;
-	}
-	return (size);
-}
-
-int		ft_gnl(int fd, char **line, t_list **alist)
+int		ft_gnl(int fd, char **line, t_gnl **alist)
 {
 	int		size;
-	t_list	*list = *alist;
+	t_gnl	*list;
 
+	list = *alist;
 	while (((size = ft_sentence(alist, list->min, list->max)) == 0) &&
 			(list->max == BUFFER_SIZE))
 	{
-		if (!(list->next = ft_lstnew(fd)))
+		if (!(list->next = ft_lstnew_gnl(fd)))
 			return (-1);
 		list = list->next;
 	}
@@ -156,16 +85,16 @@ int		ft_gnl(int fd, char **line, t_list **alist)
 
 int		get_next_line(int fd, char **line)
 {
-	static t_list *lst = NULL;
-	int		returned_value;
+	int				returned_value;
+	static t_gnl	*lst = NULL;
 
 	if (fd < 0 || !line)
 		return (-1);
 	if (lst == NULL)
-		if ((lst = ft_lstnew(fd)) == NULL)
+		if ((lst = ft_lstnew_gnl(fd)) == NULL)
 			return (-1);
 	returned_value = ft_gnl(fd, line, &lst);
 	if (returned_value == 0 || returned_value == -1)
-		ft_remove_all(&lst);
+		ft_remove_all_gnl(&lst);
 	return (returned_value);
 }
