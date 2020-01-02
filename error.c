@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:25 by mli               #+#    #+#             */
-/*   Updated: 2020/01/01 17:53:29 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/02 00:36:35 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,6 @@ int		ft_error(char *str, t_param *hub)
 	write(2, "\n", 1);
 	ft_remove_all(hub);
 	return (-1);
-}
-
-t_vectors	*ft_init_space(void)
-{
-	t_vectors	*space;
-
-	if (!(space = (t_vectors *)ft_memalloc((int)sizeof(t_vectors))))
-		return (NULL);
-	// Being at the center
-	space->pos.x = 3.5;
-	space->pos.y = 3.5;
-	// Watching North
-	space->dir.x = 0;
-	space->dir.y = -1;
-
-	return (space);
 }
 
 void	ft_recalculate_povs(t_vectors *space)

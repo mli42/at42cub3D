@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2019/12/25 21:00:14 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/02 00:37:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_funct		*funct_ptr_init(void)
 {
 	t_funct *funct;
 
-	if (!(funct = (t_funct *)ft_memalloc((int)sizeof(t_funct))))
+	if (!(funct = (t_funct *)ft_memalloc(sizeof(t_funct))))
 		return (NULL);
 	funct->key_map[0] = ARROW_RIGHT;
 	funct->key_map[1] = ARROW_LEFT;

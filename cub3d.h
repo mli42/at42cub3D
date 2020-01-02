@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2019/12/29 04:16:22 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/02 01:23:51 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct	s_win
 	void	*win;
 	void	*img;
 	int		*img_data;
-	int		win_size[2];
+	int		win_size[2]; // Dont forget to set a limit !!
 }				t_win;
 
 typedef struct	s_coord
@@ -101,15 +101,32 @@ typedef struct	s_funct
 	void	(*fct[8])();
 }				t_funct;
 
+typedef struct	s_fd
+{
+	int north;
+	int south;
+	int west;
+	int east;
+	int sprite;
+}				t_fd;
+
+typedef struct	s_parsing
+{
+	int		**map;
+	t_fd	texture;
+	int		ceiling_color;
+	int		floor_color;
+}				t_parsing;
+
 typedef struct	s_param
 {
 	t_win		*draw;
 	t_vectors	*space;
 	t_funct		*funct;
+	t_parsing	*parse;
 }				t_param;
 
 int				ft_error(char *str, t_param *hub);
-void			*ft_memalloc(int size);
 
 # include <stdio.h>
 
@@ -117,14 +134,12 @@ void			ft_draw(t_param *hub);
 
 // TMP functions
 
-void			ft_winsize(int tab[2]);
-char			*ft_map(int fd);
 void			ft_draw_square(t_win *draw);
 int				fct(int keycode, void *param);
 
 // Other
 
-t_vectors		*ft_init_space(void);
+t_param			*ft_hub_alloc(void);
 void			ft_recalculate_povs(t_vectors *space);
 double			ft_abs_double(double nbr);
 int				ft_remove_all(t_param *hub);
@@ -139,4 +154,7 @@ void			ft_a_key(t_param *hub);
 void			ft_s_key(t_param *hub);
 void			ft_d_key(t_param *hub);
 void			ft_w_key(t_param *hub);
+
+int				ft_parse(t_param *hub, char *filename);
+
 #endif
