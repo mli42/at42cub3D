@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 02:10:52 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/03 21:22:40 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define WIN_X 800
 # define WIN_Y 800
+# define WIN_X_MAX 2560
+# define WIN_Y_MAX 1600
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
@@ -155,8 +157,6 @@ void			ft_s_key(t_param *hub);
 void			ft_d_key(t_param *hub);
 void			ft_w_key(t_param *hub);
 
-int				ft_parse(t_param *hub, char *filename);
-
 /* GNL */
 # define BUFFER_SIZE 400
 
@@ -168,11 +168,25 @@ typedef struct	s_gnl
 	struct s_gnl	*next;
 }				t_gnl;
 
-int				ft_gnl(int fd, char **line, t_gnl **alist);
+int				get_next_line(int fd, char **line);
 void			ft_lstclear_gnl(t_gnl **alst);
 void			ft_remove_all_gnl(t_gnl **alist);
 t_gnl			*ft_lstnew_gnl(int fd);
 
 /* GNL */
 
+/* Parsing */
+typedef struct	s_ref
+{
+	char	*ref[5];
+	int		(*f_ref[5])();
+}				t_ref;
+
+int				ft_parse(t_param *hub, char *filename);
+int				ft_good_name(char *filename);
+t_ref			ft_ref_parse(void);
+int				f_ref_resolution(t_param *hub, char *str);
+void			ft_pass_spaces(char *str, int *i);
+
+/* Parsing */
 #endif

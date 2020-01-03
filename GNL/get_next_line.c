@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 23:32:08 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 02:25:52 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/03 17:53:32 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,23 @@ int		ft_gnl(int fd, char **line, t_gnl **alist)
 	if (ft_found(alist, line, size) == 0)
 		return (-1);
 	return ((size > 0 ? 1 : 0));
+}
+
+int		get_next_line(int fd, char **line)
+{
+	int				returned_value;
+	static t_gnl	*lst = NULL;
+
+	if (fd < 0 || !line)
+	{
+		ft_remove_all_gnl(&lst);
+		return (-1);
+	}
+	if (lst == NULL)
+		if ((lst = ft_lstnew_gnl(fd)) == NULL)
+			return (-1);
+	returned_value = ft_gnl(fd, line, &lst);
+	if (returned_value == 0 || returned_value == -1)
+		ft_remove_all_gnl(&lst);
+	return (returned_value);
 }

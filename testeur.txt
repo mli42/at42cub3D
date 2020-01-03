@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/02 01:10:30 by mli               #+#    #+#              #
-#    Updated: 2020/01/02 01:31:01 by mli              ###   ########.fr        #
+#    Updated: 2020/01/03 23:17:48 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,4 +19,5 @@ chmod 000 .cub
 Les Mallocs :
 grep "malloc" *.c
 
+Necessite d une virgule dans RGB
 

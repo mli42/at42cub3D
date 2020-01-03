@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   parsing_filename.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 15:53:02 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 22:30:11 by mli              ###   ########.fr       */
+/*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
+/*   Updated: 2020/01/03 16:18:27 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int		main(void)
+int			ft_good_name(char *filename)
 {
-	int i = 0;
-	int a = 2147483647;
-	unsigned char *b = (unsigned char *)&a;
-	(void)i;
+	int i;
 
-//	while (i < 4)
-//		b[i++] = 0;
-	b[3] = 0;
-
-	b[2] = 0;
-	b[1] = 0;
-//	b[0] = 0;
-	printf("NB: %d == %x\n", a, a);
-	printf("%d | %d | %d | %d\n", (int)b[0], (int)b[1], (int)b[2], (int)b[3]);
+	i = 0;
+	while (filename[i] && filename[i] != '.')
+		i++;
+	if (ft_strcmp(&filename[i], ".cub"))
+		return (-1);
+	return (open(filename, O_RDONLY));
 }

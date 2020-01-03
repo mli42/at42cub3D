@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/06 15:53:02 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 22:30:11 by mli              ###   ########.fr       */
+/*   Created: 2020/01/03 16:33:13 by mli               #+#    #+#             */
+/*   Updated: 2020/01/03 16:40:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "cub3d.h"
+#include "libft.h"
 
-int		main(void)
+void	ft_free(void **ptr)
 {
-	int i = 0;
-	int a = 2147483647;
-	unsigned char *b = (unsigned char *)&a;
-	(void)i;
-
-//	while (i < 4)
-//		b[i++] = 0;
-	b[3] = 0;
-
-	b[2] = 0;
-	b[1] = 0;
-//	b[0] = 0;
-	printf("NB: %d == %x\n", a, a);
-	printf("%d | %d | %d | %d\n", (int)b[0], (int)b[1], (int)b[2], (int)b[3]);
+	free(*ptr);
+	*ptr = NULL;
 }

@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/01/03 16:01:33 by mli              ###   ########.fr        #
+#    Updated: 2020/01/03 17:50:22 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ GNL_PATH = ./GNL/
 GNL_SRCS = ${GNL_PATH}get_next_line.c ${GNL_PATH}gnl_utils.c
 
 PARSING_PATH = ./parsing/
-PARSING_FILES = parsing.c
+PARSING_FILES = parsing.c filename.c ref.c utils.c
 PARSING_SRCS = ${addprefix ${PARSING_PATH}, ${PARSING_FILES}}
 
 SRCS_FILES = main.c error.c utils.c ft_remove_all.c raycasting.c \
