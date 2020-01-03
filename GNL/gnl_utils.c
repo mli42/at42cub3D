@@ -6,24 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 17:53:26 by mli               #+#    #+#             */
-/*   Updated: 2020/01/02 17:54:37 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/03 01:41:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int		ft_size(t_gnl *lst)
-{
-	int	size;
-
-	size = 1;
-	while (lst)
-	{
-		size = lst->max - lst->min;
-		lst = lst->next;
-	}
-	return (size);
-}
 
 void	ft_lstclear_gnl(t_gnl **alst)
 {

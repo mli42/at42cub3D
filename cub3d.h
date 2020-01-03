@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/02 17:57:10 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/03 02:10:52 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,8 +168,7 @@ typedef struct	s_gnl
 	struct s_gnl	*next;
 }				t_gnl;
 
-int				get_next_line(int fd, char **line);
-int				ft_size(t_gnl *lst);
+int				ft_gnl(int fd, char **line, t_gnl **alist);
 void			ft_lstclear_gnl(t_gnl **alst);
 void			ft_remove_all_gnl(t_gnl **alist);
 t_gnl			*ft_lstnew_gnl(int fd);
