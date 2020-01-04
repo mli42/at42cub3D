@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 21:22:40 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 18:18:47 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@
 # define POV_60 1.0471975511965
 # define RAD_90 1.5707963267948
 # define PI2 M_PI*2
-# define CHECK_STEP 0.001
-# define FOOT_STEP 0.08
+# define CHECK_STEP 0.005
+# define FOOT_STEP 0.05
 
 enum			e_varname
 {
@@ -115,7 +115,7 @@ typedef struct	s_fd
 typedef struct	s_parsing
 {
 	int		**map;
-	t_fd	texture;
+	t_fd	txt_w;
 	int		ceiling_color;
 	int		floor_color;
 }				t_parsing;
@@ -178,8 +178,8 @@ t_gnl			*ft_lstnew_gnl(int fd);
 /* Parsing */
 typedef struct	s_ref
 {
-	char	*ref[5];
-	int		(*f_ref[5])();
+	char	*ref[7];
+	int		(*f_ref[7])();
 }				t_ref;
 
 int				ft_parse(t_param *hub, char *filename);
@@ -187,6 +187,11 @@ int				ft_good_name(char *filename);
 t_ref			ft_ref_parse(void);
 int				f_ref_resolution(t_param *hub, char *str);
 void			ft_pass_spaces(char *str, int *i);
+int				f_ref_s(t_param *hub, char *str);
+int				f_ref_so(t_param *hub, char *str);
+int				f_ref_no(t_param *hub, char *str);
+int				f_ref_we(t_param *hub, char *str);
+int				f_ref_ea(t_param *hub, char *str);
 
 /* Parsing */
 #endif

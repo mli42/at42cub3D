@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 23:36:44 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 18:37:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,14 @@ int		f_ref_ceiling(t_param *hub, char *str)
 	while (--k >= 0)
 	{
 		nbr[k] = ft_atoi_ptr(str, &i);
-		if (nbr[k] < 0 || nbr[k] > 255)
+		ft_pass_spaces(str, &i);
+		if ((nbr[k] < 0 || nbr[k] > 255) || (str[i++] != ',' && k > 0))
 			return (-1);
 		color_bit[k] = nbr[k];
-		ft_pass_spaces(str, &i);
-		if (str[i++] != ',' && k > 0)
-			return (-1);
 	}
 	printf("Ceiling : R %d | G %d | B %d\n", nbr[2], nbr[1], nbr[0]);
-	return (1);
+	ft_pass_spaces(str, &i);
+	return ((str[i] == '\0' ? 1 : -1));
 }
 
 int		f_ref_floor(t_param *hub, char *str)
@@ -57,15 +56,14 @@ int		f_ref_floor(t_param *hub, char *str)
 	while (--k >= 0)
 	{
 		nbr[k] = ft_atoi_ptr(str, &i);
-		if (nbr[k] < 0 || nbr[k] > 255)
+		ft_pass_spaces(str, &i);
+		if ((nbr[k] < 0 || nbr[k] > 255) || (str[i++] != ',' && k > 0))
 			return (-1);
 		color_bit[k] = nbr[k];
-		ft_pass_spaces(str, &i);
-		if (str[i++] != ',' && k > 0)
-			return (-1);
 	}
 	printf("Floor : R %d | G %d | B %d\n", nbr[2], nbr[1], nbr[0]);
-	return (1);
+	ft_pass_spaces(str, &i);
+	return ((str[i] == '\0' ? 1 : -1));
 }
 
 int		f_ref_resolution(t_param *hub, char *str)
@@ -102,9 +100,16 @@ t_ref		ft_ref_parse(void)
 	ref_parse.ref[1] = "F"; 
 	ref_parse.ref[2] = "C"; 
 	ref_parse.ref[3] = "S"; 
+	ref_parse.ref[4] = "N"; 
+	ref_parse.ref[5] = "W"; 
+	ref_parse.ref[6] = "E"; 
 	ref_parse.f_ref[0] = f_ref_resolution; 
 	ref_parse.f_ref[1] = f_ref_floor; 
 	ref_parse.f_ref[2] = f_ref_ceiling; 
+	ref_parse.f_ref[3] = f_ref_s; 
+	ref_parse.f_ref[4] = f_ref_no; 
+	ref_parse.f_ref[5] = f_ref_we; 
+	ref_parse.f_ref[6] = f_ref_ea; 
 
 	return (ref_parse);
 }

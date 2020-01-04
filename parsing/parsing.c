@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 23:36:52 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 18:35:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int			ft_first_vars(t_param *hub, t_ref ref_parse, int fd)
 
 	i = 0;
 	while ((gnl_value = get_next_line(fd, &line)) == 1 && !line[0])
-		;
+		ft_free((void **)&line);
 	ft_pass_spaces(line, &i);
 	while (gnl_value == 1 && line[i] != '1')
 	{
 		k = 0;
-		while (k < 3 && ft_strncmp(&line[i], ref_parse.ref[k], 1))
+		while (k < 7 && ft_strncmp(&line[i], ref_parse.ref[k], 1))
 			k++;
-		gnl_value = (k < 3 ? ref_parse.f_ref[k](hub, &line[i]) : -1);
+		gnl_value = (k < 7 ? ref_parse.f_ref[k](hub, &line[i]) : -1);
 		ft_free((void **)&line);
 		i = 0;
-		if (gnl_value == 1)
+		if (gnl_value > 0)
 			while ((gnl_value = get_next_line(fd, &line)) == 1 && !line[0])
-				;
+				ft_free((void **)&line);
 		ft_pass_spaces(line, &i);
 	}
 	if (gnl_value != 1)

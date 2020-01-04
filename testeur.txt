@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/02 01:10:30 by mli               #+#    #+#              #
-#    Updated: 2020/01/03 23:17:48 by mli              ###   ########.fr        #
+#    Updated: 2020/01/03 23:56:23 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,3 +21,4 @@ grep "malloc" *.c
 
 Necessite d une virgule dans RGB
 
+Check if every ref has been called, but just once
