@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 16:44:46 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 18:41:30 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/05 00:16:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		f_ref_s(t_param *hub, char *str)
 	static int	pass = 0;
 
 	if (str[1] == 'O' || pass++ > 0)
-		return (str[1] == 'O' ? f_ref_so(hub, str) : -1);
+		return (str[1] == 'O' ? f_ref_so(hub, str) : PASSED_ERROR);
 	i = 1;
 	ft_pass_spaces(str, &i);
 	k = i;
@@ -42,7 +42,7 @@ int		f_ref_so(t_param *hub, char *str)
 	static int	pass = 0;
 
 	if (pass++ > 0)
-		return (-1);
+		return (PASSED_ERROR);
 	i = 2;
 	ft_pass_spaces(str, &i);
 	k = i;
@@ -65,7 +65,7 @@ int		f_ref_no(t_param *hub, char *str)
 	static int	pass = 0;
 
 	if (str[1] != 'O' || pass++ > 0)
-		return (-1);
+		return (str[1] != 'O' ? -1 : PASSED_ERROR);
 	i = 2;
 	ft_pass_spaces(str, &i);
 	k = i;
@@ -88,7 +88,7 @@ int		f_ref_ea(t_param *hub, char *str)
 	static int	pass = 0;
 
 	if (str[1] != 'A' || pass++ > 0)
-		return (-1);
+		return (str[1] != 'A' ? -1 : PASSED_ERROR);
 	i = 2;
 	ft_pass_spaces(str, &i);
 	k = i;
@@ -111,7 +111,7 @@ int		f_ref_we(t_param *hub, char *str)
 	static int	pass = 0;
 
 	if (str[1] != 'E' || pass++ > 0)
-		return (-1);
+		return (str[1] != 'E' ? -1 : PASSED_ERROR);
 	i = 2;
 	ft_pass_spaces(str, &i);
 	k = i;

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 21:17:28 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/05 00:13:37 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		f_ref_ceiling(t_param *hub, char *str)
 	unsigned char	*color_bit;
 
 	if (pass++ > 0)
-		return (-1);
+		return (PASSED_ERROR);
 	i = 1;
 	hub->parse->ceiling_color = 0;
 	color_bit = (unsigned char *)(&(hub->parse->ceiling_color));
@@ -48,7 +48,7 @@ int		f_ref_floor(t_param *hub, char *str)
 	unsigned char	*color_bit;
 
 	if (pass++ > 0)
-		return (-1);
+		return (PASSED_ERROR);
 	i = 1;
 	hub->parse->floor_color = 0;
 	color_bit = (unsigned char *)(&(hub->parse->floor_color));
@@ -73,7 +73,7 @@ int		f_ref_resolution(t_param *hub, char *str)
 	static int	pass = 0;
 
 	if (pass++ > 0)
-		return (-1);
+		return (PASSED_ERROR);
 	i = 1;
 	nbr[0] = ft_atoi_ptr(str, &i);
 	nbr[1] = ft_atoi_ptr(str, &i);

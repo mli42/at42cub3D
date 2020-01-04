@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 22:04:26 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 23:53:59 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int			ft_parse(t_param *hub, char *filename)
 		return (ft_error("Given file not correct", hub));
 	if (ft_first_vars(hub, ft_ref_parse(), fd) == -1)
 		return (-1);
-	// Check if every ref has been called
+	if (ft_allve_been_called(hub) == -1)
+		return (ft_error("Not all references have been called", hub));
 
 
 	/* Being at the center */ hub->space->pos.x = 3.5; hub->space->pos.y = 3.5;
