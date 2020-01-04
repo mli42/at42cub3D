@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/01/04 18:46:17 by mli              ###   ########.fr        #
+#    Updated: 2020/01/04 21:58:11 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 GNL_PATH = ./GNL/
-GNL_SRCS = ${GNL_PATH}get_next_line.c ${GNL_PATH}gnl_utils.c
+GNL_SRCS = ${GNL_PATH}get_next_line.c ${GNL_PATH}gnl_utils.c ${GNL_PATH}gnl_multi_fd.c
 
 PARSING_PATH = ./parsing/
 PARSING_FILES = parsing.c filename.c ref.c utils.c textures.c

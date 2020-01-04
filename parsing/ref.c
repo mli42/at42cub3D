@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 18:37:01 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 21:17:28 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		f_ref_ceiling(t_param *hub, char *str)
 	{
 		nbr[k] = ft_atoi_ptr(str, &i);
 		ft_pass_spaces(str, &i);
-		if ((nbr[k] < 0 || nbr[k] > 255) || (str[i++] != ',' && k > 0))
+		if ((nbr[k] < 0 || nbr[k] > 255) || (k > 0 && str[i++] != ','))
 			return (-1);
 		color_bit[k] = nbr[k];
 	}
@@ -57,7 +57,7 @@ int		f_ref_floor(t_param *hub, char *str)
 	{
 		nbr[k] = ft_atoi_ptr(str, &i);
 		ft_pass_spaces(str, &i);
-		if ((nbr[k] < 0 || nbr[k] > 255) || (str[i++] != ',' && k > 0))
+		if ((nbr[k] < 0 || nbr[k] > 255) || (k > 0 && str[i++] != ','))
 			return (-1);
 		color_bit[k] = nbr[k];
 	}

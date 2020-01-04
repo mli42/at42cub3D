@@ -6,11 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 17:53:26 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 01:41:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 21:55:20 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "get_next_line.h"
 
 void	ft_lstclear_gnl(t_gnl **alst)
 {
@@ -23,23 +23,6 @@ void	ft_lstclear_gnl(t_gnl **alst)
 		free(tmp->tab);
 		free(tmp);
 	}
-}
-
-void	ft_remove_all_gnl(t_gnl **alist)
-{
-	t_gnl	*tmp;
-	t_gnl	*lst;
-
-	lst = *alist;
-	while (lst)
-	{
-		tmp = lst->next;
-		free(lst->tab);
-		lst->tab = NULL;
-		free(lst);
-		lst = tmp;
-	}
-	*alist = NULL;
 }
 
 t_gnl	*ft_lstnew_gnl(int fd)

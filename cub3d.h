@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 18:18:47 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 21:19:19 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,23 +157,7 @@ void			ft_s_key(t_param *hub);
 void			ft_d_key(t_param *hub);
 void			ft_w_key(t_param *hub);
 
-/* GNL */
-# define BUFFER_SIZE 400
-
-typedef struct	s_gnl
-{
-	int				min;
-	int				max;
-	char			*tab;
-	struct s_gnl	*next;
-}				t_gnl;
-
 int				get_next_line(int fd, char **line);
-void			ft_lstclear_gnl(t_gnl **alst);
-void			ft_remove_all_gnl(t_gnl **alist);
-t_gnl			*ft_lstnew_gnl(int fd);
-
-/* GNL */
 
 /* Parsing */
 typedef struct	s_ref
