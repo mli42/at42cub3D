@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_filename.c                                 :+:      :+:    :+:   */
+/*   filename.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/03 16:18:27 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/04 22:39:13 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int			ft_good_name(char *filename)
 {
-	int i;
+	char	*str;
 
-	i = 0;
-	while (filename[i] && filename[i] != '.')
-		i++;
-	if (ft_strcmp(&filename[i], ".cub"))
+	if ((str = ft_strrchr(filename, '.')) == NULL || ft_strcmp(str, ".cub"))
 		return (-1);
 	return (open(filename, O_RDONLY));
 }

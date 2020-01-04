@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/01/04 21:58:11 by mli              ###   ########.fr        #
+#    Updated: 2020/01/04 22:56:55 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,9 +57,5 @@ fclean: clean
 re: fclean all
 
 work: all clean
-
-debug : ${OBJS} ${MLX_PATH}${MLX_NAME} ${LIBFT_PATH}${LIBFT}
-	${CC} ${CFLAGS} -g -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
-
 
 .PHONY: all clean fclean re work
