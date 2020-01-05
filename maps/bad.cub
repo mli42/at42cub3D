@@ -8,11 +8,11 @@ F 220,100,0
 
 NO ./textures/north 
 
-S ./textures/north 
+S ./textures/sprite
 
-WE ./textures/north 
+WE ./textures/west
 
-EA./textures/north 
+EA./textures/east    
 
 
 

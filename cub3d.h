@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 00:12:44 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/05 13:23:38 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,13 @@ typedef struct	s_fd
 	int south;
 	int west;
 	int east;
-	int sprite;
+	int sprit;
 }				t_fd;
 
 typedef struct	s_parsing
 {
 	int		**map;
-	t_fd	txt_w;
+	t_fd	*txt_w;
 	int		ceiling_color;
 	int		floor_color;
 }				t_parsing;

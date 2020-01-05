@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 16:44:46 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 00:16:01 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/05 13:24:22 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int		f_ref_s(t_param *hub, char *str)
 		str[k++] = '\0';
 	ft_pass_spaces(str, &k);
 
-	printf("Sprite : fd = %d || opening : '%s'\n",
-			(hub->parse->txt_w.sprite = open(&str[i], O_RDONLY)), &str[i]);
+	printf("Sprite opening : '%s'\n", &str[i]);
 
-	return (str[k] ? -1 : (hub->parse->txt_w.sprite = open(&str[i], O_RDONLY)));
+	return (str[k] ? -1 : (hub->parse->txt_w->sprit = open(&str[i], O_RDONLY)));
 }
 
 int		f_ref_so(t_param *hub, char *str)
@@ -52,10 +51,9 @@ int		f_ref_so(t_param *hub, char *str)
 		str[k++] = '\0';
 	ft_pass_spaces(str, &k);
 
-	printf("South : fd = %d || opening : '%s'\n",
-			(hub->parse->txt_w.south = open(&str[i], O_RDONLY)), &str[i]);
+	printf("South opening : '%s'\n", &str[i]);
 
-	return (str[k] ? -1 : (hub->parse->txt_w.south = open(&str[i], O_RDONLY)));
+	return (str[k] ? -1 : (hub->parse->txt_w->south = open(&str[i], O_RDONLY)));
 }
 
 int		f_ref_no(t_param *hub, char *str)
@@ -75,10 +73,9 @@ int		f_ref_no(t_param *hub, char *str)
 		str[k++] = '\0';
 	ft_pass_spaces(str, &k);
 
-	printf("North : fd = %d || opening : '%s'\n",
-			(hub->parse->txt_w.north = open(&str[i], O_RDONLY)), &str[i]);
+	printf("North opening : '%s'\n", &str[i]);
 
-	return (str[k] ? -1 : (hub->parse->txt_w.north = open(&str[i], O_RDONLY)));
+	return (str[k] ? -1 : (hub->parse->txt_w->north = open(&str[i], O_RDONLY)));
 }
 
 int		f_ref_ea(t_param *hub, char *str)
@@ -98,10 +95,9 @@ int		f_ref_ea(t_param *hub, char *str)
 		str[k++] = '\0';
 	ft_pass_spaces(str, &k);
 
-	printf("East : fd = %d || opening : '%s'\n",
-			(hub->parse->txt_w.east = open(&str[i], O_RDONLY)), &str[i]);
+	printf("East opening : '%s'\n", &str[i]);
 
-	return (str[k] ? -1 : (hub->parse->txt_w.east = open(&str[i], O_RDONLY)));
+	return (str[k] ? -1 : (hub->parse->txt_w->east = open(&str[i], O_RDONLY)));
 }
 
 int		f_ref_we(t_param *hub, char *str)
@@ -121,8 +117,7 @@ int		f_ref_we(t_param *hub, char *str)
 		str[k++] = '\0';
 	ft_pass_spaces(str, &k);
 
-	printf("West : fd = %d || opening : '%s'\n",
-			(hub->parse->txt_w.west = open(&str[i], O_RDONLY)), &str[i]);
+	printf("West opening : '%s'\n", &str[i]);
 
-	return (str[k] ? -1 : (hub->parse->txt_w.west = open(&str[i], O_RDONLY)));
+	return (str[k] ? -1 : (hub->parse->txt_w->west = open(&str[i], O_RDONLY)));
 }
