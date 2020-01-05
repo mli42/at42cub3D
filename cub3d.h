@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 13:23:38 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/05 22:32:07 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ typedef struct	s_fd
 typedef struct	s_parsing
 {
 	int		**map;
+	int		map_len;
+	int		map_size;
 	t_fd	*txt_w;
 	int		ceiling_color;
 	int		floor_color;
@@ -179,8 +181,13 @@ int				f_ref_no(t_param *hub, char *str);
 int				f_ref_we(t_param *hub, char *str);
 int				f_ref_ea(t_param *hub, char *str);
 int				ft_allve_been_called(t_param *hub);
+int				ft_map_parse(t_param *hub, char *line, int fd, int i);
 
 # define PASSED_ERROR -2
 
+int		ft_isposition(char c);
+int		ft_ismapchar(char c);
+
 /* Parsing */
+
 #endif

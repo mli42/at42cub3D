@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 23:53:59 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/05 20:38:40 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int			ft_first_vars(t_param *hub, t_ref ref_parse, int fd)
 				ft_free((void **)&line);
 		ft_pass_spaces(line, &i);
 	}
-	if (gnl_value <= 0)
+	if ((gnl_value <= 0) || (gnl_value = ft_map_parse(hub, line, fd, i)) <= 0)
 		get_next_line(fd, NULL);
 	return (gnl_value == 1 ? 1 : ft_error("Map Reference Error", hub));
 }

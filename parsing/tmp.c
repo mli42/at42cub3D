@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/03 17:48:49 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 18:36:23 by mli              ###   ########.fr       */
+/*   Created: 2020/01/05 18:52:03 by mli               #+#    #+#             */
+/*   Updated: 2020/01/05 20:43:20 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
-
-void	ft_pass_spaces(char *str, int *i)
+int		ft_map_parse_end(t_param *hub, char *line, int gnl_value, int fd)
 {
-	if (str)
-		while (str[*i] == ' ')
-			(*i)++;
-}
+	if (gnl_value <= 0)
+	{
+		get_next_line(fd, NULL);
+		ft_lstclear(&lst, free);
+	}
+	return (gnl_value == 1 ? 1 : ft_error("Map Reference Error", hub));
 
-int		ft_isposition(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	return (0);
-}
-
-int		ft_ismapchar(char c)
-{
-	if (ft_isposition(c) || ft_isdigit(c))
-		return (1);
-	return (0);
+	return (1);
 }
