@@ -6,11 +6,24 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 23:32:08 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 21:38:24 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/06 18:18:52 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		ft_lstsize_gnl(t_gnl *lst)
+{
+	int i;
+
+	i = 1;
+	while (lst)
+	{
+		i += lst->max - lst->min;
+		lst = lst->next;
+	}
+	return (i);
+}
 
 int		ft_sentence(t_gnl **alist, int min, int max)
 {
@@ -26,8 +39,6 @@ int		ft_sentence(t_gnl **alist, int min, int max)
 		lst = lst->next;
 	}
 	tab = lst->tab;
-	if (lst->max == 0)
-		return (size);
 	while (min < max)
 	{
 		size++;
@@ -78,6 +89,7 @@ int		ft_gnl(int fd, char **line, t_gnl **alist)
 			return (-1);
 		list = list->next;
 	}
+	size = (size > 0 ? size : ft_lstsize_gnl(*alist));
 	if (ft_found(alist, line, size) == 0)
 		return (-1);
 	return ((size > 0 ? 1 : 0));
