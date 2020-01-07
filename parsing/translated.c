@@ -6,11 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 23:06:26 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/07 18:20:48 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	print_map(t_param *hub)
 {
@@ -23,10 +23,12 @@ void	print_map(t_param *hub)
 		j = -1;
 		while (++j < hub->parse->map_len)
 		{
-			printf("%d", map[i][j]);
-			if (j != hub->parse->map_len - 1)
-				printf("\n");
+			if (ft_isdigit(map[i][j] + 48))
+				printf(" %d ", map[i][j]);
+			else
+				printf(" %c ", map[i][j]);
 		}
+		printf("\n");
 	}
 }
 
@@ -40,12 +42,14 @@ int		ft_translate(t_param *hub, t_list **alst)
 	if (!(hub->parse->map = ft_memalloc(sizeof(int *) * hub->parse->map_size)))
 		return (0);
 	i = -1;
-	while (*alst)
+	while (++i < hub->parse->map_size)
 	{
 		lst = (*alst)->next;
-		ft_free(alst);
+		ft_free((void **)alst);
 		*alst = lst;
-		map[i++] = (*alst)->content;
+		(hub->parse->map)[i] = (*alst)->content;
 	}
+	ft_free((void **)alst);
+	print_map(hub);
 	return (1);
 }

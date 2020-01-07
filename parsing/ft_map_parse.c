@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 15:54:36 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 23:06:22 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/07 18:26:41 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	ft_print_list(t_list *begin_list)
 			i = -1;
 			while (++i < 29)
 			{
-				printf("[%d]", ((int *)begin_list->content)[i]);
-//				if (i < 28)
-//					printf("| ");
+				if (ft_isdigit(((int *)begin_list->content)[i] + 48))
+					printf("[%d]", ((int *)begin_list->content)[i]);
+				else
+					printf("[%c]", ((int *)begin_list->content)[i]);
 			}
 			printf("\n");
 		}
@@ -106,8 +107,12 @@ int		ft_map_parse(t_param *hub, char *line, int fd, int i)
 		gnl_value = (gnl_value < 1 || !lst[1] ? -2 : get_next_line(fd, &line));
 		ft_pass_spaces(line, &i);
 	}
-//	gnl_value = (gnl_value > 0 ? ft_suite : -2);
-//	line[i] == '\0' ?
+//	gnl_value = (gnl_value > 0 && line[i] == '\0' ? ft_suite : -2);
+	if (line[i] == '\0' && (gnl_value = 1))
+		ft_free((void **)&line);
+
 	ft_print_list(*alst);
-	return (0); // ft_map_parse_end;
+	if ((ft_translate(hub, alst)) < 1)
+		return (0);
+	return (1); // ft_map_parse_end;
 }

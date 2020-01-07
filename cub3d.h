@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 22:32:07 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/06 14:06:44 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ int				ft_map_parse(t_param *hub, char *line, int fd, int i);
 
 int		ft_isposition(char c);
 int		ft_ismapchar(char c);
+int		ft_translate(t_param *hub, t_list **alst);
 
 /* Parsing */
 
