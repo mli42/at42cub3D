@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/06 14:06:44 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 16:53:18 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 
-# define WIN_X 800
-# define WIN_Y 800
 # define WIN_X_MAX 2560
-# define WIN_Y_MAX 1600
+# define WIN_Y_MAX 1440
 # define ARROW_UP 126
 # define ARROW_DOWN 125
 # define ARROW_LEFT 123
@@ -188,6 +186,9 @@ int				ft_map_parse(t_param *hub, char *line, int fd, int i);
 int		ft_isposition(char c);
 int		ft_ismapchar(char c);
 int		ft_translate(t_param *hub, t_list **alst);
+int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd);
+int		ft_map_parse_next(t_param *hub, t_list **alst, char *line, int fd);
+int		ft_is_map_good(t_param *hub);
 
 /* Parsing */
 

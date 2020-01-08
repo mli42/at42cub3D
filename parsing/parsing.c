@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 20:38:40 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 17:48:42 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,5 @@ int			ft_parse(t_param *hub, char *filename)
 		return (-1);
 	if (ft_allve_been_called(hub) == -1)
 		return (ft_error("Not all references have been called", hub));
-
-
-	/* Being at the center */ hub->space->pos.x = 3.5; hub->space->pos.y = 3.5;
-	/* Watching North */ hub->space->dir.x = 0; hub->space->dir.y = -1;
-	/* Win_size */ hub->draw->win_size[0] = WIN_X; hub->draw->win_size[1] = WIN_Y;
 	return (1);
 }

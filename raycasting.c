@@ -6,13 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/01 21:55:29 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 15:37:18 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int map[9][9];
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
@@ -37,14 +35,14 @@ void	ft_drawing_ray(t_param *hub, int i, double distance, int face)
 	int padding_limit;
 
 	x = -1;
-	size = hub->draw->win_size[0] / distance;
-	padding_limit = (hub->draw->win_size[0] - size) / 5;
-	while (++x < hub->draw->win_size[0])
+	size = hub->draw->win_size[1] / distance;
+	padding_limit = (hub->draw->win_size[1] - size) / 2;
+	while (++x < hub->draw->win_size[1])
 	{
 		color = ft_color(hub, face);
 		if (x < padding_limit)
 			hub->draw->img_data[x * hub->draw->win_size[0] + i] = SKYBLUE;
-		else if (x > hub->draw->win_size[0] - padding_limit)
+		else if (x > hub->draw->win_size[1] - padding_limit)
 			hub->draw->img_data[x * hub->draw->win_size[0] + i] = GREY_FLOOR;
 		else
 			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color;
@@ -70,8 +68,10 @@ void	ft_raycasting(t_param *hub, double current_ray, int i)
 	double		distance;
 	t_coord		check_pt;
 	t_coord		const_add;
+	int			**map;
 
 	distance = 0;
+	map = hub->parse->map;
 	check_pt.x = hub->space->pos.x;
 	check_pt.y = hub->space->pos.y;
 	const_add.x = cos(current_ray) * CHECK_STEP;
@@ -95,10 +95,10 @@ void	ft_draw(t_param *hub)
 	static double	ray_size;
 
 	ft_recalculate_povs(hub->space);
-	ray_size = POV_60 / hub->draw->win_size[1];
+	ray_size = POV_60 / hub->draw->win_size[0];
 	current_ray = hub->space->pov_max_rad + ray_size;
 	i = -1;
-	ray_max = hub->draw->win_size[1];
+	ray_max = hub->draw->win_size[0];
 	while (++i < ray_max)
 	{
 		ft_raycasting(hub, current_ray, i);
