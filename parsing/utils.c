@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:49 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 18:36:23 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 22:07:15 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ int		ft_isposition(char c)
 	return (0);
 }
 
+int		ft_ishandledchar(char c)
+{
+	if (c== '0' || c == '1' || c == '2')
+		return (1);
+	return (0);
+}
+
 int		ft_ismapchar(char c)
 {
-	if (ft_isposition(c) || ft_isdigit(c))
+	if (ft_isposition(c) || ft_ishandledchar(c))
 		return (1);
 	return (0);
 }

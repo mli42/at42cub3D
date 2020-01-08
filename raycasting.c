@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 15:37:18 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 22:41:02 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	ft_raycasting(t_param *hub, double current_ray, int i)
 	check_pt.y = hub->space->pos.y;
 	const_add.x = cos(current_ray) * CHECK_STEP;
 	const_add.y = sin(current_ray) * CHECK_STEP;
-	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 0)
+	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1)
 	{
 		check_pt.y += const_add.y;
-		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 0 ? 'h' : 'v');
+		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 1 ? 'h' : 'v');
 		check_pt.x += const_add.x;
 		distance += CHECK_STEP;
 	}
@@ -93,7 +93,10 @@ void	ft_draw(t_param *hub)
 	static int		ray_max;
 	double			current_ray;
 	static double	ray_size;
+	t_coord			check_pt;
 
+	check_pt.x = (int)hub->space->pos.x + 1;
+	check_pt.y = (int)hub->space->pos.y + 1;
 	ft_recalculate_povs(hub->space);
 	ray_size = POV_60 / hub->draw->win_size[0];
 	current_ray = hub->space->pov_max_rad + ray_size;
@@ -101,7 +104,11 @@ void	ft_draw(t_param *hub)
 	ray_max = hub->draw->win_size[0];
 	while (++i < ray_max)
 	{
-		ft_raycasting(hub, current_ray, i);
+		if (check_pt.x > hub->parse->map_len - 1 || check_pt.x < 0 ||
+			check_pt.y < 0 || check_pt.y > hub->parse->map_size - 1)
+			ft_drawing_ray(hub, i, CHECK_STEP, 'D');
+		else
+			ft_raycasting(hub, current_ray, i);
 		current_ray += ray_size;
 	}
 	mlx_put_image_to_window(hub->draw->mlx, hub->draw->win, hub->draw->img, 0, 0);

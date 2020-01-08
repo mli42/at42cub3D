@@ -1,5 +1,5 @@
 
-R 1000 1000
+R 1440 900
 
 C 225,30,0
 SO ./textures/south 

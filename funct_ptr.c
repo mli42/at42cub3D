@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/01/02 00:37:01 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 22:57:19 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,34 @@ void	ft_arrow_right(t_param *hub)
 {
 	hub->space->dir.x = cos(hub->space->dir_rad + RAD_5);
 	hub->space->dir.y = sin(hub->space->dir_rad + RAD_5);
-	printf("Pressed ARROW_RIGHT\n");
 }
 
 void	ft_arrow_left(t_param *hub)
 {
 	hub->space->dir.x = cos(hub->space->dir_rad - RAD_5);
 	hub->space->dir.y = sin(hub->space->dir_rad - RAD_5);
-	printf("Pressed ARROW_LEFT\n");
 }
 
 void	ft_arrow_up(t_param *hub)
 {
 	(void)hub;
-	printf("Pressed ARROW_UP\n");
 }
 
 void	ft_arrow_down(t_param *hub)
 {
 	(void)hub;
-	printf("Pressed ARROW_DOWN\n");
 }
 
 void	ft_w_key(t_param *hub)
 {
-	hub->space->pos.y += (hub->space->dir.y * FOOT_STEP);
-	hub->space->pos.x += (hub->space->dir.x * FOOT_STEP);
-	printf("Pressed W-key\n");
+	hub->space->pos.y += (hub->space->dir.y * FOOT_STEP * 2);
+	hub->space->pos.x += (hub->space->dir.x * FOOT_STEP * 2);
 }
 
 void	ft_s_key(t_param *hub)
 {
-	hub->space->pos.y -= (hub->space->dir.y * FOOT_STEP);
-	hub->space->pos.x -= (hub->space->dir.x * FOOT_STEP);
-	printf("Pressed S-key\n");
+	hub->space->pos.y -= (hub->space->dir.y * FOOT_STEP * 2);
+	hub->space->pos.x -= (hub->space->dir.x * FOOT_STEP * 2);
 }
 
 void	ft_a_key(t_param *hub)
@@ -63,7 +57,6 @@ void	ft_a_key(t_param *hub)
 
 	hub->space->pos.y += (left_side.y * FOOT_STEP);
 	hub->space->pos.x += (left_side.x * FOOT_STEP);
-	printf("Pressed A-key\n");
 }
 
 void	ft_d_key(t_param *hub)
@@ -77,7 +70,6 @@ void	ft_d_key(t_param *hub)
 
 	hub->space->pos.y += (right_side.y * FOOT_STEP);
 	hub->space->pos.x += (right_side.x * FOOT_STEP);
-	printf("Pressed D-key\n");
 }
 
 t_funct		*funct_ptr_init(void)

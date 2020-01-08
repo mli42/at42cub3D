@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 16:53:18 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 22:45:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct	s_win
 	void	*win;
 	void	*img;
 	int		*img_data;
-	int		win_size[2]; // Dont forget to set a limit !!
+	int		win_size[2];
 }				t_win;
 
 typedef struct	s_coord
@@ -76,12 +76,6 @@ typedef struct	s_coord
 	double x;
 	double y;
 }				t_coord;
-
-typedef struct	s_point
-{
-	int x;
-	int y;
-}				t_point;
 
 typedef struct	s_vectors
 {
@@ -159,7 +153,6 @@ void			ft_w_key(t_param *hub);
 
 int				get_next_line(int fd, char **line);
 
-/* Parsing */
 typedef struct	s_ref
 {
 	char	*ref[7];
@@ -189,7 +182,5 @@ int		ft_translate(t_param *hub, t_list **alst);
 int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd);
 int		ft_map_parse_next(t_param *hub, t_list **alst, char *line, int fd);
 int		ft_is_map_good(t_param *hub);
-
-/* Parsing */
 
 #endif
