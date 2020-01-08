@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 22:45:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 23:54:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int				ft_error(char *str, t_param *hub);
 # include <stdio.h>
 
 void			ft_draw(t_param *hub);
+int				ft_mouse_press(int button, int x, int y, void *param);
 
 // TMP functions
 

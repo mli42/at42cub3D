@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 14:03:39 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/08 23:55:26 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		ft_cub3d(t_param *hub)
 
 	ft_draw(hub);
 	mlx_hook(draw->win, KeyPress, KeyPressMask, ft_press_key, hub);
+	mlx_mouse_hook(draw->win, ft_mouse_press, hub);
 //	if (var[sizeLine] > 10)
 //		exit(0);
 

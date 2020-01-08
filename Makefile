@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/01/08 16:52:52 by mli              ###   ########.fr        #
+#    Updated: 2020/01/08 23:52:26 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ PARSING_FILES = parsing.c filename.c ref.c utils.c textures.c allve_been_called.
 PARSING_SRCS = ${addprefix ${PARSING_PATH}, ${PARSING_FILES}}
 
 SRCS_FILES = main.c error.c utils.c ft_remove_all.c raycasting.c \
-			 funct_ptr.c ft_hub_alloc.c \
+			 funct_ptr.c ft_hub_alloc.c ft_mouse_press.c\
 			 ${GNL_SRCS} ${PARSING_SRCS}
 
 OBJS = ${SRCS_FILES:.c=.o}
