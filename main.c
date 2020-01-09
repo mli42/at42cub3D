@@ -6,11 +6,16 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 23:55:26 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/09 10:36:57 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		ft_mouse_quit(void *param)
+{
+	exit(ft_remove_all((t_param *)param));
+}
 
 int		ft_press_key(int keycode, void *param)
 {
@@ -51,15 +56,11 @@ int		ft_cub3d(t_param *hub)
 			draw->win_size[1])))
 		return (ft_error("MLX can't create an image", hub));
 	if (!(draw->img_data = (int *)mlx_get_data_addr(draw->img,
-			&var[0], &var[1], &var[2])))
+			&var[bit_per_pixel], &var[sizeLine], &var[endian])))
 		return (ft_error("MLX can't create an image", hub));
-
 	ft_draw(hub);
 	mlx_hook(draw->win, KeyPress, KeyPressMask, ft_press_key, hub);
-	mlx_mouse_hook(draw->win, ft_mouse_press, hub);
-//	if (var[sizeLine] > 10)
-//		exit(0);
-
+	mlx_hook(draw->win, DestroyNotify, 0, ft_mouse_quit, hub);
 	return (1);
 }
 

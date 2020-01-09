@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 23:54:03 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/09 10:51:55 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@
 # define GREY_FLOOR 0x424242
 # define YELLOW 0xFFED2D
 
-// M_PI/18
 # define RAD_5  0.0872664625997
 # define RAD_10 0.1745329251994
 # define RAD_30 0.5235987755982
 # define POV_60 1.0471975511965
 # define RAD_90 1.5707963267948
-# define PI2 M_PI*2
+# define PI2 6.283185307179586
 # define CHECK_STEP 0.005
 # define FOOT_STEP 0.05
 
@@ -127,7 +126,6 @@ int				ft_error(char *str, t_param *hub);
 # include <stdio.h>
 
 void			ft_draw(t_param *hub);
-int				ft_mouse_press(int button, int x, int y, void *param);
 
 // TMP functions
 
@@ -177,11 +175,13 @@ int				ft_map_parse(t_param *hub, char *line, int fd, int i);
 
 # define PASSED_ERROR -2
 
-int		ft_isposition(char c);
-int		ft_ismapchar(char c);
-int		ft_translate(t_param *hub, t_list **alst);
-int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd);
-int		ft_map_parse_next(t_param *hub, t_list **alst, char *line, int fd);
-int		ft_is_map_good(t_param *hub);
+int				ft_isposition(char c);
+int				ft_ismapchar(char c);
+int				ft_translate(t_param *hub, t_list **alst);
+int				ft_map_parse_pb(t_list **alst, int *map_line,
+									char *line, int fd);
+int				ft_map_parse_next(t_param *hub, t_list **alst,
+									char *line, int fd);
+int				ft_is_map_good(t_param *hub);
 
 #endif
