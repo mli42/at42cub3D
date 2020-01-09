@@ -1,10 +1,10 @@
 
 R 1440 900
 
-C 225,30,0
+C 135,206,235
 SO ./textures/south 
 
-F 220,100,0
+F 25,25,112
 
 NO ./textures/north 
 

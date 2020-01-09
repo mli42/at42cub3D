@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 22:41:02 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/09 18:01:29 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,23 @@ void	ft_drawing_ray(t_param *hub, int i, double distance, int face)
 {
 	int x;
 	int size;
-	int color;
+	int color[3];
 	int padding_limit;
 
 	x = -1;
+	color[1] = hub->parse->ceiling_color;
+	color[2] = hub->parse->floor_color;
 	size = hub->draw->win_size[1] / distance;
 	padding_limit = (hub->draw->win_size[1] - size) / 2;
 	while (++x < hub->draw->win_size[1])
 	{
-		color = ft_color(hub, face);
+		color[0] = ft_color(hub, face);
 		if (x < padding_limit)
-			hub->draw->img_data[x * hub->draw->win_size[0] + i] = SKYBLUE;
+			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color[1];
 		else if (x > hub->draw->win_size[1] - padding_limit)
-			hub->draw->img_data[x * hub->draw->win_size[0] + i] = GREY_FLOOR;
+			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color[2];
 		else
-			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color;
+			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color[0];
 	}
 }
 
