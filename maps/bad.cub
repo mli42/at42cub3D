@@ -2,17 +2,17 @@
 R 1440 900
 
 C 135,206,235
-SO ./textures/south_wall.bmp 
+SO ./textures/south_wall.XPM
 
 F 25,25,112
 
-NO ./textures/north_wall.bmp
+NO ./textures/north_wall.XPM
 
 S ./textures/sprite
 
-WE ./textures/west_wall.bmp
+WE ./textures/west_wall.XPM
 
-EA./textures/east_wall.bmp    
+EA./textures/east_wall.XPM
 
 
 
