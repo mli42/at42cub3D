@@ -6,13 +6,13 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 23:51:16 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 00:18:45 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/26 18:26:37 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		ft_allve_been_called(t_param *hub)
+int		ft_allve_been_called(t_hub *hub)
 {
 	if (f_ref_resolution(hub, "R error ?") != PASSED_ERROR)
 		return (-1);

@@ -6,13 +6,13 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 13:55:45 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/27 17:03:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		f_ref_ceiling(t_param *hub, char *str)
+int		f_ref_ceiling(t_hub *hub, char *str)
 {
 	int				i;
 	int				k;
@@ -23,8 +23,8 @@ int		f_ref_ceiling(t_param *hub, char *str)
 	if (pass++ > 0)
 		return (PASSED_ERROR);
 	i = 1;
-	hub->parse->ceiling_color = 0;
-	color_bit = (unsigned char *)(&(hub->parse->ceiling_color));
+	hub->env->ceiling_color = 0;
+	color_bit = (unsigned char *)(&(hub->env->ceiling_color));
 	k = 3;
 	while (--k >= 0)
 	{
@@ -34,12 +34,11 @@ int		f_ref_ceiling(t_param *hub, char *str)
 			return (-1);
 		color_bit[k] = nbr[k];
 	}
-	printf("Ceiling : R %d | G %d | B %d\n", nbr[2], nbr[1], nbr[0]);
 	ft_pass_spaces(str, &i);
 	return ((str[i] == '\0' ? 1 : -1));
 }
 
-int		f_ref_floor(t_param *hub, char *str)
+int		f_ref_floor(t_hub *hub, char *str)
 {
 	int				i;
 	int				k;
@@ -50,8 +49,8 @@ int		f_ref_floor(t_param *hub, char *str)
 	if (pass++ > 0)
 		return (PASSED_ERROR);
 	i = 1;
-	hub->parse->floor_color = 0;
-	color_bit = (unsigned char *)(&(hub->parse->floor_color));
+	hub->env->floor_color = 0;
+	color_bit = (unsigned char *)(&(hub->env->floor_color));
 	k = 3;
 	while (--k >= 0)
 	{
@@ -61,12 +60,11 @@ int		f_ref_floor(t_param *hub, char *str)
 			return (-1);
 		color_bit[k] = nbr[k];
 	}
-	printf("Floor : R %d | G %d | B %d\n", nbr[2], nbr[1], nbr[0]);
 	ft_pass_spaces(str, &i);
 	return ((str[i] == '\0' ? 1 : -1));
 }
 
-int		f_ref_resolution(t_param *hub, char *str)
+int		f_ref_resolution(t_hub *hub, char *str)
 {
 	int			i;
 	int			nbr[2];
@@ -77,31 +75,30 @@ int		f_ref_resolution(t_param *hub, char *str)
 	i = 1;
 	nbr[0] = ft_atoi_ptr(str, &i);
 	nbr[1] = ft_atoi_ptr(str, &i);
-	hub->draw->win_size[0] = (nbr[0] > WIN_X_MAX ? WIN_X_MAX : nbr[0]);
-	hub->draw->win_size[1] = (nbr[1] > WIN_Y_MAX ? WIN_Y_MAX : nbr[1]);
+	hub->win->win_size[0] = (nbr[0] > WIN_X_MAX ? WIN_X_MAX : nbr[0]);
+	hub->win->win_size[1] = (nbr[1] > WIN_Y_MAX ? WIN_Y_MAX : nbr[1]);
 	ft_pass_spaces(str, &i);
 	if (str[i] != '\0' || nbr[0] <= 0 || nbr[1] <= 0)
 		return (-1);
 	return (1);
 }
 
-t_ref		ft_ref_parse(void)
+t_fct_r		*ft_ref_parse(void)
 {
-	t_ref	ref_parse;
+	t_fct_r		*ref_parse;
+	const char	*ref = "RFCSNWE";
 
-	ref_parse.ref[0] = "R";
-	ref_parse.ref[1] = "F";
-	ref_parse.ref[2] = "C";
-	ref_parse.ref[3] = "S";
-	ref_parse.ref[4] = "N";
-	ref_parse.ref[5] = "W";
-	ref_parse.ref[6] = "E";
-	ref_parse.f_ref[0] = f_ref_resolution;
-	ref_parse.f_ref[1] = f_ref_floor;
-	ref_parse.f_ref[2] = f_ref_ceiling;
-	ref_parse.f_ref[3] = f_ref_s;
-	ref_parse.f_ref[4] = f_ref_no;
-	ref_parse.f_ref[5] = f_ref_we;
-	ref_parse.f_ref[6] = f_ref_ea;
+	if (!(ref_parse = (t_fct_r *)ft_memalloc(sizeof(t_fct_r))))
+		return (NULL);
+	if (!(ref_parse->fct = (int (**)())ft_memalloc(sizeof(int (*)()) * 7 )))
+		return (NULL);
+	ref_parse->fct[0] = f_ref_resolution;
+	ref_parse->fct[1] = f_ref_floor;
+	ref_parse->fct[2] = f_ref_ceiling;
+	ref_parse->fct[3] = f_ref_s;
+	ref_parse->fct[4] = f_ref_no;
+	ref_parse->fct[5] = f_ref_we;
+	ref_parse->fct[6] = f_ref_ea;
+	ref_parse->ref = ref;
 	return (ref_parse);
 }

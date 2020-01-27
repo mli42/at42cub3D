@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/09 18:01:29 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/26 18:16:20 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
-int		ft_color(t_param *hub, int face)
+int		ft_color(t_hub *hub, int face)
 {
 	(void)hub; // Hub for textures
 
@@ -27,7 +27,7 @@ int		ft_color(t_param *hub, int face)
 	return (color_set[4]);
 }
 
-void	ft_drawing_ray(t_param *hub, int i, double distance, int face)
+void	ft_drawing_ray(t_hub *hub, int i, double distance, int face)
 {
 	int x;
 	int size;
@@ -35,19 +35,19 @@ void	ft_drawing_ray(t_param *hub, int i, double distance, int face)
 	int padding_limit;
 
 	x = -1;
-	color[1] = hub->parse->ceiling_color;
-	color[2] = hub->parse->floor_color;
-	size = hub->draw->win_size[1] / distance;
-	padding_limit = (hub->draw->win_size[1] - size) / 2;
-	while (++x < hub->draw->win_size[1])
+	color[1] = hub->env->ceiling_color;
+	color[2] = hub->env->floor_color;
+	size = hub->win->win_size[1] / distance;
+	padding_limit = (hub->win->win_size[1] - size) / 2;
+	while (++x < hub->win->win_size[1])
 	{
 		color[0] = ft_color(hub, face);
 		if (x < padding_limit)
-			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color[1];
-		else if (x > hub->draw->win_size[1] - padding_limit)
-			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color[2];
+			hub->win->img_data[x * hub->win->win_size[0] + i] = color[1];
+		else if (x > hub->win->win_size[1] - padding_limit)
+			hub->win->img_data[x * hub->win->win_size[0] + i] = color[2];
 		else
-			hub->draw->img_data[x * hub->draw->win_size[0] + i] = color[0];
+			hub->win->img_data[x * hub->win->win_size[0] + i] = color[0];
 	}
 }
 
@@ -64,7 +64,7 @@ int		ft_face(double current_ray, int h_v)
 	return ('W');
 }
 
-void	ft_raycasting(t_param *hub, double current_ray, int i)
+void	ft_raycasting(t_hub *hub, double current_ray, int i)
 {
 	int			h_v;
 	double		distance;
@@ -73,9 +73,9 @@ void	ft_raycasting(t_param *hub, double current_ray, int i)
 	int			**map;
 
 	distance = 0;
-	map = hub->parse->map;
-	check_pt.x = hub->space->pos.x;
-	check_pt.y = hub->space->pos.y;
+	map = hub->env->map;
+	check_pt.x = hub->player->entity.pos.x;
+	check_pt.y = hub->player->entity.pos.y;
 	const_add.x = cos(current_ray) * CHECK_STEP;
 	const_add.y = sin(current_ray) * CHECK_STEP;
 	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1)
@@ -85,11 +85,11 @@ void	ft_raycasting(t_param *hub, double current_ray, int i)
 		check_pt.x += const_add.x;
 		distance += CHECK_STEP;
 	}
-	distance *= cos(ft_abs_double(hub->space->dir_rad - current_ray));
+	distance *= cos(ft_abs_double(hub->player->entity.dir_rad - current_ray));
 	ft_drawing_ray(hub, i, distance, ft_face(current_ray, h_v));
 }
 
-void	ft_draw(t_param *hub)
+void	ft_draw(t_hub *hub)
 {
 	int				i;
 	static int		ray_max;
@@ -97,21 +97,21 @@ void	ft_draw(t_param *hub)
 	static double	ray_size;
 	t_coord			check_pt;
 
-	check_pt.x = (int)hub->space->pos.x + 1;
-	check_pt.y = (int)hub->space->pos.y + 1;
-	ft_recalculate_povs(hub->space);
-	ray_size = POV_60 / hub->draw->win_size[0];
-	current_ray = hub->space->pov_max_rad + ray_size;
+	check_pt.x = (int)hub->player->entity.pos.x + 1;
+	check_pt.y = (int)hub->player->entity.pos.y + 1;
+	ft_recalculate_povs(hub->player);
+	ray_size = POV_60 / hub->win->win_size[0];
+	current_ray = hub->player->pov_max_rad + ray_size;
 	i = -1;
-	ray_max = hub->draw->win_size[0];
+	ray_max = hub->win->win_size[0];
 	while (++i < ray_max)
 	{
-		if (check_pt.x > hub->parse->map_len - 1 || check_pt.x < 0 ||
-			check_pt.y < 0 || check_pt.y > hub->parse->map_size - 1)
+		if (check_pt.x > hub->env->map_width - 1 || check_pt.x < 0 ||
+			check_pt.y < 0 || check_pt.y > hub->env->map_height - 1)
 			ft_drawing_ray(hub, i, CHECK_STEP, 'D');
 		else
 			ft_raycasting(hub, current_ray, i);
 		current_ray += ray_size;
 	}
-	mlx_put_image_to_window(hub->draw->mlx, hub->draw->win, hub->draw->img, 0, 0);
+	mlx_put_image_to_window(hub->win->mlx, hub->win->win, hub->win->img, 0, 0);
 }

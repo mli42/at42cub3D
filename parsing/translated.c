@@ -6,28 +6,28 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 17:21:07 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/26 18:28:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		ft_translate(t_param *hub, t_list **alst)
+int		ft_translate(t_hub *hub, t_list **alst)
 {
 	int		i;
 	t_list	*lst;
 
-	if ((hub->parse->map_size = ft_lstsize(*alst) - 1) < 3)
+	if ((hub->env->map_height = ft_lstsize(*alst) - 1) < 3)
 		return (-1);
-	if (!(hub->parse->map = ft_memalloc(sizeof(int *) * hub->parse->map_size)))
+	if (!(hub->env->map = ft_memalloc(sizeof(int *) * hub->env->map_height)))
 		return (0);
 	i = -1;
-	while (++i < hub->parse->map_size)
+	while (++i < hub->env->map_height)
 	{
 		lst = (*alst)->next;
 		ft_free((void **)alst);
 		*alst = lst;
-		(hub->parse->map)[i] = (*alst)->content;
+		(hub->env->map)[i] = (*alst)->content;
 	}
 	ft_free((void **)alst);
 	return (1);
@@ -44,7 +44,7 @@ int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd)
 	return (-1);
 }
 
-int		ft_map_parse_next(t_param *hub, t_list **alst, char *line, int fd)
+int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 {
 	int gnl_value;
 

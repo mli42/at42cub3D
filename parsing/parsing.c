@@ -6,13 +6,13 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 17:48:42 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/27 17:01:53 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int			ft_first_vars(t_param *hub, t_ref ref_parse, int fd)
+int			ft_first_vars(t_hub *hub, t_fct_r *ref_parse, int fd)
 {
 	int		i;
 	int		k;
@@ -26,9 +26,9 @@ int			ft_first_vars(t_param *hub, t_ref ref_parse, int fd)
 	while (gnl_value == 1 && line[i] != '1')
 	{
 		k = 0;
-		while (k < 7 && ft_strncmp(&line[i], ref_parse.ref[k], 1))
+		while (k < 7 && line[i] != ((char *)ref_parse->ref)[k])
 			k++;
-		gnl_value = (k < 7 ? ref_parse.f_ref[k](hub, &line[i]) : -1);
+		gnl_value = (k < 7 ? ref_parse->fct[k](hub, &line[i]) : -1);
 		ft_free((void **)&line);
 		i = 0;
 		if (gnl_value > 0)
@@ -41,14 +41,19 @@ int			ft_first_vars(t_param *hub, t_ref ref_parse, int fd)
 	return (gnl_value == 1 ? 1 : ft_error("Map Reference Error", hub));
 }
 
-int			ft_parse(t_param *hub, char *filename)
+int			ft_parse(t_hub *hub, char *filename)
 {
 	int			fd;
+	t_fct_r		*fct;
 
+	if (!(fct = ft_ref_parse()))
+		return (ft_error("Cannot Allocate", hub));
 	if ((fd = ft_good_name(filename)) == -1)
 		return (ft_error("Given file not correct", hub));
-	if (ft_first_vars(hub, ft_ref_parse(), fd) == -1)
+	if (ft_first_vars(hub, fct, fd) == -1)
 		return (-1);
+	ft_free((void **)&(fct->fct));
+	ft_free((void **)&fct);
 	if (ft_allve_been_called(hub) == -1)
 		return (ft_error("Not all references have been called", hub));
 	return (1);

@@ -6,27 +6,25 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 00:23:18 by mli               #+#    #+#             */
-/*   Updated: 2020/01/05 13:17:25 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/26 15:25:29 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_param		*ft_hub_alloc(void)
+t_hub		*ft_hub_alloc(void)
 {
-	t_param *hub;
+	t_hub *hub;
 
-	if (!(hub = (t_param *)ft_memalloc(sizeof(t_param))))
+	if (!(hub = (t_hub *)ft_memalloc(sizeof(t_hub))))
 		exit(ft_error("Can't allocate", hub));
-	if (!(hub->draw = (t_win *)ft_memalloc(sizeof(t_win))))
+	if (!(hub->win = (t_win *)ft_memalloc(sizeof(t_win))))
 		exit(ft_error("Can't allocate", hub));
-	if (!(hub->space = (t_vectors *)ft_memalloc(sizeof(t_vectors))))
+	if (!(hub->player = (t_player *)ft_memalloc(sizeof(t_player))))
 		exit(ft_error("Can't allocate", hub));
-	if (!(hub->funct = funct_ptr_init()))
+	if (!(hub->fct_moves = fct_moves_ptr_init()))
 		exit(ft_error("Can't allocate", hub));
-	if (!(hub->parse = (t_parsing *)ft_memalloc(sizeof(t_parsing))))
-		exit(ft_error("Can't allocate", hub));
-	if (!(hub->parse->txt_w = (t_fd *)ft_memalloc(sizeof(t_fd))))
+	if (!(hub->env = (t_env *)ft_memalloc(sizeof(t_env))))
 		exit(ft_error("Can't allocate", hub));
 	return (hub);
 }

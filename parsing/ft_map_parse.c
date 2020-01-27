@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 15:54:36 by mli               #+#    #+#             */
-/*   Updated: 2020/01/08 16:18:08 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/26 18:28:14 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,22 @@ int		ft_map_strlen(char *line)
 	return (size);
 }
 
-int		ft_map_parse(t_param *hub, char *line, int fd, int i)
+int		ft_map_parse(t_hub *hub, char *line, int fd, int i)
 {
 	int		*map_line;
 	int		gnl_value;
 	t_list	*lst[2];
 	t_list	**alst;
 
-	if ((hub->parse->map_len = ft_map_strlen(line)) < 3)
+	if ((hub->env->map_width = ft_map_strlen(line)) < 3)
 		return (-1);
 	alst = &lst[0];
 	lst[0] = ft_lstnew(NULL);
 	gnl_value = (lst[0] ? 1 : -2);
 	while (gnl_value == 1 && line[i] == '1')
 	{
-		if (ft_map_strlen(line) != hub->parse->map_len ||
-			!(map_line = fill_line(line, hub->parse->map_len)))
+		if (ft_map_strlen(line) != hub->env->map_width ||
+			!(map_line = fill_line(line, hub->env->map_width)))
 			gnl_value = -2;
 		if (gnl_value == 1 && (lst[1] = ft_lstnew(map_line)))
 			ft_lstadd_back(alst, lst[1]);
