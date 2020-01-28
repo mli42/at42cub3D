@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/27 13:26:28 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/28 15:59:41 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@
 # define CHECK_STEP 0.005
 # define FOOT_STEP 0.05
 
-
 int		ft_error(char *str, t_hub *hub);
 
 # include <stdio.h>
@@ -68,17 +67,12 @@ int		fct(int keycode, void *param);
 
 // Other
 
-t_hub	*ft_hub_alloc(void);
 void	ft_recalculate_povs(t_player *player);
 double	ft_abs_double(double nbr);
 int		ft_remove_all(t_hub *hub);
 void	ft_draw(t_hub *hub);
 t_funct	*fct_moves_ptr_init(void);
 
-void	ft_arrow_right(t_hub *hub);
-void	ft_arrow_left(t_hub *hub);
-void	ft_arrow_up(t_hub *hub);
-void	ft_arrow_down(t_hub *hub);
 void	ft_a_key(t_hub *hub);
 void	ft_s_key(t_hub *hub);
 void	ft_d_key(t_hub *hub);

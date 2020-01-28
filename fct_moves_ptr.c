@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/01/27 16:08:31 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/28 16:56:10 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,45 +34,7 @@ void	ft_arrow_down(t_hub *hub)
 	(void)hub;
 }
 
-void	ft_w_key(t_hub *hub)
-{
-	hub->player->entity.pos.y += (hub->player->entity.dir.y * hub->player->entity.speed * 2);
-	hub->player->entity.pos.x += (hub->player->entity.dir.x * hub->player->entity.speed * 2);
-}
-
-void	ft_s_key(t_hub *hub)
-{
-	hub->player->entity.pos.y -= (hub->player->entity.dir.y * hub->player->entity.speed * 2);
-	hub->player->entity.pos.x -= (hub->player->entity.dir.x * hub->player->entity.speed * 2);
-}
-
-void	ft_a_key(t_hub *hub)
-{
-	t_coord left_side;
-	double turn;
-
-	turn = atan2(hub->player->entity.dir.y, hub->player->entity.dir.x) - RAD_90;
-	left_side.x = cos(turn);
-	left_side.y = sin(turn);
-
-	hub->player->entity.pos.y += (left_side.y * hub->player->entity.speed);
-	hub->player->entity.pos.x += (left_side.x * hub->player->entity.speed);
-}
-
-void	ft_d_key(t_hub *hub)
-{
-	t_coord right_side;
-	double turn;
-
-	turn = atan2(hub->player->entity.dir.y, hub->player->entity.dir.x) + RAD_90;
-	right_side.x = cos(turn);
-	right_side.y = sin(turn);
-
-	hub->player->entity.pos.y += (right_side.y * hub->player->entity.speed);
-	hub->player->entity.pos.x += (right_side.x * hub->player->entity.speed);
-}
-
-t_funct		*fct_moves_ptr_init(void)
+t_funct	*fct_moves_ptr_init(void)
 {
 	t_funct *funct;
 

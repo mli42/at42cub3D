@@ -8,7 +8,7 @@ F 25,25,112
 
 NO ./textures/north_wall.XPM
 
-S ./textures/sprite
+S ./textures/north_wall.XPM
 
 WE ./textures/west_wall.XPM
 
