@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/02 01:10:30 by mli               #+#    #+#              #
-#    Updated: 2020/01/08 23:21:38 by mli              ###   ########.fr        #
+#    Updated: 2020/01/28 14:49:17 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,13 @@ grep "malloc" *.c
 mlx :
 grep "destroy" *.c
 
-Necessite d une virgule dans RGB
+Parsing :
+Wrong file texture
+
+? Necessite d une virgule dans RGB
 
 Check if every ref has been called, but just once
 
 How to check leaks + good free ?
 After ft_remove : hub = NULL; while (1);
+

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 16:44:46 by mli               #+#    #+#             */
-/*   Updated: 2020/01/27 22:16:18 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/28 14:47:18 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		f_ref_s(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.sprite.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.sprite.width), &(hub->env->text.sprite.height));
-	return (1);
+	return (hub->env->text.sprite.img ? 1 : -1);
 }
 
 int		f_ref_so(t_hub *hub, char *str)
@@ -55,7 +55,7 @@ int		f_ref_so(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.south.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.south.width), &(hub->env->text.south.height));
-	return (1);
+	return (hub->env->text.south.img ? 1 : -1);
 }
 
 int		f_ref_no(t_hub *hub, char *str)
@@ -78,7 +78,7 @@ int		f_ref_no(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.north.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.north.width), &(hub->env->text.north.height));
-	return (1);
+	return (hub->env->text.north.img ? 1 : -1);
 }
 
 int		f_ref_ea(t_hub *hub, char *str)
@@ -101,7 +101,7 @@ int		f_ref_ea(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.east.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.east.width), &(hub->env->text.east.height));
-	return (1);
+	return (hub->env->text.east.img ? 1 : -1);
 }
 
 int		f_ref_we(t_hub *hub, char *str)
@@ -124,5 +124,5 @@ int		f_ref_we(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.west.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.west.width), &(hub->env->text.west.height));
-	return (1);
+	return (hub->env->text.west.img ? 1 : -1);
 }
