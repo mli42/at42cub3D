@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 15:53:17 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 23:30:46 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd);
 int		ft_is_map_good(t_hub *hub);
 
 void	ft_speed(t_hub *hub);
+void	ft_life(t_hub *hub);
 
 #endif

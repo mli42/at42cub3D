@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/26 18:16:20 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 23:30:30 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,6 @@ void	ft_draw(t_hub *hub)
 			ft_raycasting(hub, current_ray, i);
 		current_ray += ray_size;
 	}
+	ft_life(hub);
 	mlx_put_image_to_window(hub->win->mlx, hub->win->win, hub->win->img, 0, 0);
 }
