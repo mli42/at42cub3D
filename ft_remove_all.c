@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 16:02:00 by mli               #+#    #+#             */
-/*   Updated: 2020/01/27 22:28:14 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 11:15:51 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int		ft_remove_all(t_hub *hub)
 		if (hub->fct_moves)
 		{
 			ft_free((void **)&hub->fct_moves->ref);
+			ft_free((void **)&hub->fct_moves->switch_);
 			ft_free((void **)&hub->fct_moves->fct);
 			ft_free((void **)&hub->fct_moves);
 		}

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/28 15:59:41 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 12:25:38 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@
 # define PI2 6.283185307179586
 # define CHECK_STEP 0.005
 # define FOOT_STEP 0.05
+
+int		ft_press_key(int keycode, void *param);
+int		ft_key_release(int keycode, void *param);
 
 int		ft_error(char *str, t_hub *hub);
 

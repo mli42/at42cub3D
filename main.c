@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/01/28 16:36:43 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 12:24:23 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,19 @@ int		ft_mouse_quit(void *param)
 	exit(ft_remove_all((t_hub *)param));
 }
 
-int		ft_press_key(int keycode, void *param)
+int		ft_key_loop(void *param)
 {
-	int		i;
-	int		*keymap;
-	t_hub	*hub;
+	int				i;
+	static t_hub	*hub = NULL;
 
-//	printf("Key: %d\n", keycode);
-	hub = (t_hub *)param;
-	keymap = (int *)hub->fct_moves->ref;
-	if (keycode == EXIT_CODE)
-		exit(ft_remove_all(hub));
-	else
-	{
-		i = -1;
-		// while (kmap != -1)
-		while (++i < 8)
-			if (keycode == keymap[i])
-			{
-				hub->fct_moves->fct[i](hub);
-				ft_draw(hub);
-				break ;
-			}
-	}
+	if (!hub)
+		hub = (t_hub *)param;
+	i = -1;
+	// while (kmap != -1)
+	while (++i < 8)
+		if (hub->fct_moves->switch_[i] == 1)
+			hub->fct_moves->fct[i](hub);
+	ft_draw(hub);
 	return (1);
 }
 
@@ -58,7 +48,9 @@ int		ft_init_mlx(t_hub *hub)
 		return (ft_error("MLX can't create an image", hub));
 	ft_draw(hub);
 	mlx_hook(hub->win->win, KeyPress, KeyPressMask, ft_press_key, hub);
+	mlx_hook(hub->win->win, KeyRelease, KeyReleaseMask, ft_key_release, hub);
 	mlx_hook(hub->win->win, DestroyNotify, 0, ft_mouse_quit, hub);
+	mlx_loop_hook(hub->win->mlx, ft_key_loop, hub);
 	return (1);
 }
 

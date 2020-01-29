@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/01/28 16:56:10 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 11:14:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void	ft_arrow_down(t_hub *hub)
 
 t_funct	*fct_moves_ptr_init(void)
 {
-	t_funct *funct;
+	t_funct		*funct;
+	static int	nb = 8;
 
 	if (!(funct = (t_funct *)ft_memalloc(sizeof(t_funct))) ||
-			!(funct->ref = (int *)ft_memalloc(sizeof(int) * 8)) ||
-			!(funct->fct = (void (**)())ft_memalloc(sizeof(void (*)()) * 8)))
+			!(funct->ref = (int *)ft_memalloc(sizeof(int) * nb)) ||
+			!(funct->switch_ = (char *)ft_memalloc(sizeof(char) * nb)) ||
+			!(funct->fct = (void (**)())ft_memalloc(sizeof(void (*)()) * nb)))
 		return (NULL);
 	funct->ref[0] = ARROW_RIGHT;
 	funct->ref[1] = ARROW_LEFT;

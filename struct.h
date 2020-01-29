@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/27 22:16:33 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 11:02:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_env
 typedef struct	s_funct
 {
 	int		*ref;
+	char	*switch_;
 	void	(**fct)();
 }				t_funct;
 
