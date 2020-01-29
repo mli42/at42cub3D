@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 12:25:38 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 15:53:17 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define D_KEY 2
 # define W_KEY 13
 
+# define SHIFT_KEY 257
+
 # define SKYBLUE 0x7fffff
 # define GREEN 0xff00
 # define D_BLUE 0x555
@@ -52,7 +54,7 @@
 # define RAD_90 1.5707963267948
 # define PI2 6.283185307179586
 # define CHECK_STEP 0.005
-# define FOOT_STEP 0.05
+# define FOOT_STEP 0.03
 
 int		ft_press_key(int keycode, void *param);
 int		ft_key_release(int keycode, void *param);
@@ -106,5 +108,7 @@ int		ft_translate(t_hub *hub, t_list **alst);
 int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd);
 int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd);
 int		ft_is_map_good(t_hub *hub);
+
+void	ft_speed(t_hub *hub);
 
 #endif

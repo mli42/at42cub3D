@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 12:24:23 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/29 15:59:22 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_key_loop(void *param)
 		hub = (t_hub *)param;
 	i = -1;
 	// while (kmap != -1)
-	while (++i < 8)
+	while (++i < 6)
 		if (hub->fct_moves->switch_[i] == 1)
 			hub->fct_moves->fct[i](hub);
 	ft_draw(hub);

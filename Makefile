@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/01/29 12:24:46 by mli              ###   ########.fr        #
+#    Updated: 2020/01/29 15:52:23 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ PARSING_FILES = parsing.c filename.c ref.c utils.c textures.c allve_been_called.
 PARSING_SRCS = ${addprefix ${PARSING_PATH}, ${PARSING_FILES}}
 
 SRCS_FILES = main.c error.c utils.c ft_remove_all.c raycasting.c calculus.c \
-			 fct_moves_ptr.c fct_moves_wasd.c key_switch.c \
+			 fct_moves_ptr.c fct_moves_wasd.c key_switch.c options.c \
 			 ${GNL_SRCS} ${PARSING_SRCS}
 
 LIBFT_FILES = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
