@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 00:43:38 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 09:32:43 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	ft_life(t_hub *hub)
 	bar_len = (hub->win->win_size[0] - (hub->win->win_size[0] * 0.7)) / 2;
 	bar_size[0] = hub->win->win_size[1] >> 5;
 	bar_size[1] = bar_size[0] + hub->win->win_size[1] * 0.02;
-
 	y = -1;
-	if (color >= 134217728)
+	if (color >= 67108864)
 		color = 0xFFFFFF;
 	while (++y < hub->win->win_size[1])
 	{
