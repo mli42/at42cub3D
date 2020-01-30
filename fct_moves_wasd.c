@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 15:37:28 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 17:23:25 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,96 @@
 
 void	ft_w_key(t_hub *hub)
 {
-	t_coord zukunft;
+	t_coord		zukunft;
+	t_entity	entity;
 
-	zukunft.y = hub->player->entity.pos.y +
-		(hub->player->entity.dir.y * hub->player->entity.speed * 2.5);
-	zukunft.x = hub->player->entity.pos.x +
-		(hub->player->entity.dir.x * hub->player->entity.speed * 2.5);
+	entity = hub->player->entity;
+	zukunft.y = entity.pos.y + (entity.dir.y * entity.speed * 2.5);
+	zukunft.x = entity.pos.x + (entity.dir.x * entity.speed * 2.5);
 	if (!hub->player->collision ||
 			hub->env->map[(int)zukunft.y + 1][(int)zukunft.x + 1] != 1)
 	{
 		hub->player->entity.pos.y = zukunft.y;
 		hub->player->entity.pos.x = zukunft.x;
+	}
+	else
+	{
+		if (hub->env->map[(int)zukunft.y + 1][(int)entity.pos.x + 1] != 1)
+			hub->player->entity.pos.y = zukunft.y;
+		if (hub->env->map[(int)entity.pos.y + 1][(int)zukunft.x + 1] != 1)
+			hub->player->entity.pos.x = zukunft.x;
 	}
 }
 
 void	ft_s_key(t_hub *hub)
 {
-	t_coord zukunft;
+	t_coord		zukunft;
+	t_entity	entity;
 
-	zukunft.y = hub->player->entity.pos.y -
-		(hub->player->entity.dir.y * hub->player->entity.speed * 2.5);
-	zukunft.x = hub->player->entity.pos.x -
-		(hub->player->entity.dir.x * hub->player->entity.speed * 2.5);
+	entity = hub->player->entity;
+	zukunft.y = entity.pos.y - (entity.dir.y * entity.speed * 2.5);
+	zukunft.x = entity.pos.x - (entity.dir.x * entity.speed * 2.5);
 	if (!hub->player->collision ||
 			hub->env->map[(int)zukunft.y + 1][(int)zukunft.x + 1] != 1)
 	{
 		hub->player->entity.pos.y = zukunft.y;
 		hub->player->entity.pos.x = zukunft.x;
 	}
+	else
+	{
+		if (hub->env->map[(int)zukunft.y + 1][(int)entity.pos.x + 1] != 1)
+			hub->player->entity.pos.y = zukunft.y;
+		if (hub->env->map[(int)entity.pos.y + 1][(int)zukunft.x + 1] != 1)
+			hub->player->entity.pos.x = zukunft.x;
+	}
 }
 
 void	ft_a_key(t_hub *hub)
 {
-	double	turn;
-	t_coord	then;
+	double		turn;
+	t_coord		then;
+	t_entity	entity;
 
-	turn = atan2(hub->player->entity.dir.y, hub->player->entity.dir.x) - RAD_90;
-	then.x = hub->player->entity.pos.x + cos(turn) * hub->player->entity.speed;
-	then.y = hub->player->entity.pos.y + sin(turn) * hub->player->entity.speed;
+	entity = hub->player->entity;
+	turn = atan2(entity.dir.y, entity.dir.x) - RAD_90;
+	then.x = entity.pos.x + cos(turn) * entity.speed;
+	then.y = entity.pos.y + sin(turn) * entity.speed;
 	if (!hub->player->collision ||
 			hub->env->map[(int)then.y + 1][(int)then.x + 1] != 1)
 	{
 		hub->player->entity.pos.y = then.y;
 		hub->player->entity.pos.x = then.x;
 	}
+	else
+	{
+		if (hub->env->map[(int)then.y + 1][(int)entity.pos.x + 1] != 1)
+			hub->player->entity.pos.y = then.y;
+		if (hub->env->map[(int)entity.pos.y + 1][(int)then.x + 1] != 1)
+			hub->player->entity.pos.x = then.x;
+	}
 }
 
 void	ft_d_key(t_hub *hub)
 {
-	double	turn;
-	t_coord	then;
+	double		turn;
+	t_coord		then;
+	t_entity	entity;
 
-	turn = atan2(hub->player->entity.dir.y, hub->player->entity.dir.x) + RAD_90;
-	then.x = hub->player->entity.pos.x + cos(turn) * hub->player->entity.speed;
-	then.y = hub->player->entity.pos.y + sin(turn) * hub->player->entity.speed;
+	entity = hub->player->entity;
+	turn = atan2(entity.dir.y, entity.dir.x) + RAD_90;
+	then.x = entity.pos.x + cos(turn) * entity.speed;
+	then.y = entity.pos.y + sin(turn) * entity.speed;
 	if (!hub->player->collision ||
 			hub->env->map[(int)then.y + 1][(int)then.x + 1] != 1)
 	{
 		hub->player->entity.pos.y = then.y;
 		hub->player->entity.pos.x = then.x;
+	}
+	else
+	{
+		if (hub->env->map[(int)then.y + 1][(int)entity.pos.x + 1] != 1)
+			hub->player->entity.pos.y = then.y;
+		if (hub->env->map[(int)entity.pos.y + 1][(int)then.x + 1] != 1)
+			hub->player->entity.pos.x = then.x;
 	}
 }
