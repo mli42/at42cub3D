@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 23:30:46 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 13:56:19 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define W_KEY 13
 
 # define SHIFT_KEY 257
+# define C_KEY 8
 
 # define SKYBLUE 0x7fffff
 # define GREEN 0xff00
@@ -111,5 +112,6 @@ int		ft_is_map_good(t_hub *hub);
 
 void	ft_speed(t_hub *hub);
 void	ft_life(t_hub *hub);
+void	ft_collision(t_hub *hub);
 
 #endif

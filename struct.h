@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 20:02:11 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 15:34:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct	s_player
 	t_coord		pov_max;
 	double		pov_min_rad;
 	double		pov_max_rad;
+	char		collision;
 }				t_player;
 
 typedef struct	s_win

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 11:59:35 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 15:55:19 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,9 @@ void		ft_life(t_hub *hub)
 	bar_max[0] = hub->win->win_size[0] - bar_begin[0];
 	bar_max[1] = bar_begin[1] + hub->win->win_size[1] * 0.02;
 	ft_drawbar(hub, bar_max, bar_begin[0] - 1, bar_begin[1] - 1);
+}
+
+void		ft_collision(t_hub *hub)
+{
+	hub->player->collision = (hub->player->collision == 1 ? 0 : 1);
 }

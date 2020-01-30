@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 15:57:06 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 15:53:46 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_arrow_left(t_hub *hub)
 	hub->player->entity.dir.x = cos(hub->player->entity.dir_rad - RAD_5);
 	hub->player->entity.dir.y = sin(hub->player->entity.dir_rad - RAD_5);
 }
-
 
 t_funct	*fct_moves_ptr_init(void)
 {
@@ -42,7 +41,7 @@ t_funct	*fct_moves_ptr_init(void)
 	funct->ref[4] = D_KEY;
 	funct->ref[5] = W_KEY;
 	funct->ref[6] = SHIFT_KEY;
-	funct->ref[7] = -1;
+	funct->ref[7] = C_KEY;
 	funct->fct[0] = ft_arrow_right;
 	funct->fct[1] = ft_arrow_left;
 	funct->fct[2] = ft_a_key;
@@ -50,6 +49,6 @@ t_funct	*fct_moves_ptr_init(void)
 	funct->fct[4] = ft_d_key;
 	funct->fct[5] = ft_w_key;
 	funct->fct[6] = ft_speed;
-	funct->fct[7] = NULL;
+	funct->fct[7] = ft_collision;
 	return (funct);
 }
