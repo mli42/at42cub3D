@@ -6,43 +6,55 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 09:32:43 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 11:59:35 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_speed(t_hub *hub)
+void		ft_speed(t_hub *hub)
 {
 	hub->player->entity.speed = (hub->player->entity.speed >= FOOT_STEP ?
 			FOOT_STEP : FOOT_STEP * 2.3);
 }
 
-void	ft_life(t_hub *hub)
+static void	ft_drawbar(t_hub *hub, int bar_max[2], int x, int y)
 {
-	int x;
-	int y;
-	int bar_len;
-	int bar_size[2];
-	static float color = 0xFFFFFF;
+	int				border;
+	int				start[2];
+	static float	color = 0xFFFFFF;
 
-	bar_len = (hub->win->win_size[0] - (hub->win->win_size[0] * 0.7)) / 2;
-	bar_size[0] = hub->win->win_size[1] >> 5;
-	bar_size[1] = bar_size[0] + hub->win->win_size[1] * 0.02;
-	y = -1;
+	start[0] = x;
+	start[1] = y;
+	border = (bar_max[1] - start[1]) * 0.45;
 	if (color >= 67108864)
 		color = 0xFFFFFF;
-	while (++y < hub->win->win_size[1])
+	while (++y < bar_max[1])
 	{
-		x = -1;
-		while (++x < hub->win->win_size[0])
+		x = start[0];
+		while (++x < bar_max[0])
 		{
-			if ((x > bar_len && x < hub->win->win_size[0] - bar_len) &&
-					y > bar_size[0] && y < bar_size[1])
-			{
+			if (x < start[0] + border || x > bar_max[0] - border ||
+					y < start[1] + border || y > bar_max[1] - border)
+				hub->win->img_data[y * hub->win->win_size[0] + x] = 0xFFFFFF;
+			else if (x - start[0] > (bar_max[0] - start[0])
+					* hub->player->entity.life / 100)
+				hub->win->img_data[y * hub->win->win_size[0] + x] = 0;
+			else
 				hub->win->img_data[y * hub->win->win_size[0] + x] = (int)color;
-				color += 3;
-			}
+			color += 3;
 		}
 	}
+}
+
+void		ft_life(t_hub *hub)
+{
+	int bar_begin[2];
+	int bar_max[2];
+
+	bar_begin[0] = (hub->win->win_size[0] - (hub->win->win_size[0] * 0.7)) / 2;
+	bar_begin[1] = hub->win->win_size[1] >> 5;
+	bar_max[0] = hub->win->win_size[0] - bar_begin[0];
+	bar_max[1] = bar_begin[1] + hub->win->win_size[1] * 0.02;
+	ft_drawbar(hub, bar_max, bar_begin[0] - 1, bar_begin[1] - 1);
 }

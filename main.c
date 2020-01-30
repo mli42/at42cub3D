@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 15:59:22 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 11:41:50 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int		main(int argc, char **argv)
 		return (-1);
 	// Funct to write
 	hub->player->entity.speed = FOOT_STEP;
+	hub->player->entity.life = 100;
 	mlx_loop(hub->win->mlx);
 	return (0);
 }
