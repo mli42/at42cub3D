@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:57:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 17:32:13 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/30 09:49:09 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ int		ft_press_key(int keycode, void *param)
 		if (keycode == keymap[i])
 		{
 			hub->fct_moves->switch_[i] = 1;
-			break ;
+			return (1);
 		}
-	while (i < 8)
+	i--;
+	while (++i < 8)
 		if (keycode == keymap[i])
 		{
-			hub->fct_moves->fct[i++](hub);
-			break ;
+			hub->fct_moves->fct[i](hub);
+			return (1);
 		}
 	return (1);
 }
