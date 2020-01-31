@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 15:53:46 by mli              ###   ########.fr       */
+/*   Updated: 2020/01/31 13:03:08 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_arrow_right(t_hub *hub)
 {
-	hub->player->entity.dir.x = cos(hub->player->entity.dir_rad + RAD_5);
-	hub->player->entity.dir.y = sin(hub->player->entity.dir_rad + RAD_5);
+	hub->player->entity.dir.x = cos(hub->player->entity.dir_rad + RAD_2_5);
+	hub->player->entity.dir.y = sin(hub->player->entity.dir_rad + RAD_2_5);
 }
 
 void	ft_arrow_left(t_hub *hub)
 {
-	hub->player->entity.dir.x = cos(hub->player->entity.dir_rad - RAD_5);
-	hub->player->entity.dir.y = sin(hub->player->entity.dir_rad - RAD_5);
+	hub->player->entity.dir.x = cos(hub->player->entity.dir_rad - RAD_2_5);
+	hub->player->entity.dir.y = sin(hub->player->entity.dir_rad - RAD_2_5);
 }
 
 t_funct	*fct_moves_ptr_init(void)
