@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 16:44:46 by mli               #+#    #+#             */
-/*   Updated: 2020/01/28 14:47:18 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/03 01:25:42 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int		f_ref_so(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.south.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.south.width), &(hub->env->text.south.height));
+	// Do not forget to protect
+	hub->env->text.south.data = (int *)mlx_get_data_addr(hub->env->text.south.img,
+			&i, &i, &i);
 	return (hub->env->text.south.img ? 1 : -1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 23:30:30 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/03 01:26:25 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
-int		ft_color(t_hub *hub, int face)
+int		ft_color(t_hub *hub, int face, t_coord check_pt, double x)
 {
+	int		pixel;
+	int		index;
+
 	(void)hub; // Hub for textures
 
 	if (face == 'N')
@@ -23,11 +26,25 @@ int		ft_color(t_hub *hub, int face)
 	if (face == 'E')
 		return (color_set[2]);
 	if (face == 'S')
-		return (color_set[3]);
+	{
+		index = (fmod(x, 64)) * hub->env->text.south.height +
+			(fmod(check_pt.x, 64)) * hub->env->text.south.width;
+		pixel = hub->env->text.south.data[index];
+
+	//printf("Y : %f\n", x * hub->env->text.south.height);
+	//printf("X : %f\n", (fmod(check_pt.y, 1) * hub->env->text.south.width));
+/*	static int a = 0;
+		printf("%d : %f\t", a++, fmod(check_pt.x, 1));
+		printf("Coord %f\n", fmod(check_pt.x, 1) * hub->env->text.south.width);
+*/		//printf("X : %lf\n", fmod(check_pt.x, 1));
+
+		return (pixel);
+//		return (color_set[3]);
+	}
 	return (color_set[4]);
 }
 
-void	ft_drawing_ray(t_hub *hub, int i, double distance, int face)
+void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
 {
 	int x;
 	int size;
@@ -37,17 +54,29 @@ void	ft_drawing_ray(t_hub *hub, int i, double distance, int face)
 	x = -1;
 	color[1] = hub->env->ceiling_color;
 	color[2] = hub->env->floor_color;
-	size = hub->win->win_size[1] / distance;
+	size = hub->win->win_size[1] / walls.distance;
 	padding_limit = (hub->win->win_size[1] - size) / 2;
 	while (++x < hub->win->win_size[1])
 	{
-		color[0] = ft_color(hub, face);
 		if (x < padding_limit)
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[1];
 		else if (x > hub->win->win_size[1] - padding_limit)
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[2];
 		else
+		{
+			color[0] = ft_color(hub, walls.face, walls.check_pt,
+					(float)(x - padding_limit) / (float)(size));
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[0];
+		}
+	}
+	int y;
+	x = -1;
+	while (++x < 64)
+	{
+		y = -1;
+			while (++y < 64)
+				hub->win->img_data[x * hub->win->win_size[0] + y] =
+					hub->env->text.south.data[x * 64 + y];
 	}
 }
 
@@ -64,7 +93,7 @@ int		ft_face(double current_ray, int h_v)
 	return ('W');
 }
 
-void	ft_raycasting(t_hub *hub, double current_ray, int i)
+void	ft_raycasting(t_hub *hub, double ray, int i)
 {
 	int			h_v;
 	double		distance;
@@ -76,8 +105,8 @@ void	ft_raycasting(t_hub *hub, double current_ray, int i)
 	map = hub->env->map;
 	check_pt.x = hub->player->entity.pos.x;
 	check_pt.y = hub->player->entity.pos.y;
-	const_add.x = cos(current_ray) * CHECK_STEP;
-	const_add.y = sin(current_ray) * CHECK_STEP;
+	const_add.x = cos(ray) * CHECK_STEP;
+	const_add.y = sin(ray) * CHECK_STEP;
 	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1)
 	{
 		check_pt.y += const_add.y;
@@ -85,8 +114,8 @@ void	ft_raycasting(t_hub *hub, double current_ray, int i)
 		check_pt.x += const_add.x;
 		distance += CHECK_STEP;
 	}
-	distance *= cos(ft_abs_double(hub->player->entity.dir_rad - current_ray));
-	ft_drawing_ray(hub, i, distance, ft_face(current_ray, h_v));
+	distance *= cos(ft_abs_double(hub->player->entity.dir_rad - ray));
+	ft_drawing_ray(hub, i, ft_walls(ft_face(ray, h_v), distance, check_pt));
 }
 
 void	ft_draw(t_hub *hub)
@@ -108,7 +137,7 @@ void	ft_draw(t_hub *hub)
 	{
 		if (check_pt.x > hub->env->map_width - 1 || check_pt.x < 0 ||
 			check_pt.y < 0 || check_pt.y > hub->env->map_height - 1)
-			ft_drawing_ray(hub, i, CHECK_STEP, 'D');
+			ft_drawing_ray(hub, i, ft_walls('D', CHECK_STEP, check_pt));
 		else
 			ft_raycasting(hub, current_ray, i);
 		current_ray += ray_size;

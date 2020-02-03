@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/31 13:02:54 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/02 22:51:17 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int		ft_error(char *str, t_hub *hub);
 
 # include <stdio.h>
 
-void	ft_draw(t_hub *hub);
-
 // TMP functions
 
 void	ft_draw_square(t_win *draw);
@@ -114,5 +112,7 @@ int		ft_is_map_good(t_hub *hub);
 void	ft_speed(t_hub *hub);
 void	ft_life(t_hub *hub);
 void	ft_collision(t_hub *hub);
+
+t_walls	ft_walls(int face, double distance, t_coord check_pt);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 15:34:00 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/02 23:15:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,19 @@ typedef struct	s_coord
 	double y;
 }				t_coord;
 
+typedef struct	s_walls
+{
+	int		face;
+	double	distance;
+	t_coord	check_pt;
+}				t_walls;
+
 typedef struct	s_data
 {
-	int *img;
-	int width;
-	int height;
+	void	*img;
+	int		*data;
+	int		width;
+	int		height;
 }				t_data;
 
 typedef struct	s_text
