@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/04 16:44:46 by mli               #+#    #+#             */
-/*   Updated: 2020/02/03 01:25:42 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 16:05:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int		f_ref_s(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.sprite.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.sprite.width), &(hub->env->text.sprite.height));
+	// Do not forget to protect
+	hub->env->text.sprite.data = (int *)mlx_get_data_addr(hub->env->text.sprite.img,
+			&i, &i, &i);
 	return (hub->env->text.sprite.img ? 1 : -1);
 }
 
@@ -81,6 +84,9 @@ int		f_ref_no(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.north.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.north.width), &(hub->env->text.north.height));
+	// Do not forget to protect
+	hub->env->text.north.data = (int *)mlx_get_data_addr(hub->env->text.north.img,
+			&i, &i, &i);
 	return (hub->env->text.north.img ? 1 : -1);
 }
 
@@ -104,6 +110,9 @@ int		f_ref_ea(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.east.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.east.width), &(hub->env->text.east.height));
+	// Do not forget to protect
+	hub->env->text.east.data = (int *)mlx_get_data_addr(hub->env->text.east.img,
+			&i, &i, &i);
 	return (hub->env->text.east.img ? 1 : -1);
 }
 
@@ -127,5 +136,8 @@ int		f_ref_we(t_hub *hub, char *str)
 		return (-1);
 	hub->env->text.west.img = mlx_xpm_file_to_image(hub->win->mlx, &str[i],
 			&(hub->env->text.west.width), &(hub->env->text.west.height));
+	// Do not forget to protect
+	hub->env->text.west.data = (int *)mlx_get_data_addr(hub->env->text.west.img,
+			&i, &i, &i);
 	return (hub->env->text.west.img ? 1 : -1);
 }

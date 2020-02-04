@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/02 22:51:17 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 16:28:15 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,10 @@ void	ft_life(t_hub *hub);
 void	ft_collision(t_hub *hub);
 
 t_walls	ft_walls(int face, double distance, t_coord check_pt);
+
+int		is_north(t_hub * hub, t_walls walls, float y[4], float x);
+int		is_south(t_hub * hub, t_walls walls, float y[4], float x);
+int		is_west(t_hub * hub, t_walls walls, float y[4], float x);
+int		is_east(t_hub * hub, t_walls walls, float y[4], float x);
 
 #endif

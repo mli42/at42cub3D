@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/04 14:53:32 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 16:27:30 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,30 @@
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
-int		ft_color(t_hub *hub, t_walls walls, int size, float x)
+int		ft_color(t_hub *hub, t_walls walls, float x)
 {
-	int		pixel;
-	int		index;
-	static float y = -1;
-
-	if (y == -1  || y >= x * hub->env->text.south.height)
-		y = x * (float)hub->env->text.south.height / (float)size;
+	static float	y[4] = {-1, -1, -1, -1};
 
 	if (walls.face == 'N')
-		return (color_set[1]);
+		return (is_north(hub, walls, y, x));
 	if (walls.face == 'E')
-		return (color_set[2]);
+		return (is_east(hub, walls, y, x));
 	if (walls.face == 'S')
-	{
-		index = ((int)y) * hub->env->text.south.height +
-			(fmod(walls.check_pt.x + 1, 1)) * hub->env->text.south.width;
-		pixel = hub->env->text.south.data[index];
-		y += (float)hub->env->text.south.height / (float)size;
-		return (pixel);
-	}
-	return (color_set[4]);
+		return (is_south(hub, walls, y, x));
+	return (is_west(hub, walls, y, x));
 }
 
 void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
 {
 	int x;
-	int size;
 	int color[3];
 	int padding_limit;
 
 	x = -1;
 	color[1] = hub->env->ceiling_color;
 	color[2] = hub->env->floor_color;
-	size = hub->win->win_size[1] / walls.distance;
-	padding_limit = (hub->win->win_size[1] - size) / 2;
+	walls.size = hub->win->win_size[1] / walls.distance;
+	padding_limit = (hub->win->win_size[1] - walls.size) / 2;
 	while (++x < hub->win->win_size[1])
 	{
 		if (x < padding_limit)
@@ -58,7 +46,8 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[2];
 		else
 		{
-			color[0] = ft_color(hub, walls, size, (float)(x - padding_limit) / (float)size);
+			color[0] = ft_color(hub, walls,
+					(float)(x - padding_limit) / (float)walls.size);
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[0];
 		}
 	}

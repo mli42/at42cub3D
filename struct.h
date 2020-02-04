@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/02 23:15:03 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 16:20:35 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_coord
 typedef struct	s_walls
 {
 	int		face;
+	int		size;
 	double	distance;
 	t_coord	check_pt;
 }				t_walls;
