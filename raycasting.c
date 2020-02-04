@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/04 16:27:30 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 18:41:57 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int		ft_color(t_hub *hub, t_walls walls, float x)
 		return (is_east(hub, walls, y, x));
 	if (walls.face == 'S')
 		return (is_south(hub, walls, y, x));
-	return (is_west(hub, walls, y, x));
+	if (walls.face == 'W')
+		return (is_west(hub, walls, y, x));
+	return (0);
 }
 
 void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
@@ -58,12 +60,12 @@ int		ft_face(double current_ray, int h_v)
 	if (current_ray < 0)
 		current_ray += PI2;
 	if (current_ray >= 0 && current_ray <= M_PI && h_v == 'h')
-		return ('N');
-	if (current_ray >= M_PI && current_ray <= PI2 && h_v == 'h')
 		return ('S');
+	if (current_ray >= M_PI && current_ray <= PI2 && h_v == 'h')
+		return ('N');
 	if (current_ray >= M_PI/2 && current_ray <= 3 * M_PI/2 && h_v == 'v')
-		return ('E');
-	return ('W');
+		return ('W');
+	return ('E');
 }
 
 void	ft_raycasting(t_hub *hub, double ray, int i)

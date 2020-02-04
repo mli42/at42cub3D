@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:36:19 by mli               #+#    #+#             */
-/*   Updated: 2020/02/04 16:32:21 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 22:41:23 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		is_south(t_hub * hub, t_walls walls, float y[4], float x)
 		y[1] = x * (float)hub->env->text.south.height / (float)walls.size;
 	pixel = hub->env->text.south.data[
 		(int)(((int)y[1]) * hub->env->text.south.height +
-			(fmod(walls.check_pt.x + 1, 1)) * hub->env->text.south.width)];
+			(1 - fmod(walls.check_pt.x + 1, 1)) * hub->env->text.south.width)];
 	y[1] += (float)hub->env->text.south.height / (float)walls.size;
 	return (pixel);
 }
@@ -46,7 +46,7 @@ int		is_west(t_hub * hub, t_walls walls, float y[4], float x)
 		y[2] = x * (float)hub->env->text.west.height / (float)walls.size;
 	pixel = hub->env->text.west.data[
 		(int)(((int)y[2]) * hub->env->text.west.height +
-			(fmod(walls.check_pt.y + 1, 1)) * hub->env->text.west.width)];
+			(1 - fmod(walls.check_pt.y + 1, 1)) * hub->env->text.west.width)];
 	y[2] += (float)hub->env->text.west.height / (float)walls.size;
 	return (pixel);
 }
