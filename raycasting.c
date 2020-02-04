@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/03 01:26:25 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/04 14:53:32 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,26 @@
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
-int		ft_color(t_hub *hub, int face, t_coord check_pt, double x)
+int		ft_color(t_hub *hub, t_walls walls, int size, float x)
 {
 	int		pixel;
 	int		index;
+	static float y = -1;
 
-	(void)hub; // Hub for textures
+	if (y == -1  || y >= x * hub->env->text.south.height)
+		y = x * (float)hub->env->text.south.height / (float)size;
 
-	if (face == 'N')
+	if (walls.face == 'N')
 		return (color_set[1]);
-	if (face == 'E')
+	if (walls.face == 'E')
 		return (color_set[2]);
-	if (face == 'S')
+	if (walls.face == 'S')
 	{
-		index = (fmod(x, 64)) * hub->env->text.south.height +
-			(fmod(check_pt.x, 64)) * hub->env->text.south.width;
+		index = ((int)y) * hub->env->text.south.height +
+			(fmod(walls.check_pt.x + 1, 1)) * hub->env->text.south.width;
 		pixel = hub->env->text.south.data[index];
-
-	//printf("Y : %f\n", x * hub->env->text.south.height);
-	//printf("X : %f\n", (fmod(check_pt.y, 1) * hub->env->text.south.width));
-/*	static int a = 0;
-		printf("%d : %f\t", a++, fmod(check_pt.x, 1));
-		printf("Coord %f\n", fmod(check_pt.x, 1) * hub->env->text.south.width);
-*/		//printf("X : %lf\n", fmod(check_pt.x, 1));
-
+		y += (float)hub->env->text.south.height / (float)size;
 		return (pixel);
-//		return (color_set[3]);
 	}
 	return (color_set[4]);
 }
@@ -64,19 +58,9 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[2];
 		else
 		{
-			color[0] = ft_color(hub, walls.face, walls.check_pt,
-					(float)(x - padding_limit) / (float)(size));
+			color[0] = ft_color(hub, walls, size, (float)(x - padding_limit) / (float)size);
 			hub->win->img_data[x * hub->win->win_size[0] + i] = color[0];
 		}
-	}
-	int y;
-	x = -1;
-	while (++x < 64)
-	{
-		y = -1;
-			while (++y < 64)
-				hub->win->img_data[x * hub->win->win_size[0] + y] =
-					hub->env->text.south.data[x * 64 + y];
 	}
 }
 
