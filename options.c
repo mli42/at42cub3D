@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 15:55:19 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/05 12:17:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		ft_speed(t_hub *hub)
 {
 	hub->player->entity.speed = (hub->player->entity.speed >= FOOT_STEP ?
-			FOOT_STEP : FOOT_STEP * 2.3);
+			FOOT_STEP : FOOT_STEP * 1.8);
 }
 
 static void	ft_drawbar(t_hub *hub, int bar_max[2], int x, int y)
