@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 15:54:36 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 00:16:32 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/07 14:58:41 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,16 @@ int		ft_map_parse(t_hub *hub, char *line, int fd, int i)
 	int		gnl_value;
 	t_list	*lst[2];
 
-	if ((hub->env->map_width = ft_map_strlen(line)) < 3)
-		return (-1);
 	lst[0] = ft_lstnew(NULL);
 	gnl_value = (lst[0] ? 1 : -2);
 	while (gnl_value > -1 && line[i] == '1')
 	{
-		if (ft_map_strlen(line) != hub->env->map_width ||
-			!(map_line = fill_line(line, hub->env->map_width)))
+		if ((lst[0]->nb = ft_map_strlen(line)) > 0 &&
+			(map_line = fill_line(line, lst[0]->nb)) &&
+			((lst[1] = ft_lstnew(map_line)) && (lst[1]->nb = lst[0]->nb)))
+				ft_lstadd_back(&lst[0], lst[1]);
+		else
 			gnl_value = -2;
-		if (gnl_value > -1 && (lst[1] = ft_lstnew(map_line)))
-			ft_lstadd_back(&lst[0], lst[1]);
 		ft_free((void **)&line);
 		i = 0;
 		gnl_value = (gnl_value < 0 || !lst[1] ? -2 : get_next_line(fd, &line));

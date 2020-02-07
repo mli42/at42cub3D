@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/04 16:20:35 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/07 12:30:42 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct	s_text
 typedef struct	s_env
 {
 	int		**map;
-	int		map_width;
+	int		*map_width;
 	int		map_height;
 	int		ceiling_color;
 	int		floor_color;

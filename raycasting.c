@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/04 18:41:57 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/07 13:53:52 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ void	ft_draw(t_hub *hub)
 	ray_max = hub->win->win_size[0];
 	while (++i < ray_max)
 	{
-		if (check_pt.x > hub->env->map_width - 1 || check_pt.x < 0 ||
-			check_pt.y < 0 || check_pt.y > hub->env->map_height - 1)
+		if (check_pt.x > hub->env->map_width[(int)check_pt.y] - 1 ||
+	check_pt.x < 0 || check_pt.y < 0 || check_pt.y > hub->env->map_height - 1)
 			ft_drawing_ray(hub, i, ft_walls('D', CHECK_STEP, check_pt));
 		else
 			ft_raycasting(hub, current_ray, i);

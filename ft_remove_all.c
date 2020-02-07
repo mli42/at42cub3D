@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 16:02:00 by mli               #+#    #+#             */
-/*   Updated: 2020/01/29 11:15:51 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/07 12:19:45 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_empty_env(t_hub *hub)
 	while (i < hub->env->map_height)
 		ft_free((void **)(&(hub->env->map[i++])));
 	ft_free((void **)(&hub->env->map));
+	ft_free((void **)(&hub->env->map_width));
 	if (hub->env->text.north.img)
 		mlx_destroy_image(hub->win->mlx, hub->env->text.north.img);
 	if (hub->env->text.south.img)

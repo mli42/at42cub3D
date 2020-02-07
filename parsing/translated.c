@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/01/26 18:28:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/07 12:30:15 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		ft_translate(t_hub *hub, t_list **alst)
 	int		i;
 	t_list	*lst;
 
-	if ((hub->env->map_height = ft_lstsize(*alst) - 1) < 3)
-		return (-1);
-	if (!(hub->env->map = ft_memalloc(sizeof(int *) * hub->env->map_height)))
+	if (((hub->env->map_height = ft_lstsize(*alst) - 1) < 3) ||
+	(!(hub->env->map = ft_memalloc(sizeof(int *) * hub->env->map_height))) ||
+	(!(hub->env->map_width = ft_memalloc(sizeof(int) * hub->env->map_height))))
 		return (0);
 	i = -1;
 	while (++i < hub->env->map_height)
@@ -28,6 +28,7 @@ int		ft_translate(t_hub *hub, t_list **alst)
 		ft_free((void **)alst);
 		*alst = lst;
 		(hub->env->map)[i] = (*alst)->content;
+		(hub->env->map_width)[i] = (*alst)->nb;
 	}
 	ft_free((void **)alst);
 	return (1);
