@@ -6,30 +6,21 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 16:29:23 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/07 22:15:22 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	print_map(t_hub *hub)
+int		ft_h_border(int **map, int max_x, int line_n)
 {
-	int i = -1;
-	int j = -1;
-	int **map = hub->env->map;
+	int i;
 
-	while (++i < hub->env->map_height)
-	{
-		j = -1;
-		while (++j < hub->env->map_width[i])
-		{
-			if (ft_isdigit(map[i][j] + 48))
-				ft_putnbr(map[i][j]);
-			else
-				ft_putchar(map[i][j]);
-		}
-		ft_putchar('\n');
-	}
+	i = -1;
+	while (++i < max_x)
+		if (map[line_n][i] != 1)
+			return (0);
+	return (1);
 }
 
 int		ft_is_close(int **map, int *max_tab, int max_y)
@@ -38,22 +29,9 @@ int		ft_is_close(int **map, int *max_tab, int max_y)
 	int max_x;
 	int prev;
 
-	i = -1;
-	max_x = max_tab[0];
-	while (++i < max_x)
-	{
-		if (map[0][i] != 1)
-			return (0);
-//		map[0][i] = 'A';
-	}
-	i = -1;
-	max_x = max_tab[max_y - 1];
-	while (++i < max_x)
-	{
-		if (map[max_y - 1][i] != 1)
-			return (0);
-//		map[max_y - 1][i] = 'B';
-	}
+	if (!ft_h_border(map, max_tab[0], 0) ||
+		!ft_h_border(map, max_tab[max_y - 1], max_y - 1))
+		return (0);
 	i = 0;
 	while (++i < max_y)
 	{
@@ -122,15 +100,9 @@ int		ft_pos_map(t_hub *hub, int **map, int *max_tab, int max_y)
 
 int		ft_is_map_good(t_hub *hub)
 {
-	int **map;
-
-	map = hub->env->map;
-	if (ft_is_close(map, hub->env->map_width, hub->env->map_height) == 0)
-	{
-		print_map(hub);
-		return (-1);
-	}
-	if (ft_pos_map(hub, map, hub->env->map_width, hub->env->map_height) == 0)
+	if (!ft_is_close(hub->env->map, hub->env->map_width, hub->env->map_height)
+	|| (!ft_pos_map(hub, hub->env->map,
+			hub->env->map_width, hub->env->map_height)))
 		return (-1);
 	return (1);
 }
