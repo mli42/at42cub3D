@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 13:53:52 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/11 19:32:17 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,69 @@
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
-int		ft_color(t_hub *hub, t_walls walls, float x)
+float	ft_y_init(t_data texture, t_walls walls, int x, int padding_limit)
 {
-	static float	y[4] = {-1, -1, -1, -1};
+	float	y;
 
+	y = (float)(x - (padding_limit > 0 ? padding_limit :
+	padding_limit * walls.size)) / (float)walls.size * (float)texture.height /
+	(float)walls.size - walls.distance / 10;
+
+	return (y);
+}
+
+int		ft_color(t_data texture, t_walls walls, float y)
+{
 	if (walls.face == 'N')
-		return (is_north(hub, walls, y, x));
+		return (is_north(texture, walls, y));
 	if (walls.face == 'E')
-		return (is_east(hub, walls, y, x));
+		return (is_east(texture, walls, y));
 	if (walls.face == 'S')
-		return (is_south(hub, walls, y, x));
+		return (is_south(texture, walls, y));
 	if (walls.face == 'W')
-		return (is_west(hub, walls, y, x));
+		return (is_west(texture, walls, y));
 	return (0);
+}
+
+t_data	ft_which_text(t_hub *hub, t_walls walls)
+{
+	if (walls.face == 'N')
+		return (hub->env->text.north);
+	else if (walls.face == 'E')
+		return (hub->env->text.east);
+	else if (walls.face == 'S')
+		return (hub->env->text.south);
+	return (hub->env->text.west);
 }
 
 void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
 {
-	int x;
-	int color[3];
-	int padding_limit;
+	int		x;
+	int		padding_limit;
+	float	y;
+	int		pixel;
+	t_data	texture;
 
 	x = -1;
-	color[1] = hub->env->ceiling_color;
-	color[2] = hub->env->floor_color;
+	y = -1;
 	walls.size = hub->win->win_size[1] / walls.distance;
 	padding_limit = (hub->win->win_size[1] - walls.size) / 2;
+	texture = ft_which_text(hub, walls);
 	while (++x < hub->win->win_size[1])
 	{
 		if (x < padding_limit)
-			hub->win->img_data[x * hub->win->win_size[0] + i] = color[1];
+			hub->win->img_data[x * hub->win->win_size[0] + i] =
+				hub->env->ceiling_color;
 		else if (x > hub->win->win_size[1] - padding_limit)
-			hub->win->img_data[x * hub->win->win_size[0] + i] = color[2];
+			hub->win->img_data[x * hub->win->win_size[0] + i] =
+				hub->env->floor_color;
 		else
 		{
-			color[0] = ft_color(hub, walls,
-					(float)(x - padding_limit) / (float)walls.size);
-			hub->win->img_data[x * hub->win->win_size[0] + i] = color[0];
+			if (y == -1)
+				y = ft_y_init(texture, walls, x, padding_limit);
+			pixel = ft_color(texture, walls, y);
+			y += (float)texture.height / (float)walls.size;
+			hub->win->img_data[x * hub->win->win_size[0] + i] = pixel;
 		}
 	}
 }
