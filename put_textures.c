@@ -6,32 +6,41 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:36:19 by mli               #+#    #+#             */
-/*   Updated: 2020/02/11 19:36:41 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/12 12:43:24 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		is_north(t_data texture, t_walls walls, float y)
+t_data	ft_which_text(t_hub *hub, t_walls walls)
 {
-	return (texture.data[(int)(((int)y) * texture.height +
-		(fmod(walls.check_pt.x + 1, 1)) * texture.width)]);
+	if (walls.face == 'N')
+		return (hub->env->text.north);
+	else if (walls.face == 'E')
+		return (hub->env->text.east);
+	else if (walls.face == 'S')
+		return (hub->env->text.south);
+	return (hub->env->text.west);
 }
 
-int		is_south(t_data texture, t_walls walls, float y)
+void	ft_black_ray(t_hub *hub, int i)
 {
-	return (texture.data[(int)(((int)y) * texture.height +
-		(1 - fmod(walls.check_pt.x + 1, 1)) * texture.width)]);
+	int		x;
+
+	x = -1;
+	while (++x < hub->win->win_size[1])
+		hub->win->img_data[x * hub->win->win_size[0] + i] = 0;
 }
 
-int		is_west(t_data texture, t_walls walls, float y)
+int		ft_face(double current_ray, int h_v)
 {
-	return (texture.data[(int)(((int)y) * texture.height +
-		(1 - fmod(walls.check_pt.y + 1, 1)) * texture.width)]);
-}
-
-int		is_east(t_data texture, t_walls walls, float y)
-{
-	return (texture.data[(int)(((int)y) * texture.height +
-		(fmod(walls.check_pt.y + 1, 1)) * texture.width)]);
+	if (current_ray < 0)
+		current_ray += PI2;
+	if (current_ray >= 0 && current_ray <= M_PI && h_v == 'h')
+		return ('S');
+	if (current_ray >= M_PI && current_ray <= PI2 && h_v == 'h')
+		return ('N');
+	if (current_ray >= M_PI / 2 && current_ray <= 3 * M_PI / 2 && h_v == 'v')
+		return ('W');
+	return ('E');
 }

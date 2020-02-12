@@ -6,21 +6,22 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/12 00:48:11 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/12 12:40:22 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
-
-int		is_texture(t_data texture, t_walls walls, float y)
+int		ft_color(t_data texture, t_walls walls, float y)
 {
 	if (walls.face == 'W' || walls.face == 'S')
 		return (texture.data[(int)(((int)y) * texture.height + texture.width *
 (1 - fmod((walls.face == 'S' ? walls.check_pt.x : walls.check_pt.y) + 1, 1)))]);
-	return (texture.data[(int)(((int)y) * texture.height + texture.width *
+	else if (walls.face == 'N' || walls.face == 'E')
+		return (texture.data[(int)(((int)y) * texture.height + texture.width *
 	(fmod((walls.face == 'N' ? walls.check_pt.x : walls.check_pt.y) + 1, 1)))]);
+	else
+		return (0);
 }
 
 float	ft_y_init(t_data texture, t_walls walls, int x, int padding_limit)
@@ -28,25 +29,6 @@ float	ft_y_init(t_data texture, t_walls walls, int x, int padding_limit)
 	return ((float)(x - (padding_limit > 0 ? padding_limit :
 	padding_limit * walls.size)) / (float)walls.size * (float)texture.height /
 	(float)walls.size - walls.distance / 10);
-}
-
-int		ft_color(t_data texture, t_walls walls, float y)
-{
-	if (walls.face == 'N' || walls.face == 'E' ||
-			walls.face == 'S' || walls.face == 'W')
-		return (is_texture(texture, walls, y));
-	return (0);
-}
-
-t_data	ft_which_text(t_hub *hub, t_walls walls)
-{
-	if (walls.face == 'N')
-		return (hub->env->text.north);
-	else if (walls.face == 'E')
-		return (hub->env->text.east);
-	else if (walls.face == 'S')
-		return (hub->env->text.south);
-	return (hub->env->text.west);
 }
 
 void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
@@ -76,28 +58,6 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
 			y += (float)texture.height / (float)walls.size;
 		}
 	}
-}
-
-void	ft_black_ray(t_hub *hub, int i)
-{
-	int		x;
-
-	x = -1;
-	while (++x < hub->win->win_size[1])
-		hub->win->img_data[x * hub->win->win_size[0] + i] = 0;
-}
-
-int		ft_face(double current_ray, int h_v)
-{
-	if (current_ray < 0)
-		current_ray += PI2;
-	if (current_ray >= 0 && current_ray <= M_PI && h_v == 'h')
-		return ('S');
-	if (current_ray >= M_PI && current_ray <= PI2 && h_v == 'h')
-		return ('N');
-	if (current_ray >= M_PI/2 && current_ray <= 3 * M_PI/2 && h_v == 'v')
-		return ('W');
-	return ('E');
 }
 
 void	ft_raycasting(t_hub *hub, int **map, double ray, int i)

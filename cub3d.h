@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/11 19:37:15 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/12 12:41:33 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,8 @@ void	ft_collision(t_hub *hub);
 
 t_walls	ft_walls(int face, double distance, t_coord check_pt);
 
-int		is_north(t_data texture, t_walls walls, float y);
-int		is_south(t_data texture, t_walls walls, float y);
-int		is_east(t_data texture, t_walls walls, float y);
-int		is_west(t_data texture, t_walls walls, float y);
+int		ft_face(double current_ray, int h_v);
+void	ft_black_ray(t_hub *hub, int i);
+t_data	ft_which_text(t_hub *hub, t_walls walls);
 
 #endif
