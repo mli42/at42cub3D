@@ -1,14 +1,14 @@
 
 R 1440 900
 
-C 135,206,235
+F 100, 200 , 100
 SO ./textures/red.XPM
 
-F 25,25,112
+C 135, 206, 235
 
 NO ./textures/brown.XPM
 
-S ./textures/column.xpm
+S ./textures/barrel.xpm
 
 WE ./textures/cyan.xpm
 
