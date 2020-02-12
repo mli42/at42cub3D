@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/11 19:32:17 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/12 00:48:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 int color_set[5] = {0, ORANGE, YELLOW, D_RED, GREY};
 
+int		is_texture(t_data texture, t_walls walls, float y)
+{
+	if (walls.face == 'W' || walls.face == 'S')
+		return (texture.data[(int)(((int)y) * texture.height + texture.width *
+(1 - fmod((walls.face == 'S' ? walls.check_pt.x : walls.check_pt.y) + 1, 1)))]);
+	return (texture.data[(int)(((int)y) * texture.height + texture.width *
+	(fmod((walls.face == 'N' ? walls.check_pt.x : walls.check_pt.y) + 1, 1)))]);
+}
+
 float	ft_y_init(t_data texture, t_walls walls, int x, int padding_limit)
 {
-	float	y;
-
-	y = (float)(x - (padding_limit > 0 ? padding_limit :
+	return ((float)(x - (padding_limit > 0 ? padding_limit :
 	padding_limit * walls.size)) / (float)walls.size * (float)texture.height /
-	(float)walls.size - walls.distance / 10;
-
-	return (y);
+	(float)walls.size - walls.distance / 10);
 }
 
 int		ft_color(t_data texture, t_walls walls, float y)
 {
-	if (walls.face == 'N')
-		return (is_north(texture, walls, y));
-	if (walls.face == 'E')
-		return (is_east(texture, walls, y));
-	if (walls.face == 'S')
-		return (is_south(texture, walls, y));
-	if (walls.face == 'W')
-		return (is_west(texture, walls, y));
+	if (walls.face == 'N' || walls.face == 'E' ||
+			walls.face == 'S' || walls.face == 'W')
+		return (is_texture(texture, walls, y));
 	return (0);
 }
 
@@ -49,19 +49,16 @@ t_data	ft_which_text(t_hub *hub, t_walls walls)
 	return (hub->env->text.west);
 }
 
-void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
+void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
 {
 	int		x;
 	int		padding_limit;
 	float	y;
-	int		pixel;
-	t_data	texture;
 
 	x = -1;
 	y = -1;
 	walls.size = hub->win->win_size[1] / walls.distance;
 	padding_limit = (hub->win->win_size[1] - walls.size) / 2;
-	texture = ft_which_text(hub, walls);
 	while (++x < hub->win->win_size[1])
 	{
 		if (x < padding_limit)
@@ -74,11 +71,20 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls)
 		{
 			if (y == -1)
 				y = ft_y_init(texture, walls, x, padding_limit);
-			pixel = ft_color(texture, walls, y);
+			hub->win->img_data[x * hub->win->win_size[0] + i] =
+				ft_color(texture, walls, y);
 			y += (float)texture.height / (float)walls.size;
-			hub->win->img_data[x * hub->win->win_size[0] + i] = pixel;
 		}
 	}
+}
+
+void	ft_black_ray(t_hub *hub, int i)
+{
+	int		x;
+
+	x = -1;
+	while (++x < hub->win->win_size[1])
+		hub->win->img_data[x * hub->win->win_size[0] + i] = 0;
 }
 
 int		ft_face(double current_ray, int h_v)
@@ -94,16 +100,15 @@ int		ft_face(double current_ray, int h_v)
 	return ('E');
 }
 
-void	ft_raycasting(t_hub *hub, double ray, int i)
+void	ft_raycasting(t_hub *hub, int **map, double ray, int i)
 {
 	int			h_v;
 	double		distance;
 	t_coord		check_pt;
 	t_coord		const_add;
-	int			**map;
+	t_walls		walls;
 
 	distance = 0;
-	map = hub->env->map;
 	check_pt.x = hub->player->entity.pos.x;
 	check_pt.y = hub->player->entity.pos.y;
 	const_add.x = cos(ray) * CHECK_STEP;
@@ -116,7 +121,8 @@ void	ft_raycasting(t_hub *hub, double ray, int i)
 		distance += CHECK_STEP;
 	}
 	distance *= cos(ft_abs_double(hub->player->entity.dir_rad - ray));
-	ft_drawing_ray(hub, i, ft_walls(ft_face(ray, h_v), distance, check_pt));
+	walls = ft_walls(ft_face(ray, h_v), distance, check_pt);
+	ft_drawing_ray(hub, i, walls, ft_which_text(hub, walls));
 }
 
 void	ft_draw(t_hub *hub)
@@ -138,9 +144,9 @@ void	ft_draw(t_hub *hub)
 	{
 		if (check_pt.x > hub->env->map_width[(int)check_pt.y] - 1 ||
 	check_pt.x < 0 || check_pt.y < 0 || check_pt.y > hub->env->map_height - 1)
-			ft_drawing_ray(hub, i, ft_walls('D', CHECK_STEP, check_pt));
+			ft_black_ray(hub, i);
 		else
-			ft_raycasting(hub, current_ray, i);
+			ft_raycasting(hub, hub->env->map, current_ray, i);
 		current_ray += ray_size;
 	}
 	ft_life(hub);
