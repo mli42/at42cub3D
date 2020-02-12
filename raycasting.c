@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/12 12:57:18 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/12 23:11:08 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ float	ft_y_init(t_data texture, t_walls walls, int x, int padding_limit)
 {
 	return ((float)(x - (padding_limit > 0 ? padding_limit :
 	padding_limit * walls.size)) / (float)walls.size * (float)texture.height /
-	(float)walls.size - walls.distance / 10);
+	(float)walls.size);
 }
 
 void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
@@ -51,7 +51,7 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
 				hub->env->floor_color;
 		else
 		{
-			if (y == -1)
+			if (y == -1 || y >= texture.height)
 				y = ft_y_init(texture, walls, x, padding_limit);
 			hub->win->img_data[x * hub->win->win_size[0] + i] =
 				ft_darker(ft_color(texture, walls, y), walls.distance);
