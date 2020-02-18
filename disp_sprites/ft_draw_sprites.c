@@ -1,16 +1,100 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   ft_draw_sprites.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/18 15:48:03 by mli              ###   ########.fr       */
+/*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
+/*   Updated: 2020/02/18 19:32:05 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
+
+typedef struct	s_sp
+{
+	char	face;
+	int		size;
+	double	distance;
+	t_coord	pos; // ?
+	double	offset; // ?
+}				t_sp;
+
+t_sp	ft_sprites(char face, double distance, t_coord pos)
+{
+	t_sp sprite;
+
+	sprite.face = face;
+	sprite.distance = distance;
+	sprite.pos = pos;
+	return (sprite);
+}
+
+double	ft_points_dist(t_coord a, t_coord b)
+{
+	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
+	return (hypot(b.x - a.x, b.y - a.y));
+}
+
+int		same_pos(t_coord a, t_coord b)
+{
+	if (((int)a.x) == ((int)b.x) && ((int)a.y) == (int)b.y)
+		return (1);
+	return (0);
+}
+
+void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord wont_check)
+{
+	int		h_v;
+	t_sp	sprite; // ??
+	t_coord	check_pt;
+	t_coord	const_add;
+
+	int **map = hub->env->map;
+
+	check_pt.x = hub->player->entity.pos.x;
+	check_pt.y = hub->player->entity.pos.y;
+	const_add.x = cos(ray) * CHECK_STEP;
+	const_add.y = sin(ray) * CHECK_STEP;
+	while (same_pos(check_pt, wont_check))
+	{
+		check_pt.y += const_add.y;
+		check_pt.x += const_add.x;
+	}
+	while ((map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1) &&
+		(map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2))
+	{
+		check_pt.y += const_add.y;
+		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 2 ? 'h' : 'v');
+		check_pt.x += const_add.x;
+	}
+	if (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2)
+		return ;
+//	else
+//	{
+//		ft_putchar('a');
+//		ft_draw_sprites(hub, ray, i, check_pt);
+//	}
+	check_pt.x = floor(check_pt.x) + 0.5;
+	check_pt.y = floor(check_pt.y) + 0.5;
+	sprite = ft_sprites(ft_face(ray, h_v),
+			ft_points_dist(hub->player->entity.pos, check_pt),
+			check_pt);
+	(void)ray;
+	(void)i;
+}
+
+/*
+void	ft_raycasting(t_hub *hub, int **map, double ray, int i)
+{
+	double		distance;
+
+	distance = 0;
+	distance *= cos(ft_abs_double(hub->player->entity.dir_rad - ray));
+	ft_drawing_ray(hub, i, walls, ft_which_text(hub, walls));
+}
+
 
 int		ft_color(t_data texture, t_walls walls, float y)
 {
@@ -59,57 +143,4 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
 		}
 	}
 }
-
-void	ft_raycasting(t_hub *hub, int **map, double ray, int i)
-{
-	int			h_v;
-	double		distance;
-	t_coord		check_pt;
-	t_coord		const_add;
-	t_walls		walls;
-
-	distance = 0;
-	check_pt.x = hub->player->entity.pos.x;
-	check_pt.y = hub->player->entity.pos.y;
-	const_add.x = cos(ray) * CHECK_STEP;
-	const_add.y = sin(ray) * CHECK_STEP;
-	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1)
-	{
-		check_pt.y += const_add.y;
-		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 1 ? 'h' : 'v');
-		check_pt.x += const_add.x;
-		distance += CHECK_STEP;
-	}
-	distance *= cos(ft_abs_double(hub->player->entity.dir_rad - ray));
-	walls = ft_walls(ft_face(ray, h_v), distance, check_pt);
-	ft_drawing_ray(hub, i, walls, ft_which_text(hub, walls));
-	ft_draw_sprites(hub, ray, i, hub->player->entity.pos);
-}
-
-void	ft_draw(t_hub *hub)
-{
-	int				i;
-	static int		ray_max;
-	double			current_ray;
-	static double	ray_size;
-	t_coord			check_pt;
-
-	check_pt.x = (int)hub->player->entity.pos.x + 1;
-	check_pt.y = (int)hub->player->entity.pos.y + 1;
-	ft_recalculate_povs(hub->player);
-	ray_size = POV_60 / hub->win->win_size[0];
-	current_ray = hub->player->pov_max_rad + ray_size;
-	i = -1;
-	ray_max = hub->win->win_size[0];
-	while (++i < ray_max)
-	{
-		if (check_pt.x > hub->env->map_width[(int)check_pt.y] - 1 ||
-	check_pt.x < 0 || check_pt.y < 0 || check_pt.y > hub->env->map_height - 1)
-			ft_black_ray(hub, i);
-		else
-			ft_raycasting(hub, hub->env->map, current_ray, i);
-		current_ray += ray_size;
-	}
-	ft_life(hub);
-	mlx_put_image_to_window(hub->win->mlx, hub->win->win, hub->win->img, 0, 0);
-}
+*/

@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/02/04 16:28:42 by mli              ###   ########.fr        #
+#    Updated: 2020/02/18 15:34:21 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,13 @@ PARSING_FILES = parsing.c filename.c ref.c utils.c textures.c allve_been_called.
 				ft_map_parse.c translated.c correct_map.c
 PARSING_SRCS = ${addprefix ${PARSING_PATH}, ${PARSING_FILES}}
 
+SPRITES_PATH = ./disp_sprites/
+SPRITES_FILES = ft_draw_sprites.c
+SPRITES_SRCS = ${addprefix ${SPRITES_PATH}, ${SPRITES_FILES}}
+
 SRCS_FILES = main.c error.c utils.c ft_remove_all.c raycasting.c calculus.c \
 			 fct_moves_ptr.c fct_moves_wasd.c key_switch.c options.c put_textures.c \
-			 ${GNL_SRCS} ${PARSING_SRCS}
+			 ${GNL_SRCS} ${PARSING_SRCS} ${SPRITES_SRCS}
 
 LIBFT_FILES = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			 ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c \
