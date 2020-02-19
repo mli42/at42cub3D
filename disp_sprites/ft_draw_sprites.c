@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/18 19:32:05 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/19 12:33:38 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_sp	ft_sprites(char face, double distance, t_coord pos)
 
 double	ft_points_dist(t_coord a, t_coord b)
 {
-	return (sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y)));
 	return (hypot(b.x - a.x, b.y - a.y));
 }
 
@@ -44,20 +43,26 @@ int		same_pos(t_coord a, t_coord b)
 	return (0);
 }
 
-void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord wont_check)
+double	ft_sp_offset(t_sp sprite, double ray)
+{
+	(void)sprite;
+	(void)ray;
+	return (0);
+}
+
+void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 {
 	int		h_v;
 	t_sp	sprite; // ??
-	t_coord	check_pt;
+	t_coord	here;
 	t_coord	const_add;
 
 	int **map = hub->env->map;
 
-	check_pt.x = hub->player->entity.pos.x;
-	check_pt.y = hub->player->entity.pos.y;
+	here = check_pt;
 	const_add.x = cos(ray) * CHECK_STEP;
 	const_add.y = sin(ray) * CHECK_STEP;
-	while (same_pos(check_pt, wont_check))
+	while (same_pos(check_pt, here))
 	{
 		check_pt.y += const_add.y;
 		check_pt.x += const_add.x;
@@ -71,17 +76,15 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord wont_check)
 	}
 	if (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2)
 		return ;
-//	else
-//	{
-//		ft_putchar('a');
-//		ft_draw_sprites(hub, ray, i, check_pt);
-//	}
+	else
+		ft_draw_sprites(hub, ray, i, check_pt);
 	check_pt.x = floor(check_pt.x) + 0.5;
 	check_pt.y = floor(check_pt.y) + 0.5;
 	sprite = ft_sprites(ft_face(ray, h_v),
 			ft_points_dist(hub->player->entity.pos, check_pt),
 			check_pt);
-	(void)ray;
+	sprite.offset = ft_sp_offset(sprite, ray);
+
 	(void)i;
 }
 
@@ -114,6 +117,20 @@ float	ft_y_init(t_data texture, t_walls walls, int x, int padding_limit)
 	padding_limit * walls.size)) / (float)walls.size * (float)texture.height /
 	(float)walls.size);
 }
+
+#########################################
+
+if (!(x < padding_limit) && !(x > hub->win->win_size[1] - padding_limit))
+
+if (ft_color(texture, walls, y) == -16777216)
+{
+    y += (float)texture.height / (float)walls.size;
+    continue ;
+}
+hub->win->img_data[x * hub->win->win_size[0] + i] = ft_color(texture, walls, y);
+y += (float)texture.height / (float)walls.size;
+
+#########################################
 
 void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
 {
