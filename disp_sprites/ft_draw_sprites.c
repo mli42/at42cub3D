@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/19 12:33:38 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/19 19:47:07 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef struct	s_sp
 	t_coord	pos; // ?
 	double	offset; // ?
 }				t_sp;
+
+typedef	struct	s_faffine
+{
+	double	a;
+	double	b;
+//	double	x;
+}				t_faffine;
 
 t_sp	ft_sprites(char face, double distance, t_coord pos)
 {
@@ -36,6 +43,13 @@ double	ft_points_dist(t_coord a, t_coord b)
 	return (hypot(b.x - a.x, b.y - a.y));
 }
 
+double	ft_dist_to_sp(t_coord my_pos, t_coord sp_pos)
+{
+	sp_pos.x = (int)sp_pos.x + 0.5;
+	sp_pos.y = (int)sp_pos.y + 0.5;
+	return (ft_points_dist(my_pos, sp_pos));
+}
+
 int		same_pos(t_coord a, t_coord b)
 {
 	if (((int)a.x) == ((int)b.x) && ((int)a.y) == (int)b.y)
@@ -50,42 +64,77 @@ double	ft_sp_offset(t_sp sprite, double ray)
 	return (0);
 }
 
+char	next_check_pt(t_coord *check_pt, t_coord const_add, int **map)
+{
+	char h_v;
+
+	check_pt->y += const_add.y;
+	h_v = (map[(int)check_pt->y + 1][(int)check_pt->x + 1] == 2 ? 'h' : 'v');
+	check_pt->x += const_add.x;
+	return (h_v);
+}
+
+double		ft_find_b(t_coord a, double ax)
+{
+	return (a.x / ax + a.y);
+}
+
+t_faffine	ft_dirf(t_coord a, t_coord b)
+{
+	t_faffine dir;
+
+	dir.a = (b.y - a.y) / (b.x - a.x);
+	dir.b = ft_find_b(a, dir.a);
+	return (dir);
+}
+
+t_faffine	ft_perpf(t_faffine dir, t_coord point)
+{
+	t_faffine perp;
+
+	perp.a = -(1/dir.a);
+	perp.b = ft_find_b(point, perp.a);
+	return (perp);
+}
+
+void	ft_sprite_next(t_hub *hub, int i, t_sp sprite)
+{
+	t_faffine dir;
+	t_faffine perp;
+	t_faffine cast;
+
+	dir = ft_dirf();
+	perp = ft_perpf();
+	cast = ft_castf();
+
+	(void)hub;
+	(void)i;
+	(void)sprite;
+
+//	sprite.offset = ft_sp_offset(sprite, ray);
+}
+
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 {
 	int		h_v;
-	t_sp	sprite; // ??
 	t_coord	here;
 	t_coord	const_add;
-
-	int **map = hub->env->map;
 
 	here = check_pt;
 	const_add.x = cos(ray) * CHECK_STEP;
 	const_add.y = sin(ray) * CHECK_STEP;
 	while (same_pos(check_pt, here))
-	{
-		check_pt.y += const_add.y;
-		check_pt.x += const_add.x;
-	}
-	while ((map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1) &&
-		(map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2))
-	{
-		check_pt.y += const_add.y;
-		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 2 ? 'h' : 'v');
-		check_pt.x += const_add.x;
-	}
-	if (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2)
+		next_check_pt(&check_pt, const_add, hub->env->map);
+	while ((hub->env->map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1) &&
+		(hub->env->map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2))
+		h_v = next_check_pt(&check_pt, const_add, hub->env->map);
+	if (hub->env->map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2)
 		return ;
 	else
 		ft_draw_sprites(hub, ray, i, check_pt);
-	check_pt.x = floor(check_pt.x) + 0.5;
-	check_pt.y = floor(check_pt.y) + 0.5;
-	sprite = ft_sprites(ft_face(ray, h_v),
-			ft_points_dist(hub->player->entity.pos, check_pt),
-			check_pt);
-	sprite.offset = ft_sp_offset(sprite, ray);
+	ft_sprite_next(hub, i, ft_sprites(ft_face(ray, h_v),
+				ft_dist_to_sp(hub->player->entity.pos, check_pt), check_pt));
 
-	(void)i;
 }
 
 /*
