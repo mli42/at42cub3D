@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 12:30:42 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/20 13:35:48 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,21 @@ typedef struct	s_hub
 	t_funct		*fct_moves;
 	t_env		*env;
 }				t_hub;
+
+typedef struct	s_sp
+{
+	char	face;
+	int		size;
+	double	distance;
+	double	offset;
+	t_coord	hit;
+	t_coord	center;
+}				t_sp;
+
+typedef struct	s_faffine
+{
+	double	a;
+	double	b;
+}				t_faffine;
 
 #endif
