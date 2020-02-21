@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/20 13:47:41 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/21 11:25:17 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ t_sp	ft_sprites(char face, double distance, t_coord pos)
 	sprite.face = face;
 	sprite.distance = distance;
 	sprite.hit = pos;
+	pos.x = (int)pos.x + 0.5;
+	pos.y = (int)pos.y + 0.5;
+	sprite.center = pos;
 	return (sprite);
 }
 
@@ -33,15 +36,17 @@ char	next_check_pt(t_coord *check_pt, t_coord const_add, int **map)
 	return (h_v);
 }
 
-void	ft_sprite_next(t_hub *hub, int i, t_sp sprite)
+void	ft_sprite_next(t_hub *hub, int i, t_sp sprite, double ray)
 {
-	t_faffine dir;
-	t_faffine perp;
-//	t_faffine cast;
+	t_faffine	dir;
+	t_faffine	perp;
+	t_faffine	cast;
+	t_coord		m;
 
 	dir = ft_dirf(hub->player->entity.pos, sprite.center);
 	perp = ft_perpf(dir, sprite.center);
-//	cast = ft_castf();
+	cast = ft_castf(ray, hub->player->entity.pos);
+	m = resolve_eq(perp, cast);
 
 	(void)hub;
 	(void)i;
@@ -69,7 +74,7 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 	else
 		ft_draw_sprites(hub, ray, i, check_pt);
 	ft_sprite_next(hub, i, ft_sprites(ft_face(ray, h_v),
-				ft_dist_to_sp(hub->player->entity.pos, check_pt), check_pt));
+			ft_dist_to_sp(hub->player->entity.pos, check_pt), check_pt), ray);
 
 }
 

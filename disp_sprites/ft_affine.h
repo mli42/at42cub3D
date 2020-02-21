@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:44:24 by mli               #+#    #+#             */
-/*   Updated: 2020/02/20 13:51:18 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/21 11:23:44 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ double		ft_find_b(t_coord a, double ax);
 
 t_faffine	ft_perpf(t_faffine dir, t_coord point);
 t_faffine	ft_dirf(t_coord a, t_coord b);
+t_faffine	ft_castf(double ray, t_coord a);
+t_coord		resolve_eq(t_faffine perp, t_faffine cast);
 
 #endif
