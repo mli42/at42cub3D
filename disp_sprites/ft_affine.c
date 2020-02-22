@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/21 12:15:25 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/22 17:57:02 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ double		ft_points_dist(t_coord a, t_coord b)
 
 double		ft_dist_to_sp(t_coord my_pos, t_coord sp_pos)
 {
-	sp_pos.x = (int)sp_pos.x + 0.5;
-	sp_pos.y = (int)sp_pos.y + 0.5;
+	sp_pos.x = (int)sp_pos.x + 0.500001;
+	sp_pos.y = (int)sp_pos.y + 0.500001;
 	return (ft_points_dist(my_pos, sp_pos));
 }
 
@@ -31,21 +31,41 @@ int			same_pos(t_coord a, t_coord b)
 	return (0);
 }
 
-double		ft_sp_offset(t_sp sprite, double ray)
+double		ft_find_x(t_faffine fct, double y)
 {
-	(void)sprite;
-	(void)ray;
-	return (0);
+	return ((y - fct.b) / fct.a);
 }
 
 double		ft_find_b(t_coord a, double ax)
 {
-	return (a.x / ax + a.y);
+	return (a.y - a.x * ax);
 }
 
 double		ft_affine(t_faffine fct, double x)
 {
 	return (fct.a * x + fct.b);
+}
+
+double      ft_sp_offset(t_sp sprite, t_faffine perp, t_coord m)
+{
+	t_coord	a;
+	t_coord	b;
+
+	if (sprite.face == 'N' || sprite.face == 'S')
+	{
+		a.x = (int)m.x;
+		a.y = ft_affine(perp, a.x);
+		b.x = (int)m.x + 1;
+		b.y = ft_affine(perp, b.x);
+	}
+	else
+	{
+		a.y = (int)m.y;
+		a.x = ft_find_x(perp, a.y);
+		b.y = (int)m.y + 1;
+		b.x = ft_find_x(perp, b.y);
+	}
+	return (ft_points_dist(a, m) / ft_points_dist(a, b));
 }
 
 t_faffine	ft_dirf(t_coord a, t_coord b)

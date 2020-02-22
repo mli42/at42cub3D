@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/19 12:06:40 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/22 12:35:30 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int		ft_face(double current_ray, int h_v);
 void	ft_black_ray(t_hub *hub, int i);
 t_data	ft_which_text(t_hub *hub, t_walls walls);
 int		ft_darker(int pixel, float distance);
+float	ft_y_init(t_data texture, int size, int x, int padding_limit);
 
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt);
 
