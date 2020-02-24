@@ -6,11 +6,34 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/02/05 12:17:01 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/24 18:48:08 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void		ft_restart_game(t_hub *hub)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (++i < hub->env->map_height - 1)
+	{
+		j = 0;
+		while (++j < hub->env->map_width[i] - 1)
+		{
+			if (ft_isposition(hub->env->map[i][j]))
+				ft_only_one_pos(hub, hub->env->map[i][j], i, j);
+			else if (hub->env->map[i][j] == 'T')
+				hub->env->map[i][j] = 2;
+		}
+	}
+	hub->player->collision = 0;
+	hub->player->entity.life = 100;
+	hub->player->entity.speed = FOOT_STEP;
+	ft_putstr("The Game Has Restart\n");
+}
 
 void		ft_speed(t_hub *hub)
 {

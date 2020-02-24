@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/22 12:35:30 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/24 18:24:28 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 # define SHIFT_KEY 257
 # define C_KEY 8
+# define R_KEY 15
 
 # define SKYBLUE 0x7fffff
 # define GREEN 0xff00
@@ -108,10 +109,12 @@ int		ft_translate(t_hub *hub, t_list **alst);
 int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd);
 int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd);
 int		ft_is_map_good(t_hub *hub);
+int		ft_only_one_pos(t_hub *hub, int dir, int i, int j);
 
 void	ft_speed(t_hub *hub);
 void	ft_life(t_hub *hub);
 void	ft_collision(t_hub *hub);
+void	ft_restart_game(t_hub *hub);
 
 t_walls	ft_walls(int face, double distance, t_coord check_pt);
 

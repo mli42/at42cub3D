@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/02/05 12:08:45 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/24 19:05:25 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,17 @@ void	ft_arrow_left(t_hub *hub)
 t_funct	*fct_moves_ptr_init(void)
 {
 	t_funct		*funct;
-	static int	nb = 8;
+	const int	nb = 9;
 
 	if (!(funct = (t_funct *)ft_memalloc(sizeof(t_funct))) ||
 			!(funct->ref = (int *)ft_memalloc(sizeof(int) * nb)) ||
 			!(funct->switch_ = (char *)ft_memalloc(sizeof(char) * nb)) ||
 			!(funct->fct = (void (**)())ft_memalloc(sizeof(void (*)()) * nb)))
 		return (NULL);
-	funct->ref[0] = ARROW_RIGHT;
-	funct->ref[1] = ARROW_LEFT;
-	funct->ref[2] = A_KEY;
-	funct->ref[3] = S_KEY;
-	funct->ref[4] = D_KEY;
-	funct->ref[5] = W_KEY;
-	funct->ref[6] = SHIFT_KEY;
-	funct->ref[7] = C_KEY;
-	funct->fct[0] = ft_arrow_right;
-	funct->fct[1] = ft_arrow_left;
-	funct->fct[2] = ft_a_key;
-	funct->fct[3] = ft_s_key;
-	funct->fct[4] = ft_d_key;
-	funct->fct[5] = ft_w_key;
-	funct->fct[6] = ft_speed;
-	funct->fct[7] = ft_collision;
+	ft_memcpy(funct->ref, (int	[]){ARROW_RIGHT, ARROW_LEFT, A_KEY, S_KEY,
+		D_KEY, W_KEY, SHIFT_KEY, C_KEY, R_KEY}, sizeof(int) * nb);
+	ft_memcpy(funct->fct, (void	(*[])()){ft_arrow_right, ft_arrow_left,
+		ft_a_key, ft_s_key, ft_d_key, ft_w_key, ft_speed, ft_collision,
+		ft_restart_game}, sizeof(void (*)()) * nb);
 	return (funct);
 }
