@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/24 18:24:28 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/25 14:30:27 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ int		ft_darker(int pixel, float distance);
 float	ft_y_init(t_data texture, int size, int x, int padding_limit);
 
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt);
+void	ft_save(t_hub *hub);
 
 #endif
