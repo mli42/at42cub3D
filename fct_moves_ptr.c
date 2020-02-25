@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/02/24 19:05:25 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/25 18:21:46 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_arrow_left(t_hub *hub)
 t_funct	*fct_moves_ptr_init(void)
 {
 	t_funct		*funct;
-	const int	nb = 9;
+	const int	nb = 10;
 
 	if (!(funct = (t_funct *)ft_memalloc(sizeof(t_funct))) ||
 			!(funct->ref = (int *)ft_memalloc(sizeof(int) * nb)) ||
@@ -39,9 +39,9 @@ t_funct	*fct_moves_ptr_init(void)
 			!(funct->fct = (void (**)())ft_memalloc(sizeof(void (*)()) * nb)))
 		return (NULL);
 	ft_memcpy(funct->ref, (int	[]){ARROW_RIGHT, ARROW_LEFT, A_KEY, S_KEY,
-		D_KEY, W_KEY, SHIFT_KEY, C_KEY, R_KEY}, sizeof(int) * nb);
+		D_KEY, W_KEY, SHIFT_KEY, C_KEY, R_KEY, P_KEY}, sizeof(int) * nb);
 	ft_memcpy(funct->fct, (void	(*[])()){ft_arrow_right, ft_arrow_left,
 		ft_a_key, ft_s_key, ft_d_key, ft_w_key, ft_speed, ft_collision,
-		ft_restart_game}, sizeof(void (*)()) * nb);
+		ft_restart_game, ft_save}, sizeof(void (*)()) * nb);
 	return (funct);
 }

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/25 14:30:27 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/25 18:17:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define SHIFT_KEY 257
 # define C_KEY 8
 # define R_KEY 15
+# define P_KEY 35
 
 # define SKYBLUE 0x7fffff
 # define GREEN 0xff00

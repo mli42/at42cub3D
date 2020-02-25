@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/01/30 11:41:50 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/25 18:41:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		ft_key_loop(void *param)
 	if (!hub)
 		hub = (t_hub *)param;
 	i = -1;
-	// while (kmap != -1)
 	while (++i < 6)
 		if (hub->fct_moves->switch_[i] == 1)
 			hub->fct_moves->fct[i](hub);
@@ -33,7 +32,7 @@ int		ft_key_loop(void *param)
 	return (1);
 }
 
-int		ft_init_mlx(t_hub *hub)
+int		ft_init_mlx(t_hub *hub, int do_save)
 {
 	int	var[3];
 
@@ -47,6 +46,8 @@ int		ft_init_mlx(t_hub *hub)
 			&var[bit_per_pixel], &var[sizeLine], &var[endian])))
 		return (ft_error("MLX can't create an image", hub));
 	ft_draw(hub);
+	if (do_save == 1)
+		ft_save(hub);
 	mlx_hook(hub->win->win, KeyPress, KeyPressMask, ft_press_key, hub);
 	mlx_hook(hub->win->win, KeyRelease, KeyReleaseMask, ft_key_release, hub);
 	mlx_hook(hub->win->win, DestroyNotify, 0, ft_mouse_quit, hub);
@@ -77,16 +78,15 @@ int		main(int argc, char **argv)
 
 	if (argc != 2 && !(argc == 3 &&
 		(!ft_strcmp(argv[2], "-save") || !ft_strcmp(argv[2], "--save"))))
-		return (ft_error("Wrong Arguments", NULL));
+		return (ft_error("Wrong Arguments\nRIGHT: *.cub (-save/--save)", NULL));
 	if (!(hub = ft_hub_alloc()))
 		return (-1);
 	if (!(hub->win->mlx = mlx_init()))
 		return (ft_error("MLX does not initialize", hub));
 	if ((ft_parse(hub, argv[1])) == -1)
 		return (-1);
-	if ((ft_init_mlx(hub) == -1))
+	if ((ft_init_mlx(hub, argc == 3) == -1))
 		return (-1);
-	// Funct to write
 	hub->player->entity.speed = FOOT_STEP;
 	hub->player->entity.life = 100;
 	mlx_loop(hub->win->mlx);
