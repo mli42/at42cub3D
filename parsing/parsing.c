@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/28 22:17:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/26 12:33:20 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,14 @@ int			ft_parse(t_hub *hub, char *filename)
 	if ((fd = ft_good_name(filename)) == -1)
 		return (ft_error("Given file not correct", hub));
 	if (!(fct = ft_ref_parse()))
+	{
+		close(fd);
 		return (ft_error("Cannot Allocate", hub));
+	}
 	ret = ft_first_vars(hub, fct, fd);
 	ft_free((void **)&(fct->fct));
 	ft_free((void **)&fct);
+	close(fd);
 	if (ret == -1)
 		return (-1);
 	if (ft_allve_been_called(hub) == -1)
