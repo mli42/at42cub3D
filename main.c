@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/02/25 18:41:01 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/27 00:38:35 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		ft_mouse_quit(void *param)
 int		ft_key_loop(void *param)
 {
 	int				i;
+	t_coord			pos;
 	static t_hub	*hub = NULL;
 
 	if (!hub)
@@ -28,6 +29,19 @@ int		ft_key_loop(void *param)
 	while (++i < 6)
 		if (hub->fct_moves->switch_[i] == 1)
 			hub->fct_moves->fct[i](hub);
+	pos = hub->player->entity.pos;
+	if (!(pos.y >= hub->env->map_height - 1 || pos.y <= 0 || pos.x <= 0 ||
+		pos.x >= hub->env->map_width[(int)pos.y] - 1) &&
+		(hub->env->map[(int)pos.y + 1][(int)pos.x + 1] == 2))
+	{
+		hub->player->entity.life -= 10;
+		hub->env->map[(int)pos.y + 1][(int)pos.x + 1] = 'T';
+	}
+	if (hub->player->entity.life <= 0)
+	{
+		ft_putstr("YOU DIED.\n");
+		exit(ft_remove_all((t_hub *)param));
+	}
 	ft_draw(hub);
 	return (1);
 }
