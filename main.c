@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/02/27 00:38:35 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/27 18:06:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ int		ft_key_loop(void *param)
 		if (hub->fct_moves->switch_[i] == 1)
 			hub->fct_moves->fct[i](hub);
 	pos = hub->player->entity.pos;
-	if (!(pos.y >= hub->env->map_height - 1 || pos.y <= 0 || pos.x <= 0 ||
-		pos.x >= hub->env->map_width[(int)pos.y] - 1) &&
-		(hub->env->map[(int)pos.y + 1][(int)pos.x + 1] == 2))
+	if (!is_outside_map(hub, pos) && map_is_what(hub, pos, 2))
 	{
 		hub->player->entity.life -= 10;
-		hub->env->map[(int)pos.y + 1][(int)pos.x + 1] = 'T';
+		hub->env->map[(int)pos.y][(int)pos.x] = 'T';
 	}
 	if (hub->player->entity.life <= 0)
 	{

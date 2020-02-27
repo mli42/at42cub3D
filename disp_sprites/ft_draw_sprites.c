@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/22 18:08:23 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/27 17:34:10 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	next_check_pt(t_coord *check_pt, t_coord const_add, int **map)
 	char h_v;
 
 	check_pt->y += const_add.y;
-	h_v = (map[(int)check_pt->y + 1][(int)check_pt->x + 1] == 2 ? 'h' : 'v');
+	h_v = (map[(int)check_pt->y][(int)check_pt->x] == 2 ? 'h' : 'v');
 	check_pt->x += const_add.x;
 	return (h_v);
 }
@@ -94,10 +94,9 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 	const_add.y = sin(ray) * CHECK_STEP;
 	while (same_pos(check_pt, here))
 		next_check_pt(&check_pt, const_add, hub->env->map);
-	while ((hub->env->map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1) &&
-		(hub->env->map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2))
+	while (!map_is_what(hub, check_pt, 1) && !map_is_what(hub, check_pt, 2))
 		h_v = next_check_pt(&check_pt, const_add, hub->env->map);
-	if (hub->env->map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 2)
+	if (!map_is_what(hub, check_pt, 2))
 		return ;
 	else
 		ft_draw_sprites(hub, ray, i, check_pt);

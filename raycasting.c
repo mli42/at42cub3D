@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/22 12:34:13 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/27 17:57:05 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	ft_raycasting(t_hub *hub, int **map, double ray, int i)
 	check_pt.y = hub->player->entity.pos.y;
 	const_add.x = cos(ray) * CHECK_STEP;
 	const_add.y = sin(ray) * CHECK_STEP;
-	while (map[(int)check_pt.y + 1][(int)check_pt.x + 1] != 1)
+	while (map[(int)check_pt.y][(int)check_pt.x] != 1)
 	{
 		check_pt.y += const_add.y;
-		h_v = (map[(int)check_pt.y + 1][(int)check_pt.x + 1] == 1 ? 'h' : 'v');
+		h_v = (map[(int)check_pt.y][(int)check_pt.x] == 1 ? 'h' : 'v');
 		check_pt.x += const_add.x;
 		distance += CHECK_STEP;
 	}
@@ -94,8 +94,8 @@ void	ft_draw(t_hub *hub)
 	static double	ray_size;
 	t_coord			check_pt;
 
-	check_pt.x = (int)hub->player->entity.pos.x + 1;
-	check_pt.y = (int)hub->player->entity.pos.y + 1;
+	check_pt.x = (int)hub->player->entity.pos.x;
+	check_pt.y = (int)hub->player->entity.pos.y;
 	ft_recalculate_povs(hub->player);
 	ray_size = POV_60 / hub->win->win_size[0];
 	current_ray = hub->player->pov_max_rad + ray_size;
@@ -103,8 +103,7 @@ void	ft_draw(t_hub *hub)
 	ray_max = hub->win->win_size[0];
 	while (++i < ray_max)
 	{
-		if (check_pt.x >= hub->env->map_width[(int)check_pt.y] - 1 ||
-check_pt.x <= 0 || check_pt.y <= 0 || check_pt.y >= hub->env->map_height - 1)
+		if (is_outside_map(hub, check_pt))
 			ft_black_ray(hub, i);
 		else
 			ft_raycasting(hub, hub->env->map, current_ray, i);
