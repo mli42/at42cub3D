@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/20 13:35:48 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/28 14:51:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct	s_hub
 	t_player	*player;
 	t_funct		*fct_moves;
 	t_env		*env;
+	t_coord		plane;
 }				t_hub;
 
 typedef struct	s_sp

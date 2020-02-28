@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 22:15:22 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/28 14:59:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,23 @@ int		ft_only_one_pos(t_hub *hub, int dir, int i, int j)
 	hub->player->entity.pos.y = (float)i - 0.5;
 	if (dir == 'N')
 	{
-		hub->player->entity.dir.x = 0;
-		hub->player->entity.dir.y = -1;
+		hub->player->entity.dir = (t_coord){0, -1};
+		hub->plane = (t_coord){.66, 0};
 	}
 	else if (dir == 'S')
 	{
-		hub->player->entity.dir.x = 0;
-		hub->player->entity.dir.y = 1;
+		hub->player->entity.dir = (t_coord){0, 1};
+		hub->plane = (t_coord){-.66, 0};
 	}
 	else if (dir == 'E')
 	{
-		hub->player->entity.dir.x = 1;
-		hub->player->entity.dir.y = 0;
+		hub->player->entity.dir = (t_coord){1, 0};
+		hub->plane = (t_coord){0, .66};
 	}
 	else
 	{
-		hub->player->entity.dir.x = -1;
-		hub->player->entity.dir.y = 0;
+		hub->player->entity.dir = (t_coord){-1, 0};
+		hub->plane = (t_coord){0, -.66};
 	}
 	return ((++pass == 1 ? 1 : 0));
 }
