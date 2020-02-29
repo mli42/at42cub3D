@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/27 17:34:10 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/29 14:52:09 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 	const_add.y = sin(ray) * CHECK_STEP;
 	while (same_pos(check_pt, here))
 		next_check_pt(&check_pt, const_add, hub->env->map);
+	if (is_outside_map(hub, check_pt))
+		return ;
 	while (!map_is_what(hub, check_pt, 1) && !map_is_what(hub, check_pt, 2))
 		h_v = next_check_pt(&check_pt, const_add, hub->env->map);
 	if (!map_is_what(hub, check_pt, 2))
