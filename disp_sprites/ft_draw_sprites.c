@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/29 14:52:09 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/29 15:11:09 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,6 @@ void	ft_draw_sp_ray(t_hub *hub, int i, t_sp sprite, t_data texture)
 			y += (float)texture.height / (float)sprite.size;
 		}
 	}
-}
-
-void	ft_sprite_next(t_hub *hub, int i, t_sp sp, double ray)
-{
-	t_faffine	perp;
-
-	perp = ft_perpf(ft_dirf(hub->player->entity.pos, sp.center), sp.center);
-	sp.offset = ft_sp_offset(sp, perp,
-			resolve_eq(perp, ft_castf(ray, hub->player->entity.pos)));
-	ft_draw_sp_ray(hub, i, sp, hub->env->text.sprite);
 }
 
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)

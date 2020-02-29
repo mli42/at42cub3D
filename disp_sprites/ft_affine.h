@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:44:24 by mli               #+#    #+#             */
-/*   Updated: 2020/02/22 17:44:40 by mli              ###   ########.fr       */
+/*   Updated: 2020/02/29 15:25:38 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,10 @@ t_faffine	ft_dirf(t_coord a, t_coord b);
 t_faffine	ft_castf(double ray, t_coord a);
 t_coord		resolve_eq(t_faffine perp, t_faffine cast);
 double		ft_affine(t_faffine fct, double x);
+void		ft_sprite_next(t_hub *hub, int i, t_sp sp, double ray);
+
+t_coord		v_add(t_coord a, t_coord b);
+t_coord		v_sub(t_coord a, t_coord b);
+t_coord		v_scal(t_coord a, double b);
 
 #endif
