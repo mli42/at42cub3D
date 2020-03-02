@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 15:09:34 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 16:20:19 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:28:18 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,11 @@ void	draw_h(t_hub *hub, int x, t_dr_sp sp_h, int text_x)
 {
 	int		color;
 	float	text_y;
-	float	step;
 
-	step = ((float)hub->env->text.sprite.height / sp_h.size);
-	text_y = sp_h.start + ((sp_h.size - hub->win->win_size[1]) >> 1);
-	text_y *= step;
 	while (sp_h.start < sp_h.end)
 	{
-		text_y += step;
+		text_y = sp_h.start + ((sp_h.size - hub->win->win_size[1]) >> 1);
+		text_y *= ((float)hub->env->text.sprite.height / sp_h.size);
 		color = hub->env->text.sprite.data[text_x +
 			(int)text_y * hub->env->text.sprite.width];
 		if (color != -16777216 && color != 9961608)
