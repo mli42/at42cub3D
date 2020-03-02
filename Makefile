@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/03/02 16:50:24 by mli              ###   ########.fr        #
+#    Updated: 2020/03/02 17:44:18 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,13 +61,15 @@ VPATH = ${LIBFT_PATH}:${MLX_PATH}
 OBJS = ${SRCS_FILES:.c=.o}
 
 $(NAME): ${OBJS} ${MLX_PATH}${MLX_NAME} ${LIBFT_PATH}${LIBFT}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
+	@${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
 
 $(MLX_PATH)$(MLX_NAME): ${MLX_FILES}
-	make -C ${MLX_PATH}
+	@echo "\033[1mMake mlx\033[0;0m"
+	@make -C ${MLX_PATH}
 
 $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
-	make -C ${LIBFT_PATH}
+	@echo "\033[1mMake libft\033[0;0m"
+	@make -C ${LIBFT_PATH}
 
 all: ${NAME}
 

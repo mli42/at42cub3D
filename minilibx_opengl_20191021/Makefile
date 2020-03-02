@@ -14,11 +14,19 @@ CFLAGS+= -DSTRINGPUTX11
 all: $(NOM)
 
 $(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+	@echo ""
+	@ar -rcs $(NOM) $(OBJ)
 
 clean:
 	rm -f $(NOM) $(OBJ) *~
 	rm -f mlx_app
+
+.c.o:
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 2>/dev/null
+	@printf "\033[0;33m▓\033[0;0m"
+
+.m.o:
+	@${CC} ${CFLAGS} -c $< -o ${<:.m=.o} 2>/dev/null
+	@printf "\033[0;33m▓\033[0;0m"
 
 re: clean all
