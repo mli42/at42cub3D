@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   vect_do_op.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/03 17:48:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 17:00:56 by mli              ###   ########.fr       */
+/*   Created: 2020/02/28 16:52:51 by mli               #+#    #+#             */
+/*   Updated: 2020/03/02 16:55:32 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "ft_affine.h"
 
-void	ft_pass_spaces(char *str, int *i)
+t_coord	v_sub(t_coord a, t_coord b)
 {
-	if (str)
-		while (str[*i] == ' ')
-			(*i)++;
+	t_coord	c;
+
+	c.x = a.x - b.x;
+	c.y = a.y - b.y;
+	return (c);
 }
 
-int		ft_isposition(char c)
+double	ft_points_dist(t_coord a, t_coord b)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	return (0);
+	return (hypot(b.x - a.x, b.y - a.y));
 }
 
-int		ft_ishandledchar(char c)
+double	ft_dist_to_sp(t_coord my_pos, t_coord sp_pos)
 {
-	if (c == '0' || c == '1' || c == '2')
-		return (1);
-	return (0);
-}
-
-int		ft_ismapchar(char c)
-{
-	if (ft_isposition(c) || ft_ishandledchar(c))
-		return (1);
-	return (0);
+	sp_pos.x = (int)sp_pos.x + 0.500001;
+	sp_pos.y = (int)sp_pos.y + 0.500001;
+	return (ft_points_dist(my_pos, sp_pos));
 }

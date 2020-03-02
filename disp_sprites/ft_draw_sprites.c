@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/27 17:34:10 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:45:14 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,6 @@ void	ft_draw_sp_ray(t_hub *hub, int i, t_sp sprite, t_data texture)
 	}
 }
 
-void	ft_sprite_next(t_hub *hub, int i, t_sp sp, double ray)
-{
-	t_faffine	perp;
-
-	perp = ft_perpf(ft_dirf(hub->player->entity.pos, sp.center), sp.center);
-	sp.offset = ft_sp_offset(sp, perp,
-			resolve_eq(perp, ft_castf(ray, hub->player->entity.pos)));
-	ft_draw_sp_ray(hub, i, sp, hub->env->text.sprite);
-}
-
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 {
 	int		h_v;
@@ -94,12 +84,16 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 	const_add.y = sin(ray) * CHECK_STEP;
 	while (same_pos(check_pt, here))
 		next_check_pt(&check_pt, const_add, hub->env->map);
+	if (is_outside_map(hub, check_pt))
+		return ;
 	while (!map_is_what(hub, check_pt, 1) && !map_is_what(hub, check_pt, 2))
 		h_v = next_check_pt(&check_pt, const_add, hub->env->map);
 	if (!map_is_what(hub, check_pt, 2))
 		return ;
 	else
+	{
+		can_see_sprite(hub, check_pt);
 		ft_draw_sprites(hub, ray, i, check_pt);
-	ft_sprite_next(hub, i, ft_sprites(ft_face(ray, h_v),
-			ft_dist_to_sp(hub->player->entity.pos, check_pt), check_pt), ray);
+	}
+	sprite_2(hub, here);
 }

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 15:54:36 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 14:58:41 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:59:17 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ int		ft_map_parse(t_hub *hub, char *line, int fd, int i)
 	{
 		if ((lst[0]->nb = ft_map_strlen(line)) > 0 &&
 			(map_line = fill_line(line, lst[0]->nb)) &&
-			((lst[1] = ft_lstnew(map_line)) && (lst[1]->nb = lst[0]->nb)))
-				ft_lstadd_back(&lst[0], lst[1]);
+			((lst[1] = ft_lstnew(map_line)) &&
+			(lst[1]->nb = lst[0]->nb)))
+			ft_lstadd_back(&lst[0], lst[1]);
 		else
 			gnl_value = -2;
 		ft_free((void **)&line);

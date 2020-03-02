@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 22:52:57 by mli               #+#    #+#             */
-/*   Updated: 2020/01/27 17:03:11 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 17:00:42 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ int		f_ref_resolution(t_hub *hub, char *str)
 	return (1);
 }
 
-t_fct_r		*ft_ref_parse(void)
+t_fct_r	*ft_ref_parse(void)
 {
 	t_fct_r		*ref_parse;
 	const char	*ref = "RFCSNWE";
 
 	if (!(ref_parse = (t_fct_r *)ft_memalloc(sizeof(t_fct_r))))
 		return (NULL);
-	if (!(ref_parse->fct = (int (**)())ft_memalloc(sizeof(int (*)()) * 7 )))
+	if (!(ref_parse->fct = (int (**)())ft_memalloc(sizeof(int (*)()) * 7)))
 		return (NULL);
 	ref_parse->fct[0] = f_ref_resolution;
 	ref_parse->fct[1] = f_ref_floor;

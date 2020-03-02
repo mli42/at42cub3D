@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 22:15:22 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:02:30 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,27 @@ int		ft_only_one_pos(t_hub *hub, int dir, int i, int j)
 {
 	static int pass = 0;
 
-	hub->player->entity.pos.x = (float)j - 0.5;
-	hub->player->entity.pos.y = (float)i - 0.5;
+	hub->player->entity.pos.x = (float)j + 0.5;
+	hub->player->entity.pos.y = (float)i + 0.5;
 	if (dir == 'N')
 	{
-		hub->player->entity.dir.x = 0;
-		hub->player->entity.dir.y = -1;
+		hub->player->entity.dir = (t_coord){0, -1};
+		hub->plane = (t_coord){.66, 0};
 	}
 	else if (dir == 'S')
 	{
-		hub->player->entity.dir.x = 0;
-		hub->player->entity.dir.y = 1;
+		hub->player->entity.dir = (t_coord){0, 1};
+		hub->plane = (t_coord){-.66, 0};
 	}
 	else if (dir == 'E')
 	{
-		hub->player->entity.dir.x = 1;
-		hub->player->entity.dir.y = 0;
+		hub->player->entity.dir = (t_coord){1, 0};
+		hub->plane = (t_coord){0, .66};
 	}
 	else
 	{
-		hub->player->entity.dir.x = -1;
-		hub->player->entity.dir.y = 0;
+		hub->player->entity.dir = (t_coord){-1, 0};
+		hub->plane = (t_coord){0, -.66};
 	}
 	return ((++pass == 1 ? 1 : 0));
 }
@@ -90,11 +90,16 @@ int		ft_pos_map(t_hub *hub, int **map, int *max_tab, int max_y)
 		j = 0;
 		max_x = max_tab[i];
 		while (++j < max_x - 1)
-			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-					map[i][j] == 'W' || map[i][j] == 'E')
+		{
+			if (ft_isposition(map[i][j]))
 				if (++pass != 1 || ft_only_one_pos(hub, map[i][j], i, j) == 0)
 					return (0);
+			if (map[i][j] == 2)
+				hub->env->sp_nb++;
+		}
 	}
+	if (!(hub->env->sp = (t_sp *)ft_memalloc(sizeof(t_sp) * hub->env->sp_nb)))
+		return (0);
 	return (1);
 }
 

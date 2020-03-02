@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/27 17:55:17 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 17:06:59 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,8 @@ int		ft_key_release(int keycode, void *param);
 
 int		ft_error(char *str, t_hub *hub);
 
-# include <stdio.h>
-
-// TMP functions
-
 void	ft_draw_square(t_win *draw);
 int		fct(int keycode, void *param);
-
-// Other
 
 void	ft_recalculate_povs(t_player *player);
 double	ft_abs_double(double nbr);
@@ -127,8 +121,11 @@ float	ft_y_init(t_data texture, int size, int x, int padding_limit);
 
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt);
 void	ft_save(t_hub *hub);
+void	load_sprites(t_hub *hub, int **map, int *width, int height);
 
 int		map_is_what(t_hub *hub, t_coord cmp, int nb);
 int		is_outside_map(t_hub *hub, t_coord pt);
+
+void	in_game(t_hub *hub);
 
 #endif

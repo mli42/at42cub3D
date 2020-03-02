@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:57:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/25 18:21:26 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 17:05:56 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@ int		ft_press_key(int keycode, void *param)
 	static int		*keymap = NULL;
 	static t_hub	*hub = NULL;
 
-	if (!hub || !keymap)
-	{
+	if (!hub)
 		hub = (t_hub *)param;
+	if (!keymap)
 		keymap = (int *)hub->fct_moves->ref;
-	}
-//	printf("Key: %d\n", keycode);
 	if (keycode == EXIT_CODE)
 		exit(ft_remove_all(hub));
 	i = -1;
-	// while (kmap != -1)
 	while (++i < 6)
 		if (keycode == keymap[i])
 		{

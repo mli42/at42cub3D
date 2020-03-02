@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   load_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/03 17:48:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 17:00:56 by mli              ###   ########.fr       */
+/*   Created: 2020/03/02 11:48:36 by mli               #+#    #+#             */
+/*   Updated: 2020/03/02 16:49:39 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	ft_pass_spaces(char *str, int *i)
+void	load_sprites(t_hub *hub, int **map, int *width, int height)
 {
-	if (str)
-		while (str[*i] == ' ')
-			(*i)++;
-}
+	int i;
+	int j;
+	int k;
 
-int		ft_isposition(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	return (0);
-}
-
-int		ft_ishandledchar(char c)
-{
-	if (c == '0' || c == '1' || c == '2')
-		return (1);
-	return (0);
-}
-
-int		ft_ismapchar(char c)
-{
-	if (ft_isposition(c) || ft_ishandledchar(c))
-		return (1);
-	return (0);
+	i = 0;
+	k = 0;
+	while (++i < height - 1)
+	{
+		j = 0;
+		while (++j < width[i] - 1)
+		{
+			if (map[i][j] == 2)
+				hub->env->sp[k++].center = (t_coord){j + 0.5, i + 0.5};
+		}
+	}
 }
