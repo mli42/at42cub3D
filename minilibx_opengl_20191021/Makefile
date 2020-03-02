@@ -18,8 +18,9 @@ $(NOM):	$(OBJ)
 	@ar -rcs $(NOM) $(OBJ)
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@echo "\033[1m\x1b[33mRemove all MLX. |\x1b[32m| done\x1b[37m"
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
 
 .c.o:
 	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 2>/dev/null

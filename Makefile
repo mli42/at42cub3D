@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/03/02 17:44:18 by mli              ###   ########.fr        #
+#    Updated: 2020/03/02 21:25:17 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,8 +60,13 @@ VPATH = ${LIBFT_PATH}:${MLX_PATH}
 
 OBJS = ${SRCS_FILES:.c=.o}
 
-$(NAME): ${OBJS} ${MLX_PATH}${MLX_NAME} ${LIBFT_PATH}${LIBFT}
+$(NAME): ${MLX_PATH}${MLX_NAME} ${LIBFT_PATH}${LIBFT} ${OBJS}
+	@echo ""
 	@${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
+
+.c.o:
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	@printf "\033[0;33m▓\033[0;0m"
 
 $(MLX_PATH)$(MLX_NAME): ${MLX_FILES}
 	@echo "\033[1mMake mlx\033[0;0m"
@@ -74,12 +79,14 @@ $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
 all: ${NAME}
 
 clean:
-	rm -rf ${OBJS}
+	@echo "\033[1m\x1b[33mRemove......... |\x1b[32m| done\x1b[37m"
+	@rm -rf ${OBJS}
 
 fclean: clean
-	rm -rf $(NAME)
-	make -C ${MLX_PATH} clean
-	make -C ${LIBFT_PATH} fclean
+	@echo "\033[1m\x1b[33mRemove all..... |\x1b[32m| done\x1b[37m"
+	@rm -rf $(NAME)
+	@make -C ${MLX_PATH} clean
+	@make -C ${LIBFT_PATH} fclean
 
 re: fclean all
 

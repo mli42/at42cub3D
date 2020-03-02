@@ -6,7 +6,7 @@
 #    By: mli <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 17:22:00 by mli               #+#    #+#              #
-#    Updated: 2020/03/02 17:40:45 by mli              ###   ########.fr        #
+#    Updated: 2020/03/02 21:04:46 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,10 +41,12 @@ $(NAME): ${OBJS}
 all: ${NAME}
 
 clean:
-	rm -rf ${OBJS}
+	@echo "\033[1m\x1b[33mRemove libft... |\x1b[32m| done\x1b[37m"
+	@rm -rf ${OBJS}
 
 fclean: clean
-	rm -rf ${NAME}
+	@echo "\033[1m\x1b[33mRemove all libft|\x1b[32m| done\x1b[37m"
+	@rm -rf ${NAME}
 
 re: fclean all
 
