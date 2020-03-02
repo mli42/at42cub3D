@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 12:30:15 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 11:31:14 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 		return (ft_map_parse_pb(alst, NULL, line, fd));
 	get_next_line(fd, NULL);
 	if ((ft_translate(hub, alst)) < 1)
+	{
+		ft_lstclear(alst, free);
 		return (-1);
+	}
 	if (ft_is_map_good(hub) < 1)
 		return (-1);
 	return (1);

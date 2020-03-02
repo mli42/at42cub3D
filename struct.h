@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/02/28 14:51:36 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 10:53:45 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ typedef struct	s_coord
 	double x;
 	double y;
 }				t_coord;
+
+typedef struct	s_sp
+{
+	char	face;
+	int		size;
+	double	distance;
+	double	offset;
+	t_coord	hit;
+	t_coord	center;
+	char	can_see;
+}				t_sp;
 
 typedef struct	s_walls
 {
@@ -59,6 +70,8 @@ typedef struct	s_env
 	int		map_height;
 	int		ceiling_color;
 	int		floor_color;
+	int		sp_nb;
+	t_sp	*sp;
 	t_text	text;
 }				t_env;
 
@@ -111,16 +124,6 @@ typedef struct	s_hub
 	t_env		*env;
 	t_coord		plane;
 }				t_hub;
-
-typedef struct	s_sp
-{
-	char	face;
-	int		size;
-	double	distance;
-	double	offset;
-	t_coord	hit;
-	t_coord	center;
-}				t_sp;
 
 typedef struct	s_faffine
 {
