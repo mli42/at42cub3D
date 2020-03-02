@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 13:36:55 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 14:30:37 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,13 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 		can_see_sprite(hub, check_pt);
 		ft_draw_sprites(hub, ray, i, check_pt);
 	}
-//	ft_sprite_next(hub, i, ft_sprites(ft_face(ray, h_v),
-//			ft_dist_to_sp(hub->player->entity.pos, check_pt), check_pt), ray);
 	int k = -1;
 	if (same_pos(here, hub->player->entity.pos))
 		while (++k < hub->env->sp_nb)
 			if (hub->env->sp[k].can_see)
 			{
-				printf("[%.1f][%.1f]\t%d\n",
-						hub->env->sp[k].center.x, hub->env->sp[k].center.y, k);
-				hub->env->sp[k].distance = ft_points_dist(hub->player->entity.pos,
-						hub->env->sp[k].center);
+				hub->env->sp[k].distance = ft_points_dist(
+				hub->player->entity.pos, hub->env->sp[k].center);
 				ft_sprite_next(hub, i, hub->env->sp[k], 0);
 			}
 }

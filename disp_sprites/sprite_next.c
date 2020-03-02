@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 15:09:34 by mli               #+#    #+#             */
-/*   Updated: 2020/02/29 16:48:33 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 14:25:39 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_coord	ft_transform(t_hub *hub, t_coord sp_coord)
 			hub->player->entity.dir.x);
 	trans.x = inv * (hub->player->entity.dir.y * sp_coord.x - sp_coord.y *
 			hub->player->entity.dir.x);
-	trans.y = inv * (-hub->plane.y * sp_coord.x - hub->plane.x * sp_coord.y);
+	trans.y = inv * (-hub->plane.y * sp_coord.x + hub->plane.x * sp_coord.y);
 	return (trans);
 }
 
