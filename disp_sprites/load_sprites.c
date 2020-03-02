@@ -6,13 +6,13 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 11:48:36 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 13:35:54 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:49:39 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void    load_sprites(t_hub *hub, int **map, int *width, int height)
+void	load_sprites(t_hub *hub, int **map, int *width, int height)
 {
 	int i;
 	int j;

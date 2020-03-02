@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 15:29:12 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:45:14 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,6 @@ void	ft_draw_sp_ray(t_hub *hub, int i, t_sp sprite, t_data texture)
 	}
 }
 
-void	can_see_sprite(t_hub *hub, t_coord pt)
-{
-	int k;
-
-	k = -1;
-	while (++k < hub->env->sp_nb)
-	{
-		if (same_pos(pt, hub->env->sp[k].center))
-		{
-			hub->env->sp[k].can_see = 1;
-			break ;
-		}
-	}
-}
-
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 {
 	int		h_v;
@@ -110,13 +95,5 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 		can_see_sprite(hub, check_pt);
 		ft_draw_sprites(hub, ray, i, check_pt);
 	}
-	int k = -1;
-	if (same_pos(here, hub->player->entity.pos))
-		while (++k < hub->env->sp_nb)
-			if (hub->env->sp[k].can_see)
-			{
-				hub->env->sp[k].distance = ft_points_dist(
-				hub->player->entity.pos, hub->env->sp[k].center);
-				ft_sprite_next(hub, hub->env->sp[k]);
-			}
+	sprite_2(hub, here);
 }

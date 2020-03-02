@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 13:44:24 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 16:20:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:52:29 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef struct	s_dr_sp
 {
-    int size;
-    int start;
-    int end;
+	int size;
+	int start;
+	int end;
 }				t_dr_sp;
 
 double			ft_points_dist(t_coord a, t_coord b);
@@ -33,8 +33,9 @@ t_coord			resolve_eq(t_faffine perp, t_faffine cast);
 double			ft_affine(t_faffine fct, double x);
 void			ft_sprite_next(t_hub *hub, t_sp sp);
 
-t_coord			v_add(t_coord a, t_coord b);
 t_coord			v_sub(t_coord a, t_coord b);
-t_coord			v_scal(t_coord a, double b);
+
+void			sprite_2(t_hub *hub, t_coord here);
+void			can_see_sprite(t_hub *hub, t_coord pt);
 
 #endif
