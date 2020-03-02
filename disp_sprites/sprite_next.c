@@ -6,19 +6,12 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/29 15:09:34 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 14:25:39 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:20:19 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #include "ft_affine.h"
-
-typedef	struct	s_dr_sp
-{
-	int size;
-	int start;
-	int end;
-}				t_dr_sp;
 
 t_coord	ft_transform(t_hub *hub, t_coord sp_coord)
 {
@@ -35,94 +28,70 @@ t_coord	ft_transform(t_hub *hub, t_coord sp_coord)
 
 t_dr_sp	ft_sp_h(t_hub *hub, t_coord trans)
 {
-	int		h;
 	t_dr_sp	sp_h;
 
-	h = ft_abs_double((int)(hub->win->win_size[1] / trans.y));
-	sp_h.start = -h / 2 + hub->win->win_size[1] / 2;
-	if (sp_h.start < 0)
+	sp_h.size = ft_abs_double((int)(hub->win->win_size[1] / trans.y));
+	if ((sp_h.start = (hub->win->win_size[1] - sp_h.size) >> 1) < 0)
 		sp_h.start = 0;
-	sp_h.end = h / 2 + hub->win->win_size[1] / 2;
-	if (sp_h.end >= hub->win->win_size[1])
+	if ((sp_h.end = (sp_h.size +
+					hub->win->win_size[1]) >> 1) >= hub->win->win_size[1])
 		sp_h.end = hub->win->win_size[1] - 1;
-	sp_h.size = h;
 	return (sp_h);
 }
 
 t_dr_sp	ft_sp_w(t_hub *hub, t_coord trans, int screen_x)
 {
-	int		width;
 	t_dr_sp	sp_w;
 
-
-	width = ft_abs_double((int)(hub->win->win_size[1] / trans.y));
-	sp_w.start = -width / 2 + screen_x;
-	if (sp_w.start < 0)
+	sp_w.size = ft_abs_double((int)(hub->win->win_size[1] / trans.y));
+	if ((sp_w.start = (-sp_w.size >> 1) + screen_x) < 0)
 		sp_w.start = 0;
-	sp_w.end = width / 2 + screen_x;
-	if ((sp_w.end >= (signed)hub->win->win_size[0]))
+	if ((sp_w.end = (sp_w.size >> 1) + screen_x) >= hub->win->win_size[0])
 		sp_w.end = hub->win->win_size[0] - 1;
-	sp_w.size = width;
 	return (sp_w);
 }
 
-void	draw_h(t_hub *hub, int sp_w_start, t_dr_sp sp_h, int text_x)
+void	draw_h(t_hub *hub, int x, t_dr_sp sp_h, int text_x)
 {
-	int text_y;
-	int color;
+	int		color;
+	float	text_y;
+	float	step;
 
-
+	step = ((float)hub->env->text.sprite.height / sp_h.size);
+	text_y = sp_h.start + ((sp_h.size - hub->win->win_size[1]) >> 1);
+	text_y *= step;
 	while (sp_h.start < sp_h.end)
 	{
-		text_y = sp_h.start - (hub->win->win_size[1] / 2) + sp_h.size / 2;
-		text_y = text_y * hub->env->text.sprite.height / sp_h.size;
+		text_y += step;
 		color = hub->env->text.sprite.data[text_x +
-			text_y * hub->env->text.sprite.width];
+			(int)text_y * hub->env->text.sprite.width];
 		if (color != -16777216 && color != 9961608)
-		hub->win->img_data[sp_w_start +
-			sp_h.start * hub->win->win_size[0]] = color;
+			hub->win->img_data[sp_h.start * hub->win->win_size[0] + x] = color;
 		sp_h.start++;
 	}
-	(void)color;
-	(void)hub;
-	(void)sp_w_start;
-	(void)sp_h;
 }
 
-void    ft_sprite_next(t_hub *hub, int i, t_sp sp, double ray)
+void	ft_sprite_next(t_hub *hub, t_sp sp)
 {
-	t_coord		sp_coord;
-	t_coord		trans;
+	int		text_x;
+	int		screen_x;
+	t_dr_sp	sp_h;
+	t_dr_sp	sp_w;
+	t_coord	trans;
 
-	sp_coord = v_sub(sp.center, hub->player->entity.pos);
-	trans = ft_transform(hub, sp_coord);
-
-
-	int screen_x;
-	t_dr_sp sp_h;
-	t_dr_sp sp_w;
-
-	screen_x = (int)((hub->win->win_size[0] / 2) * (1 + trans.x / trans.y));
+	trans = ft_transform(hub, v_sub(sp.center, hub->player->entity.pos));
+	if (trans.y < 0 || trans.y > sp.distance)
+		return ;
+	screen_x = (int)((hub->win->win_size[0] >> 1) * (1 + trans.x / trans.y));
+	if ((sp_w = ft_sp_w(hub, trans, screen_x)).start < 0 ||
+		sp_w.start > hub->win->win_size[0])
+		return ;
 	sp_h = ft_sp_h(hub, trans);
-	sp_w = ft_sp_w(hub, trans, screen_x);
-
-	int text_x;
-
 	while (sp_w.start < sp_w.end)
 	{
 		text_x = (int)((sp_w.start - (-sp_w.size / 2 + screen_x)) *
 				hub->env->text.sprite.width / sp_w.size);
-		if (trans.y > 0 && sp_w.start > 0 &&
-			sp_w.start < hub->win->win_size[0] && trans.y < sp.distance)
-			draw_h(hub, sp_w.start, sp_h, text_x);
+		draw_h(hub, sp_w.start, sp_h, text_x);
 		sp_w.start++;
 	}
-	(void)hub;
-	(void)sp;
-	(void)i;
-	(void)ray;
 }
-
-
-
-

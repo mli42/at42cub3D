@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 11:36:15 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 16:02:30 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int		ft_only_one_pos(t_hub *hub, int dir, int i, int j)
 {
 	static int pass = 0;
 
-	hub->player->entity.pos.x = (float)j - 0.5;
-	hub->player->entity.pos.y = (float)i - 0.5;
+	hub->player->entity.pos.x = (float)j + 0.5;
+	hub->player->entity.pos.y = (float)i + 0.5;
 	if (dir == 'N')
 	{
 		hub->player->entity.dir = (t_coord){0, -1};

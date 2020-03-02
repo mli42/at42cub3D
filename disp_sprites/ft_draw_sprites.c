@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 14:30:37 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/02 15:29:12 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 			{
 				hub->env->sp[k].distance = ft_points_dist(
 				hub->player->entity.pos, hub->env->sp[k].center);
-				ft_sprite_next(hub, i, hub->env->sp[k], 0);
+				ft_sprite_next(hub, hub->env->sp[k]);
 			}
 }
