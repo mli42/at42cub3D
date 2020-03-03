@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 15:54:07 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 17:55:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		ft_key_loop(void *param)
 	while (++i < 6)
 		if (hub->fct_moves->switch_[i] == 1)
 			hub->fct_moves->fct[i](hub);
-	in_game(hub);
 	ft_draw(hub);
 	return (1);
 }

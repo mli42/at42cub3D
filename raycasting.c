@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/02/27 17:57:05 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 17:54:57 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ void	ft_draw(t_hub *hub)
 		current_ray += ray_size;
 	}
 	ft_life(hub);
+	in_game(hub);
 	mlx_put_image_to_window(hub->win->mlx, hub->win->win, hub->win->img, 0, 0);
 }

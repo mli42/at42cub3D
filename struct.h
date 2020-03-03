@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 17:28:26 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 18:10:20 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ enum			e_varname
 	endian,
 	end
 };
+
+typedef struct	s_icoord
+{
+	int x;
+	int y;
+}				t_icoord;
 
 typedef struct	s_coord
 {
