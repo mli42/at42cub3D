@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 17:06:59 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 15:59:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ float	ft_y_init(t_data texture, int size, int x, int padding_limit);
 
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt);
 void	ft_save(t_hub *hub);
-void	load_sprites(t_hub *hub, int **map, int *width, int height);
 
 int		map_is_what(t_hub *hub, t_coord cmp, int nb);
 int		is_outside_map(t_hub *hub, t_coord pt);

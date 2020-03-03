@@ -6,20 +6,11 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/24 02:23:56 by mli               #+#    #+#             */
-/*   Updated: 2020/02/28 15:25:24 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 15:48:09 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_coord	vect_rot(t_coord a, double angle)
-{
-	t_coord b;
-
-	b.x = a.x * cos(angle) - a.y * sin(angle);
-	b.y = a.x * sin(angle) + a.y * cos(angle);
-	return (b);
-}
 
 void	ft_arrow_right(t_hub *hub)
 {
@@ -27,13 +18,11 @@ void	ft_arrow_right(t_hub *hub)
 	{
 		hub->player->entity.dir.x = cos(hub->player->entity.dir_rad + RAD_2_5);
 		hub->player->entity.dir.y = sin(hub->player->entity.dir_rad + RAD_2_5);
-		hub->plane = vect_rot(hub->plane, RAD_2_5);
 	}
 	else
 	{
 		hub->player->entity.dir.x = cos(hub->player->entity.dir_rad + RAD_5);
 		hub->player->entity.dir.y = sin(hub->player->entity.dir_rad + RAD_5);
-		hub->plane = vect_rot(hub->plane, RAD_5);
 	}
 }
 
@@ -43,13 +32,11 @@ void	ft_arrow_left(t_hub *hub)
 	{
 		hub->player->entity.dir.x = cos(hub->player->entity.dir_rad - RAD_2_5);
 		hub->player->entity.dir.y = sin(hub->player->entity.dir_rad - RAD_2_5);
-		hub->plane = vect_rot(hub->plane, -RAD_2_5);
 	}
 	else
 	{
 		hub->player->entity.dir.x = cos(hub->player->entity.dir_rad - RAD_5);
 		hub->player->entity.dir.y = sin(hub->player->entity.dir_rad - RAD_5);
-		hub->plane = vect_rot(hub->plane, -RAD_5);
 	}
 }
 

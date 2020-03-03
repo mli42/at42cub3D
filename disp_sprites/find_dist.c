@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_sprites.c                                     :+:      :+:    :+:   */
+/*   find_dist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/02 11:48:36 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 16:49:39 by mli              ###   ########.fr       */
+/*   Created: 2020/02/28 16:52:51 by mli               #+#    #+#             */
+/*   Updated: 2020/03/03 16:00:32 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "ft_affine.h"
 
-void	load_sprites(t_hub *hub, int **map, int *width, int height)
+double	ft_points_dist(t_coord a, t_coord b)
 {
-	int i;
-	int j;
-	int k;
+	return (hypot(b.x - a.x, b.y - a.y));
+}
 
-	i = 0;
-	k = 0;
-	while (++i < height - 1)
-	{
-		j = 0;
-		while (++j < width[i] - 1)
-		{
-			if (map[i][j] == 2)
-				hub->env->sp[k++].center = (t_coord){j + 0.5, i + 0.5};
-		}
-	}
+double	ft_dist_to_sp(t_coord my_pos, t_coord sp_pos)
+{
+	sp_pos.x = (int)sp_pos.x + 0.500001;
+	sp_pos.y = (int)sp_pos.y + 0.500001;
+	return (ft_points_dist(my_pos, sp_pos));
 }
