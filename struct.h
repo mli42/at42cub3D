@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 16:01:50 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 17:28:26 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ typedef struct	s_coord
 
 typedef struct	s_sp
 {
-	char	face;
 	int		size;
 	double	distance;
 	double	offset;
-	t_coord	hit;
+	double	ray;
 	t_coord	center;
 }				t_sp;
 

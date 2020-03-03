@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 16:55:53 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/03 16:43:42 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,12 @@ double		ft_affine(t_faffine fct, double x)
 	return (fct.a * x + fct.b);
 }
 
-double		ft_sp_offset(t_sp sprite, t_faffine perp, t_coord m)
+double		ft_sp_offset(t_hub *hub, t_sp sprite)
 {
-	t_coord	a;
-	t_coord	b;
+	double angle;
 
-	if (sprite.face == 'N' || sprite.face == 'S')
-	{
-		a.x = (int)m.x;
-		a.y = ft_affine(perp, a.x);
-		b.x = (int)m.x + 1;
-		b.y = ft_affine(perp, b.x);
-	}
-	else
-	{
-		a.y = (int)m.y;
-		a.x = ft_find_x(perp, a.y);
-		b.y = (int)m.y + 1;
-		b.x = ft_find_x(perp, b.y);
-	}
-	return (ft_points_dist(a, m) / ft_points_dist(a, b));
+	angle = asin(((sprite.center.x - hub->player->entity.pos.x) *
+		-sin(sprite.ray) + (sprite.center.y - hub->player->entity.pos.y) *
+		cos(sprite.ray)) / sprite.distance);
+	return (.5 + sprite.distance * tan(angle));
 }
