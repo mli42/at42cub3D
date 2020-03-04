@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/02/24 18:48:08 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 16:41:45 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,15 @@ void		ft_restart_game(t_hub *hub)
 				hub->env->map[i][j] = 2;
 		}
 	}
-	hub->player->collision = 0;
 	hub->player->entity.life = 100;
-	hub->player->entity.speed = FOOT_STEP;
+	ft_switch_all_opt_state(hub, 0);
 	ft_putstr("The Game Has Restart\n");
 }
 
 void		ft_speed(t_hub *hub)
 {
 	hub->player->entity.speed = (hub->player->entity.speed >= FOOT_STEP ?
-			FOOT_STEP : FOOT_STEP * 1.8);
+			FOOT_STEP : FOOT_STEP * BIG_FOOT);
 }
 
 static void	ft_drawbar(t_hub *hub, int bar_max[2], int x, int y)

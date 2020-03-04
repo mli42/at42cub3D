@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 15:59:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 17:06:38 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ARROW_RIGHT 124
 # define EXIT_CODE 53
 
+# define FCT_NBR 12
+
 # define A_KEY 0
 # define S_KEY 1
 # define D_KEY 2
@@ -39,6 +41,11 @@
 # define C_KEY 8
 # define R_KEY 15
 # define P_KEY 35
+# define SPACE_KEY 49
+# define M_KEY 46
+# define L_KEY 37
+# define I_KEY 34
+# define O_KEY 31
 
 # define SKYBLUE 0x7fffff
 # define GREEN 0xff00
@@ -59,6 +66,7 @@
 # define PI2 6.283185307179586
 # define CHECK_STEP 0.005
 # define FOOT_STEP 0.06
+# define BIG_FOOT 1.8
 
 int		ft_press_key(int keycode, void *param);
 int		ft_key_release(int keycode, void *param);
@@ -126,5 +134,8 @@ int		map_is_what(t_hub *hub, t_coord cmp, int nb);
 int		is_outside_map(t_hub *hub, t_coord pt);
 
 void	in_game(t_hub *hub);
+void	ft_switch_all_opt_state(t_hub *hub, char state);
+void	ft_activate_all_opt(t_hub *hub);
+void	ft_sprite_state(t_hub *hub);
 
 #endif

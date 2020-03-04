@@ -6,58 +6,53 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:57:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 17:05:56 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 16:54:08 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int		ft_which_key(int keycode, int *keymap)
+{
+	int i;
+
+	i = -1;
+	while (++i < FCT_NBR + e_nb_options)
+		if (keycode == keymap[i])
+			return (i);
+	return (-1);
+}
+
 int		ft_press_key(int keycode, void *param)
 {
 	int				i;
-	static int		*keymap = NULL;
 	static t_hub	*hub = NULL;
 
 	if (!hub)
 		hub = (t_hub *)param;
-	if (!keymap)
-		keymap = (int *)hub->fct_moves->ref;
 	if (keycode == EXIT_CODE)
 		exit(ft_remove_all(hub));
-	i = -1;
-	while (++i < 6)
-		if (keycode == keymap[i])
-		{
-			hub->fct_moves->switch_[i] = 1;
-			return (1);
-		}
-	i--;
-	while (++i < 10)
-		if (keycode == keymap[i])
-		{
-			hub->fct_moves->fct[i](hub);
-			return (1);
-		}
+	if ((i = ft_which_key(keycode, hub->fct_moves->ref)) == -1)
+		return (1);
+	if (i < 6)
+		hub->fct_moves->switch_[i] = 1;
+	else if (i < FCT_NBR)
+		hub->fct_moves->fct[i](hub);
+	else if (i < FCT_NBR + e_nb_options)
+		hub->options[i - FCT_NBR] = (hub->options[i - FCT_NBR] == 0);
 	return (1);
 }
 
 int		ft_key_release(int keycode, void *param)
 {
 	int				i;
-	static int		*keymap = NULL;
 	static t_hub	*hub = NULL;
 
-	if (!hub || !keymap)
-	{
+	if (!hub)
 		hub = (t_hub *)param;
-		keymap = (int *)hub->fct_moves->ref;
-	}
-	i = -1;
-	while (++i < 8)
-		if (keycode == keymap[i])
-		{
-			hub->fct_moves->switch_[i] = 0;
-			break ;
-		}
+	if ((i = ft_which_key(keycode, hub->fct_moves->ref)) == -1)
+		return (1);
+	if (i < 6)
+		hub->fct_moves->switch_[i] = 0;
 	return (1);
 }

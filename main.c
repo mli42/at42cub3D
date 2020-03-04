@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 17:55:03 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 14:25:58 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int		ft_init_mlx(t_hub *hub, int do_save)
 	if (!(hub->win->img_data = (int *)mlx_get_data_addr(hub->win->img,
 			&var[bit_per_pixel], &var[sizeLine], &var[endian])))
 		return (ft_error("MLX can't create an image", hub));
+	hub->player->entity.speed = FOOT_STEP;
+	hub->player->entity.life = 100;
 	ft_draw(hub);
 	if (do_save == 1)
 		ft_save(hub);
@@ -87,8 +89,6 @@ int		main(int argc, char **argv)
 		return (-1);
 	if ((ft_init_mlx(hub, argc == 3) == -1))
 		return (-1);
-	hub->player->entity.speed = FOOT_STEP;
-	hub->player->entity.life = 100;
 	mlx_loop(hub->win->mlx);
 	return (0);
 }

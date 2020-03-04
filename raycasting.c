@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 17:54:57 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 14:15:45 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,7 @@ void	ft_draw(t_hub *hub)
 	static int		ray_max;
 	double			current_ray;
 	static double	ray_size;
-	t_coord			check_pt;
 
-	check_pt.x = (int)hub->player->entity.pos.x;
-	check_pt.y = (int)hub->player->entity.pos.y;
 	ft_recalculate_povs(hub->player);
 	ray_size = POV_60 / hub->win->win_size[0];
 	current_ray = hub->player->pov_max_rad + ray_size;
@@ -103,13 +100,12 @@ void	ft_draw(t_hub *hub)
 	ray_max = hub->win->win_size[0];
 	while (++i < ray_max)
 	{
-		if (is_outside_map(hub, check_pt))
+		if (is_outside_map(hub, hub->player->entity.pos))
 			ft_black_ray(hub, i);
 		else
 			ft_raycasting(hub, hub->env->map, current_ray, i);
 		current_ray += ray_size;
 	}
-	ft_life(hub);
 	in_game(hub);
 	mlx_put_image_to_window(hub->win->mlx, hub->win->win, hub->win->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/03/03 17:21:06 by mli              ###   ########.fr        #
+#    Updated: 2020/03/04 16:59:34 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SPRITES_SRCS = ${addprefix ${SPRITES_PATH}, ${SPRITES_FILES}}
 
 SRCS_FILES = main.c error.c utils.c ft_remove_all.c raycasting.c calculus.c \
 			 fct_moves_ptr.c fct_moves_wasd.c key_switch.c options.c put_textures.c \
-			 ft_save.c options2.c\
+			 ft_save.c options2.c options3.c \
 			 ${GNL_SRCS} ${PARSING_SRCS} ${SPRITES_SRCS}
 
 LIBFT_FILES = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \

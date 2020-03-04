@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:45:26 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 19:11:04 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 16:59:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_minimap(t_hub *hub, int **map, int *width, int height)
 				ft_draw_one_case(hub, size, in_map, 0);
 			else if (map[in_map.y][in_map.x] == 2)
 				ft_draw_one_case(hub, size, in_map, ORANGE);
-			else
+			else if (map[in_map.y][in_map.x] != ' ')
 				ft_draw_one_case(hub, size, in_map, GREY_FLOOR);
 		}
 	}
@@ -56,8 +56,6 @@ void	ft_minimap(t_hub *hub, int **map, int *width, int height)
 
 void	in_game(t_hub *hub)
 {
-	if (!hub->player->collision)
-		return ;
 	if (!is_outside_map(hub, hub->player->entity.pos) &&
 			map_is_what(hub, hub->player->entity.pos, 2))
 	{
@@ -67,8 +65,12 @@ void	in_game(t_hub *hub)
 	}
 	if (hub->player->entity.life <= 0)
 	{
-		ft_putstr("YOU DIED.\n");
+		ft_putstr("\n\tYOU DIED.\n\n");
 		exit(ft_remove_all(hub));
 	}
-	ft_minimap(hub, hub->env->map, hub->env->map_width, hub->env->map_height);
+	if (hub->options[e_lifebar])
+		ft_life(hub);
+	if (hub->options[e_minimap])
+		ft_minimap(hub, hub->env->map,
+				hub->env->map_width, hub->env->map_height);
 }
