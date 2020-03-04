@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:45:26 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 18:22:09 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 21:16:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	ft_minimap(t_hub *hub, int **map, int *width, int height)
 
 void	in_game(t_hub *hub)
 {
-	if (!is_outside_map(hub, hub->player->entity.pos) &&
+	if ((hub->options[e_sprite] == e_sp_eatable) &&
+			!is_outside_map(hub, hub->player->entity.pos) &&
 			map_is_what(hub, hub->player->entity.pos, 2))
 	{
 		hub->player->entity.life -= 10;
