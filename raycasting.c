@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 14:15:45 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 23:15:20 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ft_drawing_ray(t_hub *hub, int i, t_walls walls, t_data texture)
 		{
 			if (y == -1 || y >= texture.height)
 				y = ft_y_init(texture, walls.size, x, padding_limit);
-			hub->win->img_data[x * hub->win->win_size[0] + i] =
-				ft_darker(ft_color(texture, walls, y), walls.distance);
+			hub->win->img_data[x * hub->win->win_size[0] + i] = ft_darker(
+		hub->options[e_shadow], ft_color(texture, walls, y), walls.distance);
 			y += (float)texture.height / (float)walls.size;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 15:36:19 by mli               #+#    #+#             */
-/*   Updated: 2020/02/12 12:58:02 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 23:17:05 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ int		ft_face(double current_ray, int h_v)
 	return ('E');
 }
 
-int		ft_darker(int pixel, float distance)
+int		ft_darker(char light, int pixel, float distance)
 {
+	if (light == 0)
+		return (pixel);
 	if (distance > 17)
 		return (pixel >> 2);
 	if (distance > 10)

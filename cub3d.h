@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 17:06:38 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 23:23:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define ARROW_RIGHT 124
 # define EXIT_CODE 53
 
+# define FCT_MOVE 6
 # define FCT_NBR 12
 
 # define A_KEY 0
@@ -124,7 +125,7 @@ t_walls	ft_walls(int face, double distance, t_coord check_pt);
 int		ft_face(double current_ray, int h_v);
 void	ft_black_ray(t_hub *hub, int i);
 t_data	ft_which_text(t_hub *hub, t_walls walls);
-int		ft_darker(int pixel, float distance);
+int		ft_darker(char light, int pixel, float distance);
 float	ft_y_init(t_data texture, int size, int x, int padding_limit);
 
 void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt);
