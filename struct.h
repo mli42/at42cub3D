@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 17:08:04 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 17:32:23 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 enum			e_options
 {
-	e_lifebar,
 	e_minimap,
 	e_shadow,
 	e_sprite,
 	e_nb_options
 };
 
-enum			e_sprite_state
+enum			e_game_state
 {
 	e_sp_nothing,
 	e_sp_eatable,

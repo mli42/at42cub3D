@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:45:26 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 16:59:11 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/04 18:22:09 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	in_game(t_hub *hub)
 		ft_putstr("\n\tYOU DIED.\n\n");
 		exit(ft_remove_all(hub));
 	}
-	if (hub->options[e_lifebar])
+	if (hub->options[e_sprite] == e_sp_eatable)
 		ft_life(hub);
 	if (hub->options[e_minimap])
 		ft_minimap(hub, hub->env->map,
