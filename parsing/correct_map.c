@@ -6,37 +6,23 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/03/05 14:53:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 16:34:31 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		ft_h_border(int **map, int max_x, int line_n)
-{
-	int i;
-
-	i = -1;
-	while (++i < max_x)
-		if (map[line_n][i] != 1)
-			return (0);
-	return (1);
-}
-
-int		ft_is_close(int **map, int *max_tab, int max_y)
+int		ft_is_close(int **map, t_limit *border_x, int max_y)
 {
 	int i;
 	int max_x;
 	int prev;
 
-	if (!ft_h_border(map, max_tab[0], 0) ||
-		!ft_h_border(map, max_tab[max_y - 1], max_y - 1))
-		return (0);
 	i = 0;
 	while (++i < max_y)
 	{
-		prev = max_tab[i - 1];
-		max_x = max_tab[i];
+		prev = border_x[i - 1].border[1];
+		max_x = border_x[i].border[1];
 		while (prev < max_x)
 			if (map[i][--max_x - 1] != 1)
 				return (0);
@@ -64,7 +50,7 @@ int		ft_only_one_pos(t_hub *hub, int dir, int i, int j)
 	return ((++pass == 1 ? 1 : 0));
 }
 
-int		ft_pos_map(t_hub *hub, int **map, int *max_tab, int max_y)
+int		ft_pos_map(t_hub *hub, int **map, t_limit *border_x, int max_y)
 {
 	int i;
 	int j;
@@ -75,9 +61,9 @@ int		ft_pos_map(t_hub *hub, int **map, int *max_tab, int max_y)
 	pass = 0;
 	while (++i < max_y - 1)
 	{
-		j = 0;
-		max_x = max_tab[i];
-		while (++j < max_x - 1)
+		j = border_x[i].border[0];
+		max_x = border_x[i].border[1] - 1;
+		while (++j < max_x)
 			if (ft_isposition(map[i][j]))
 				if (++pass != 1 || ft_only_one_pos(hub, map[i][j], i, j) == 0)
 					return (0);
@@ -87,10 +73,9 @@ int		ft_pos_map(t_hub *hub, int **map, int *max_tab, int max_y)
 
 int		ft_is_map_good(t_hub *hub)
 {
-	(void)hub;
-//	if (!ft_is_close(hub->env->map, hub->env->map_width, hub->env->map_height)
-//	|| (!ft_pos_map(hub, hub->env->map,
-//			hub->env->map_width, hub->env->map_height)))
+//	if (!ft_is_close(hub->env->map, hub->env->width, hub->env->full_height)
+//	|| !ft_pos_map(hub, hub->env->map, hub->env->width, hub->env->full_height))
 //		return (-1);
+	ft_pos_map(hub, hub->env->map, hub->env->width, hub->env->full_height);
 	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/05 15:47:00 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 18:01:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int		ft_translate(t_hub *hub, t_list **alst)
+static int	ft_translate(t_hub *hub, t_list **alst)
 {
 	int		i;
 	t_list	*lst;
@@ -28,6 +28,7 @@ int		ft_translate(t_hub *hub, t_list **alst)
 		ft_free((void **)alst);
 		*alst = lst;
 		(hub->env->map)[i] = (*alst)->content;
+		(hub->env->width)[i].len = (*alst)->len;
 		(hub->env->width)[i].border[0] = (*alst)->min;
 		(hub->env->width)[i].border[1] = (*alst)->max;
 	}
@@ -35,9 +36,9 @@ int		ft_translate(t_hub *hub, t_list **alst)
 	return (1);
 }
 
-int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd)
+int			ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd)
 {
-	if (alst && map_line)
+	if (alst && *alst && map_line)
 		if ((ft_lstlast(*alst))->content != map_line)
 			ft_free((void **)&map_line);
 	ft_free((void **)&line);
@@ -46,7 +47,48 @@ int		ft_map_parse_pb(t_list **alst, int *map_line, char *line, int fd)
 	return (-1);
 }
 
-int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
+static int	ft_longest_w(t_hub *hub)
+{
+	int i;
+	int res;
+
+	i = -1;
+	res = -1;
+	while (++i < hub->env->full_height)
+		if (hub->env->width[i].len > res)
+			res = hub->env->width[i].len;
+	return (res);
+}
+
+static int	ft_fill_height(t_hub *hub)
+{
+	int i;
+	int j;
+	int **map = hub->env->map;
+
+	j = 0;
+	if (!(hub->env->height = ft_memalloc(sizeof(t_limit) * ft_longest_w(hub))))
+		return (0);
+	i = hub->env->full_height;
+	while (--i >= 0)
+	{
+		j = hub->env->width[i].border[0] - 1;
+		while (++j < hub->env->width[i].border[1])
+			if (i > 0 && map[i][j] == 1 && map[i - 1][j] == ' ')
+				hub->env->height[j].border[1] = i;
+	}
+	while (++i < hub->env->full_height)
+	{
+		j = hub->env->width[i].border[0] - 1;
+		while (++j < hub->env->width[i].border[1])
+			if (i + 1 < hub->env->full_height &&
+					map[i][j] == 1 && map[i + 1][j] == ' ')
+				hub->env->height[j].border[0] = i;
+	}
+	return (1);
+}
+
+int			ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 {
 	int gnl_value;
 
@@ -65,7 +107,8 @@ int		ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 		ft_lstclear(alst, free);
 		return (-1);
 	}
-	if (ft_is_map_good(hub) < 1)
+	print_map(hub);
+	if (!ft_fill_height(hub) || ft_is_map_good(hub) < 1)
 		return (-1);
 	return (1);
 }
