@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 23:23:00 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 15:35:46 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		f_ref_resolution(t_hub *hub, char *str);
 int		f_ref_floor(t_hub *hub, char *str);
 int		f_ref_ceiling(t_hub *hub, char *str);
 void	ft_pass_spaces(char *str, int *i);
+int		ft_spaces_back(char *str, int *i);
 int		f_ref_s(t_hub *hub, char *str);
 int		f_ref_so(t_hub *hub, char *str);
 int		f_ref_no(t_hub *hub, char *str);

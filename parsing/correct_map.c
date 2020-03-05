@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/03/03 15:56:06 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 14:53:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ int		ft_pos_map(t_hub *hub, int **map, int *max_tab, int max_y)
 
 int		ft_is_map_good(t_hub *hub)
 {
-	if (!ft_is_close(hub->env->map, hub->env->map_width, hub->env->map_height)
-	|| (!ft_pos_map(hub, hub->env->map,
-			hub->env->map_width, hub->env->map_height)))
-		return (-1);
+	(void)hub;
+//	if (!ft_is_close(hub->env->map, hub->env->map_width, hub->env->map_height)
+//	|| (!ft_pos_map(hub, hub->env->map,
+//			hub->env->map_width, hub->env->map_height)))
+//		return (-1);
 	return (1);
 }

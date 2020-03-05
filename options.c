@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:28:28 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 16:41:45 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 14:48:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void		ft_restart_game(t_hub *hub)
 	int j;
 
 	i = 0;
-	while (++i < hub->env->map_height - 1)
+	while (++i < hub->env->full_height - 1)
 	{
-		j = 0;
-		while (++j < hub->env->map_width[i] - 1)
+		j = hub->env->width[i].border[0];
+		while (++j < hub->env->width[i].border[1] - 1)
 		{
 			if (ft_isposition(hub->env->map[i][j]))
 				ft_only_one_pos(hub, hub->env->map[i][j], i, j);

@@ -6,7 +6,7 @@
 /*   By: mli <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 12:34:27 by mli               #+#    #+#             */
-/*   Updated: 2020/02/07 11:29:04 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 14:15:06 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ void			ft_putnbr(int n);
 
 typedef struct	s_list
 {
-	void			*content;
-	int				nb;
+	void	*content;
+	int		len;
+	int		min;
+	int		max;
 	struct s_list	*next;
 }				t_list;
 

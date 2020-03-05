@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 11:31:14 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 15:47:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@ int		ft_translate(t_hub *hub, t_list **alst)
 	int		i;
 	t_list	*lst;
 
-	if (((hub->env->map_height = ft_lstsize(*alst) - 1) < 3) ||
-	(!(hub->env->map = ft_memalloc(sizeof(int *) * hub->env->map_height))) ||
-	(!(hub->env->map_width = ft_memalloc(sizeof(int) * hub->env->map_height))))
+	if (((hub->env->full_height = ft_lstsize(*alst) - 1) < 3) ||
+	(!(hub->env->map = ft_memalloc(sizeof(int *) * hub->env->full_height))) ||
+	(!(hub->env->width = ft_memalloc(sizeof(t_limit) * hub->env->full_height))))
 		return (0);
 	i = -1;
-	while (++i < hub->env->map_height)
+	while (++i < hub->env->full_height)
 	{
 		lst = (*alst)->next;
 		ft_free((void **)alst);
 		*alst = lst;
 		(hub->env->map)[i] = (*alst)->content;
-		(hub->env->map_width)[i] = (*alst)->nb;
+		(hub->env->width)[i].border[0] = (*alst)->min;
+		(hub->env->width)[i].border[1] = (*alst)->max;
 	}
 	ft_free((void **)alst);
 	return (1);

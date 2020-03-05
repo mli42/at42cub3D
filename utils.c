@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 17:06:14 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 14:45:59 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ int		map_is_what(t_hub *hub, t_coord cmp, int nb)
 
 int		is_outside_map(t_hub *hub, t_coord pt)
 {
-	if (pt.x <= 0 || pt.y <= 0 || pt.y >= hub->env->map_height - 1 ||
-			pt.x >= hub->env->map_width[(int)pt.y] - 1)
-		return (1);
+	if (pt.x <= 0 || pt.y <= 0 || pt.y >= hub->env->full_height - 1 ||
+			pt.x >= hub->env->width[(int)pt.y].border[1] - 1 ||
+			pt.x <= hub->env->width[(int)pt.y].border[0] ||
+			pt.y <= hub->env->height[(int)pt.x].border[0] ||
+			pt.y >= hub->env->height[(int)pt.x].border[1] - 1)
+			return (1);
 	return (0);
 }

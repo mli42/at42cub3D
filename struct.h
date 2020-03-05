@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 17:32:23 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 13:52:16 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,17 @@ typedef struct	s_text
 	t_data sprite;
 }				t_text;
 
+typedef struct	s_limit
+{
+	int		border[2];
+}				t_limit;
+
 typedef struct	s_env
 {
 	int		**map;
-	int		*map_width;
-	int		map_height;
+	t_limit	*width;
+	t_limit	*height;
+	int		full_height;
 	int		ceiling_color;
 	int		floor_color;
 	t_text	text;

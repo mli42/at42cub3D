@@ -6,11 +6,19 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/03 17:48:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/02 17:00:56 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/05 14:22:55 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int		ft_spaces_back(char *str, int *i)
+{
+	if (str)
+		while (*i > 0 && str[*i] == ' ')
+			(*i)--;
+	return (*i);
+}
 
 void	ft_pass_spaces(char *str, int *i)
 {
