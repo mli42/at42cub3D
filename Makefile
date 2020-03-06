@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/03/05 20:30:30 by mli              ###   ########.fr        #
+#    Updated: 2020/03/06 09:34:41 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ GNL_SRCS = ${addprefix ${GNL_PATH}, ${GNL_FILES}}
 
 PARSING_PATH = ./parsing/
 PARSING_FILES = parsing.c filename.c ref.c utils.c textures.c allve_been_called.c \
-				ft_map_parse.c translated.c correct_map.c print.c
+				ft_map_parse.c translated.c correct_map.c ft_is_close.c
 PARSING_SRCS = ${addprefix ${PARSING_PATH}, ${PARSING_FILES}}
 
 SPRITES_PATH = ./disp_sprites/

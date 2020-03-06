@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 02:05:41 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 09:29:03 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,17 @@ static int	ft_longest_w(t_hub *hub)
 	return (res);
 }
 
-static int	ft_fill_height(t_hub *hub)
+static int	ft_fill_height(t_hub *hub, int **map, int len)
 {
 	int i;
 	int j;
-	int **map = hub->env->map;
 
-	j = 0;
-	if (!(hub->env->height = ft_memalloc(sizeof(t_limit) * ft_longest_w(hub))))
+	if (!(hub->env->height = ft_memalloc(sizeof(t_limit) * len)))
 		return (0);
+	j = -1;
 	i = hub->env->full_height;
+	while (++j < len)
+		hub->env->height[j].border[1] = i;
 	while (--i >= 0)
 	{
 		j = hub->env->width[i].border[0] - 1;
@@ -107,8 +108,8 @@ int			ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 		ft_lstclear(alst, free);
 		return (-1);
 	}
-	print_map(hub);
-	if (!ft_fill_height(hub) || ft_is_map_good(hub) < 1)
+	if (!ft_fill_height(hub, hub->env->map,
+	(hub->env->full_width = ft_longest_w(hub))) || ft_is_map_good(hub) < 1)
 		return (-1);
 	return (1);
 }

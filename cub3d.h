@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/05 18:04:14 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 09:34:25 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
 # include "./struct.h"
-
-#include <stdio.h>
-void	print_map(t_hub *hub);
-void	ft_print_list(t_list *begin_list);
 
 # define WIN_X_MAX 2560
 # define WIN_Y_MAX 1440
@@ -109,6 +105,7 @@ int		f_ref_we(t_hub *hub, char *str);
 int		f_ref_ea(t_hub *hub, char *str);
 int		ft_allve_been_called(t_hub *hub);
 int		ft_map_parse(t_hub *hub, char *line, int fd, int i);
+int		ft_is_close(t_hub *hub, int **map, t_limit *border_x, int max_y);
 
 # define PASSED_ERROR -2
 
