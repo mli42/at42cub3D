@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 09:19:20 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 13:57:54 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct	s_env
 {
 	int		**map;
 	t_limit	*width;
-	t_limit	*height;
 	int		full_width;
 	int		full_height;
 	int		ceiling_color;

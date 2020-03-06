@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 02:05:08 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 14:21:53 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ int		is_outside_map(t_hub *hub, t_coord pt)
 {
 	if (pt.x <= 0 || pt.y <= 0 || pt.y >= hub->env->full_height - 1 ||
 			pt.x >= hub->env->width[(int)pt.y].border[1] - 1)
+		return (1);
+	return (0);
+}
+
+int		ft_iswallspace(char c)
+{
+	if (c == 1 || c == ' ')
 		return (1);
 	return (0);
 }

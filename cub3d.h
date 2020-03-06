@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 09:34:25 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 14:22:42 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ int		f_ref_we(t_hub *hub, char *str);
 int		f_ref_ea(t_hub *hub, char *str);
 int		ft_allve_been_called(t_hub *hub);
 int		ft_map_parse(t_hub *hub, char *line, int fd, int i);
-int		ft_is_close(t_hub *hub, int **map, t_limit *border_x, int max_y);
+int		ft_is_close(t_hub *hub, int **map, t_limit *border_x, int full_height);
+int		ft_iswallspace(char c);
 
 # define PASSED_ERROR -2
 

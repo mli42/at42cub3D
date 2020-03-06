@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 09:29:03 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 14:00:53 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,35 +60,6 @@ static int	ft_longest_w(t_hub *hub)
 	return (res);
 }
 
-static int	ft_fill_height(t_hub *hub, int **map, int len)
-{
-	int i;
-	int j;
-
-	if (!(hub->env->height = ft_memalloc(sizeof(t_limit) * len)))
-		return (0);
-	j = -1;
-	i = hub->env->full_height;
-	while (++j < len)
-		hub->env->height[j].border[1] = i;
-	while (--i >= 0)
-	{
-		j = hub->env->width[i].border[0] - 1;
-		while (++j < hub->env->width[i].border[1])
-			if (i > 0 && map[i][j] == 1 && map[i - 1][j] == ' ')
-				hub->env->height[j].border[0] = i;
-	}
-	while (++i < hub->env->full_height)
-	{
-		j = hub->env->width[i].border[0] - 1;
-		while (++j < hub->env->width[i].border[1])
-			if (i + 1 < hub->env->full_height &&
-					map[i][j] == 1 && map[i + 1][j] == ' ')
-				hub->env->height[j].border[1] = i;
-	}
-	return (1);
-}
-
 int			ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 {
 	int gnl_value;
@@ -108,8 +79,7 @@ int			ft_map_parse_next(t_hub *hub, t_list **alst, char *line, int fd)
 		ft_lstclear(alst, free);
 		return (-1);
 	}
-	if (!ft_fill_height(hub, hub->env->map,
-	(hub->env->full_width = ft_longest_w(hub))) || ft_is_map_good(hub) < 1)
+	if (!(hub->env->full_width = ft_longest_w(hub)) || ft_is_map_good(hub) < 1)
 		return (-1);
 	return (1);
 }

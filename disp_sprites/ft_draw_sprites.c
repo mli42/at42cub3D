@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:30:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 10:21:22 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 14:12:58 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_draw_sprites(t_hub *hub, double ray, int i, t_coord check_pt)
 		check_pt.y += const_add.y;
 		check_pt.x += const_add.x;
 	}
-	if (!map_is_what(hub, check_pt, 2))
+	if (is_outside_map(hub, check_pt) || !map_is_what(hub, check_pt, 2))
 		return ;
 	else
 		ft_draw_sprites(hub, ray, i, check_pt);
