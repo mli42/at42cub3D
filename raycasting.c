@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/04 23:15:20 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 08:56:11 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ void	ft_draw(t_hub *hub)
 	ray_max = hub->win->win_size[0];
 	while (++i < ray_max)
 	{
-		if (is_outside_map(hub, hub->player->entity.pos))
-			ft_black_ray(hub, i);
-		else
+		if (!is_outside_map(hub, hub->player->entity.pos) &&
+			!map_is_what(hub, hub->player->entity.pos, ' '))
 			ft_raycasting(hub, hub->env->map, current_ray, i);
+		else
+			ft_black_ray(hub, i);
 		current_ray += ray_size;
 	}
 	in_game(hub);
