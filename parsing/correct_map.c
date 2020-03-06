@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 09:33:53 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 15:09:09 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int		ft_pos_map(t_hub *hub, int **map, t_limit *border_x, int max_y)
 				if (++pass != 1 || ft_only_one_pos(hub, map[i][j], i, j) == 0)
 					return (0);
 	}
+	if (pass != 1)
+		return (0);
 	return (1);
 }
 

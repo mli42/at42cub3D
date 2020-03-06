@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 16:48:28 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 14:23:01 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 15:10:41 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,12 @@ int		good_borders(t_hub *hub, int **map, t_limit *border_x, int full_height)
 	return (1);
 }
 
-int		ft_check_walkable(t_hub *hub, int i, int j)
+int		is_outside_border(t_hub *hub, int i, int j)
 {
-	if (!is_outside_map(hub, (t_coord){i, j - 1}) &&
-			hub->env->map[j - 1][i] == ' ')
-		return (0);
-	if (!is_outside_map(hub, (t_coord){i, j + 1}) &&
-			hub->env->map[j + 1][i] == ' ')
-		return (0);
-	if (!is_outside_map(hub, (t_coord){i - 1, j}) &&
-			hub->env->map[j][i - 1] == ' ')
-		return (0);
-	if (!is_outside_map(hub, (t_coord){i + 1, j}) &&
-			hub->env->map[j][i + 1] == ' ')
-		return (0);
-	return (1);
+	if (i <= 0 || j <= 0 || j >= hub->env->full_height ||
+			i >= hub->env->width[j].border[1])
+		return (1);
+	return (0);
 }
 
 int		ft_is_close(t_hub *hub, int **map, t_limit *border_x, int full_height)
@@ -77,8 +68,16 @@ int		ft_is_close(t_hub *hub, int **map, t_limit *border_x, int full_height)
 		i = -1;
 		while (++i < border_x[j].border[1])
 			if (ft_iswalkable(map[j][i]))
-				if (ft_check_walkable(hub, i, j) == 0)
+			{
+				if (!is_outside_border(hub, i, j - 1) && map[j - 1][i] == ' ')
 					return (0);
+				if (!is_outside_border(hub, i, j + 1) && map[j + 1][i] == ' ')
+					return (0);
+				if (!is_outside_border(hub, i - 1, j) && map[j][i - 1] == ' ')
+					return (0);
+				if (!is_outside_border(hub, i + 1, j) && map[j][i + 1] == ' ')
+					return (0);
+			}
 	}
 	return (1);
 }
