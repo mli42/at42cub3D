@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/03/05 17:26:44 by mli              ###   ########.fr        #
+#    Updated: 2020/03/05 20:30:30 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ LIBFT_FILES = ft_memset.c ft_bzero.c ft_strlen.c ft_toupper.c ft_tolower.c \
 			 ft_putchar.c ft_putstr.c ft_putnbr.c \
 			 ft_lstnew.c ft_lstadd_front.c ft_lstlast.c ft_lstadd_back.c \
 			 ft_lstsize.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
-			 ft_strcmp.c ft_memalloc.c ft_free.c ft_atoi_ptr.c
+			 ft_strcmp.c ft_memalloc.c ft_free.c ft_atoi_ptr.c libft.h
 
 MLX_FILES = mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m \
 			mlx_xpm.c mlx_int_str_to_wordtab.c mlx_png.c mlx_mouse.m
@@ -78,11 +78,11 @@ $(LIBFT_PATH)$(LIBFT): ${LIBFT_FILES}
 all: ${NAME}
 
 clean:
-	@echo "\033[1m\x1b[33mRemove......... |\x1b[32m| done\x1b[37m"
+	@echo "\033[1m\x1b[33mRemove......... |\x1b[32m| done\x1b[0m"
 	@rm -rf ${OBJS}
 
 fclean: clean
-	@echo "\033[1m\x1b[33mRemove all..... |\x1b[32m| done\x1b[37m"
+	@echo "\033[1m\x1b[33mRemove all..... |\x1b[32m| done\x1b[0m"
 	@rm -rf $(NAME)
 	@make -C ${MLX_PATH} clean
 	@make -C ${LIBFT_PATH} fclean

@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:28:49 by mli               #+#    #+#             */
-/*   Updated: 2020/03/05 18:01:36 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 02:05:41 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	ft_fill_height(t_hub *hub)
 		j = hub->env->width[i].border[0] - 1;
 		while (++j < hub->env->width[i].border[1])
 			if (i > 0 && map[i][j] == 1 && map[i - 1][j] == ' ')
-				hub->env->height[j].border[1] = i;
+				hub->env->height[j].border[0] = i;
 	}
 	while (++i < hub->env->full_height)
 	{
@@ -83,7 +83,7 @@ static int	ft_fill_height(t_hub *hub)
 		while (++j < hub->env->width[i].border[1])
 			if (i + 1 < hub->env->full_height &&
 					map[i][j] == 1 && map[i + 1][j] == ' ')
-				hub->env->height[j].border[0] = i;
+				hub->env->height[j].border[1] = i;
 	}
 	return (1);
 }

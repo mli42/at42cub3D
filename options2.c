@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:45:26 by mli               #+#    #+#             */
-/*   Updated: 2020/03/05 14:52:37 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/06 02:08:00 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_minimap(t_hub *hub, int **map, t_limit *width, int height)
 	size[1] = hub->win->win_size[1] * 7 / 900;
 	while (++in_map.y < height)
 	{
-		in_map.x = width[in_map.y].border[0];
+		in_map.x = width[in_map.y].border[0] - 1;
 		while (++in_map.x < width[in_map.y].border[1])
 		{
 			if (same_pos(hub->player->entity.pos,
