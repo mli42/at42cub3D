@@ -1,0 +1,7 @@
+.gitignore
+minilibx_opengl_20191021
+a.out
+cub3D
+*.o
+*.a
+.vscode

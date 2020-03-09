@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 14:22:42 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/10 00:14:48 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdio.h>
 # include "./minilibx_opengl_20191021/X.h"
 # include "./minilibx_opengl_20191021/mlx.h"
 # include "./libft/libft.h"
