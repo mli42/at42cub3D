@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/20 09:27:03 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 10:18:12 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/18 15:01:28 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_raycasting(t_hub *hub, int **map, double ray, int i)
 	check_pt.y = hub->player->entity.pos.y;
 	const_add.x = cos(ray) * CHECK_STEP;
 	const_add.y = sin(ray) * CHECK_STEP;
-	while (!is_outside_map(hub, check_pt) && !map_is_what(hub, check_pt, 1))
+	while (!map_is_what(hub, check_pt, 1))
 	{
 		check_pt.y += const_add.y;
 		h_v = (map[(int)check_pt.y][(int)check_pt.x] == 1 ? 'h' : 'v');
