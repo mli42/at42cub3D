@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 11:43:26 by mli               #+#    #+#             */
-/*   Updated: 2020/01/04 21:46:49 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/17 18:37:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFFER_SIZE 300
+# define BUFFER_SIZE 50
 
 typedef struct	s_gnl
 {

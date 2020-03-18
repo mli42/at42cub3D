@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mli <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/07 14:54:53 by mli               #+#    #+#             */
-/*   Updated: 2019/10/18 10:14:44 by mli              ###   ########.fr       */
+/*   Created: 2020/03/17 16:54:27 by mli               #+#    #+#             */
+/*   Updated: 2020/03/17 16:57:01 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_bzero(void *s, size_t n)
+double		ft_abs_lf(double nbr)
 {
-	if (n > 0)
-		ft_memset(s, '\0', n);
+	return ((nbr >= 0 ? nbr : -nbr));
+}
+
+long int	ft_abs_ld(long int nb)
+{
+	return ((nb >= 0 ? nb : -nb));
 }

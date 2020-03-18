@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mli <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/14 17:09:33 by mli               #+#    #+#             */
-/*   Updated: 2019/10/18 12:11:52 by mli              ###   ########.fr       */
+/*   Created: 2020/03/14 14:45:12 by mli               #+#    #+#             */
+/*   Updated: 2020/03/14 16:04:46 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putstr_fd(char *s, int fd)
+int		ft_nbrlen_base(long int nb, int base_len)
 {
-	int i;
+	int size;
 
-	i = 0;
-	if (s)
-		while (s[i])
-			write(fd, &s[i++], 1);
+	size = 0;
+	if (nb <= 0)
+		size++;
+	while (nb != 0)
+	{
+		nb /= base_len;
+		size++;
+	}
+	return (size);
+}
+
+int		ft_nbrlen(long int nb)
+{
+	return (ft_nbrlen_base(nb, 10));
 }

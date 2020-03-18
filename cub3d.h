@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 11:16:52 by mli               #+#    #+#             */
-/*   Updated: 2020/03/10 00:14:48 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/18 00:10:04 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include "./minilibx_opengl_20191021/X.h"
 # include "./minilibx_opengl_20191021/mlx.h"
-# include "./libft/libft.h"
+# include "./libft/includes/libft.h"
 # include "./struct.h"
 
 # define WIN_X_MAX 2560

@@ -6,7 +6,7 @@
 /*   By: mli <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 12:34:27 by mli               #+#    #+#             */
-/*   Updated: 2020/03/05 16:04:52 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/18 01:17:36 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -56,7 +58,6 @@ char			*ft_strtrim(char const *s1, char const *set);
 
 char			*ft_strjoin(char const *s1, char const *s2);
 char			**ft_split(char const *s, char c);
-char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void			ft_putchar_fd(char c, int fd);
@@ -91,5 +92,11 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 
 void			ft_free(void **ptr);
 int				ft_atoi_ptr(const char *str, int *i);
+int				ft_nbrlen_base(long int nb, int base_len);
+int				ft_nbrlen(long int nb);
+char			*ft_itoa_lbase(const char *base, long int nbr);
+
+double			ft_abs_lf(double nbr);
+long int		ft_abs_ld(long int nb);
 
 #endif
