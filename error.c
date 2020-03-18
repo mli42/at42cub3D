@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 12:00:25 by mli               #+#    #+#             */
-/*   Updated: 2020/01/28 16:56:07 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/18 15:45:51 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int		ft_error(char *str, t_hub *hub)
 {
-	write(2, "Error\n", 6);
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
+	ft_printf("{fd}Error\n%s\n", 2, str);
 	ft_remove_all(hub);
 	return (-1);
 }

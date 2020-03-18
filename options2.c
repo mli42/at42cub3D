@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 13:45:26 by mli               #+#    #+#             */
-/*   Updated: 2020/03/06 02:08:00 by mli              ###   ########.fr       */
+/*   Updated: 2020/03/18 15:48:26 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	in_game(t_hub *hub)
 	}
 	if (hub->player->entity.life <= 0)
 	{
-		ft_putstr("\n\tYOU DIED.\n\n");
+		ft_printf("\n\t{bold}YOU {red}DIED{white}.{eoc}\n\n");
 		exit(ft_remove_all(hub));
 	}
 	if (hub->options[e_sprite] == e_sp_eatable)
