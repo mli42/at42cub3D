@@ -6,7 +6,7 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/03/18 01:31:22 by mli              ###   ########.fr        #
+#    Updated: 2020/05/01 22:09:17 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ MLX_NAME = libmlx.a
 
 LIBFT_PATH = ./libft/
 LIBFT = libft.a
+
+LIBS = ${addprefix ${MLX_PATH}, ${MLX_NAME}} ${addprefix ${LIBFT_PATH}, ${LIBFT}}
 
 CC = gcc
 
@@ -36,7 +38,10 @@ SRCS_FILES = main.c error.c utils.c ft_remove_all.c raycasting.c calculus.c \
 			 ft_save.c options2.c options3.c \
 			 ${PARSING_SRCS} ${SPRITES_SRCS}
 
-OBJS = ${SRCS_FILES:.c=.o}
+OBJS_PATH = ./obj/
+OBJS = ${addprefix ${OBJS_PATH}, ${SRCS_FILES:.c=.o}}
+OBJS_PATHS = ${OBJS_PATH} ${addprefix ${OBJS_PATH}, ${PARSING_PATH}} \
+			 ${addprefix ${OBJS_PATH}, ${SPRITES_PATH}}
 
 all:
 	@make -C ${MLX_PATH}
@@ -44,12 +49,15 @@ all:
 	@printf "\033[1mMake cub3D\033[0m : "
 	@make ${NAME}
 
-$(NAME): ${MLX_PATH}${MLX_NAME} ${LIBFT_PATH}${LIBFT} ${OBJS}
+$(NAME): ${LIBS} ${OBJS_PATHS} ${OBJS}
 	@echo ""
 	@${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L ${MLX_PATH} -lmlx -framework OpenGL -framework AppKit -L ${LIBFT_PATH} -lft
 
-.c.o:
-	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+${OBJS_PATHS}:
+	@mkdir -p $@
+
+${OBJS_PATH}%.o: %.c
+	@${CC} ${CFLAGS} -c $< -o $@
 	@printf "\033[0;33m▓\033[0;0m"
 
 $(MLX_PATH)$(MLX_NAME):
@@ -62,7 +70,7 @@ $(LIBFT_PATH)$(LIBFT):
 
 clean:
 	@echo "\033[1m\x1b[33mRemove......... |\x1b[32m| done\x1b[0m"
-	@rm -rf ${OBJS}
+	@rm -rf ${OBJS} ${OBJS_PATH}
 
 fclean: clean
 	@echo "\033[1m\x1b[33mRemove all..... |\x1b[32m| done\x1b[0m"
