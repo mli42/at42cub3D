@@ -5,17 +5,17 @@
 There are several options, all of them can be turned on/off :
 Key|Option
 ---|------
-Space|Active All
-Shift|Walk speed
-C|Wall Collision
-R|Restart Game
-P|Take a screenshot (.bmp)
-O|Sprite Mode (3)
-M|MiniMap
-L|Light/Shadow
+<kbd>Space</kbd>|Active All
+<kbd>Shift</kbd>|Walk speed
+<kbd>C</kbd>|Wall Collision
+<kbd>R</kbd>|Restart Game
+<kbd>P</kbd>|Take a screenshot (.bmp)
+<kbd>O</kbd>|Sprite Mode (3)
+<kbd>M</kbd>|MiniMap
+<kbd>L</kbd>|Light/Shadow
 
-Movements : **`WASD`**
-Turn : **`Arrow Right`** and **`Arrow Left`**
+Movements : <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
+Turn : <kbd>Arrow Right</kbd> and <kbd>Arrow Left</kbd>
 
 There are three sprite's modes:
 - Go throught them
@@ -31,7 +31,7 @@ There are three sprite's modes:
 - Time, sheets of paper
 
 ### Todos :
-- Docker to play everywhere
-- Better DDA (t_faffine)
-- Multi-threading
-- FOV on MiniMap
+- [ ] Docker to play everywhere
+- [ ] Better DDA (t_faffine)
+- [ ] Multi-threading
+- [ ] FOV on MiniMap
