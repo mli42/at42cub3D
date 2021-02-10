@@ -6,7 +6,7 @@
 #    By: mli <marvin@42.fr>                         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/07 17:22:00 by mli               #+#    #+#              #
-#    Updated: 2019/12/09 18:54:36 by mli              ###   ########.fr        #
+#    Updated: 2021/02/10 15:21:11 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+INCL_PATH = ./includes/
+
+CFLAGS = -Wall -Wextra -Werror -I ${INCL_PATH}
 
 SRCS_FILES = ft_memset.c ft_bzero.c ft_strlen.c \
 			 ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c \
@@ -28,16 +30,25 @@ SRCS_FILES = ft_memset.c ft_bzero.c ft_strlen.c \
 
 OBJS = ${SRCS_FILES:.c=.o}
 
-$(NAME): ${OBJS} 
-	ar rcs ${NAME} ${OBJS}
+all:
+	@printf "\033[1mMake libft\033[0m : "
+	@make ${NAME}
 
-all: ${NAME}
+$(NAME): ${OBJS}
+	@echo ""
+	@ar rcs ${NAME} ${OBJS}
+
+.c.o:
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	@printf "\033[0;33m▓\033[0m"
 
 clean:
-	rm -rf ${OBJS}
+	@echo "\033[1m\x1b[33mRemove libft... |\x1b[32m| done\x1b[0m"
+	@rm -rf ${OBJS}
 
 fclean: clean
-	rm -rf ${NAME}
+	@echo "\033[1m\x1b[33mRemove all libft|\x1b[32m| done\x1b[0m"
+	@rm -rf ${NAME}
 
 re: fclean all
 

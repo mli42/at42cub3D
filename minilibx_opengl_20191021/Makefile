@@ -11,14 +11,25 @@ CFLAGS+=-O2
 # add to match string put with X11 in size and position
 CFLAGS+= -DSTRINGPUTX11
 
-all: $(NOM)
+all:
+	@printf "\033[1mMake mlx\033[0m : "
+	@make ${NOM}
 
 $(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+	@echo ""
+	@ar -rcs $(NOM) $(OBJ)
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@echo "\033[1m\x1b[33mRemove all MLX. |\x1b[32m| done\x1b[37m"
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
+
+.c.o:
+	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 2>/dev/null
+	@printf "\033[0;33m▓\033[0;0m"
+
+.m.o:
+	@${CC} ${CFLAGS} -c $< -o ${<:.m=.o} 2>/dev/null
+	@printf "\033[0;33m▓\033[0;0m"
 
 re: clean all
