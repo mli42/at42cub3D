@@ -55,7 +55,7 @@ int		fct(int keycode, void *param)
 	//      printf("%d\n", keycode);
 
 	if (keycode == 53)
-		exit(1);
+		exit(0);
 	else if (keycode == RIGHT)
 		square_postion_x += 10;
 	else if (keycode == LEFT)

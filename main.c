@@ -6,7 +6,7 @@
 /*   By: mli <mli@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 11:35:51 by mli               #+#    #+#             */
-/*   Updated: 2019/12/13 17:22:10 by mli              ###   ########.fr       */
+/*   Updated: 2021/02/10 15:25:49 by mli              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,19 @@ void	ft_draw(t_win *draw)
 	ft_draw_square(draw);
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	t_win	*draw;
-	char	*map;
 
-	if (argc != 2)
-		return (ft_error("Just give me ONE map", NULL));
 	if (!(draw = (t_win *)ft_memalloc((int)sizeof(t_win))))
 		return (ft_error("Can't do any allocation", NULL));
-	if (!(map = ft_map(open(argv[1], O_RDONLY))))
-		return (ft_error("Map error", draw));
 	ft_winsize(draw->win_size);
 	if (!(draw->mlx = mlx_init()))
 		return (ft_error("MLX does not initialize", draw));
 	if (!(draw->win = mlx_new_window(draw->mlx, draw->win_size[0],
 					draw->win_size[1], "cub3D")))
 		return (ft_error("MLX does not open a window", draw));
-	if ((ft_cub3d(draw, map)) == -1)
+	if ((ft_cub3d(draw, NULL)) == -1)
 		return (-1);
 	ft_draw(draw);
 	mlx_hook(draw->win, KeyPress, KeyPressMask, fct, draw);

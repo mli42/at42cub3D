@@ -1,0 +1,8 @@
+.gitignore
+a.out
+*.o
+*.a
+.vscode
+.idea
+CMake*
+cub3D
