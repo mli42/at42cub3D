@@ -1,6 +1,9 @@
-# cub3D : My first game using raycasting
+# cub3D : My first game using RayCasting
 ### A small Wolfenstein 3D
 
+<p align="center">
+	<img src="./game.gif" >
+</p>
 
 There are several options, all of them can be turned on/off :
 Key|Option
@@ -22,7 +25,9 @@ There are three sprite's modes:
 - Consume them and being hurt (lifebar)
 - Collision with them
 
-![In Game Image](https://github.com/mli42/at42cub3d/blob/master/in_game.png)
+<p align="center">
+	<img src="./in_game.png" >
+</p>
 
 ### Usefull Links :
 - [HOWTO] Gerer d'autres evenements avec la MinilibX https://gist.github.com/KokaKiwi/4052375
