@@ -6,16 +6,18 @@
 #    By: mli <mli@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 19:30:43 by mli               #+#    #+#              #
-#    Updated: 2020/05/01 22:09:17 by mli              ###   ########.fr        #
+#    Updated: 2021/04/10 12:45:29 by mli              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-MLX_PATH = ./minilibx_opengl_20191021/
+SRCS_PATH = ./srcs/
+
+MLX_PATH = ${SRCS_PATH}/minilibx_opengl_20191021/
 MLX_NAME = libmlx.a
 
-LIBFT_PATH = ./libft/
+LIBFT_PATH = ${SRCS_PATH}/libft/
 LIBFT = libft.a
 
 LIBS = ${addprefix ${MLX_PATH}, ${MLX_NAME}} ${addprefix ${LIBFT_PATH}, ${LIBFT}}
@@ -56,7 +58,7 @@ $(NAME): ${LIBS} ${OBJS_PATHS} ${OBJS}
 ${OBJS_PATHS}:
 	@mkdir -p $@
 
-${OBJS_PATH}%.o: %.c
+${OBJS_PATH}%.o: ${SRCS_PATH}%.c
 	@${CC} ${CFLAGS} -c $< -o $@
 	@printf "\033[0;33m▓\033[0;0m"
 
